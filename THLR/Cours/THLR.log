@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.21)  12 SEP 2023 15:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.21)  13 SEP 2023 09:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -258,91 +258,108 @@ Package pdftex.def Info: Image3.png  used on input line 156.
 (pdftex.def)             Requested size: 84.01451pt x 110.51372pt.
  [7 <./Image3.png>]
 [8]
-<Image4.png, id=49, 829.0975pt x 368.37625pt>
+<uncomplete_automaton.png, id=49, 474.77374pt x 132.495pt>
+File: uncomplete_automaton.png Graphic file (type png)
+<use uncomplete_automaton.png>
+Package pdftex.def Info: uncomplete_automaton.png  used on input line 194.
+(pdftex.def)             Requested size: 142.43321pt x 39.7488pt.
+<complete_automaton.png, id=50, 480.79625pt x 229.85875pt>
+File: complete_automaton.png Graphic file (type png)
+<use complete_automaton.png>
+Package pdftex.def Info: complete_automaton.png  used on input line 195.
+(pdftex.def)             Requested size: 144.23997pt x 68.95815pt.
+<Image4.png, id=51, 829.0975pt x 368.37625pt>
 File: Image4.png Graphic file (type png)
 <use Image4.png>
-Package pdftex.def Info: Image4.png  used on input line 205.
+Package pdftex.def Info: Image4.png  used on input line 214.
 (pdftex.def)             Requested size: 248.73117pt x 110.51372pt.
-<Image5.png, id=50, 829.0975pt x 368.37625pt>
+ [9 <./uncomplete_automaton.png> <./complete_automaton.png>]
+<Image5.png, id=58, 829.0975pt x 368.37625pt>
 File: Image5.png Graphic file (type png)
 <use Image5.png>
-Package pdftex.def Info: Image5.png  used on input line 210.
+Package pdftex.def Info: Image5.png  used on input line 219.
 (pdftex.def)             Requested size: 248.73117pt x 110.51372pt.
- [9 <./Image4.png>]
-<Image6.png, id=56, 829.0975pt x 249.93375pt>
+<Image6.png, id=59, 829.0975pt x 249.93375pt>
 File: Image6.png Graphic file (type png)
 <use Image6.png>
-Package pdftex.def Info: Image6.png  used on input line 214.
+Package pdftex.def Info: Image6.png  used on input line 223.
 (pdftex.def)             Requested size: 248.73117pt x 74.9807pt.
-<Image7.png, id=57, 841.1425pt x 162.6075pt>
+<Image7.png, id=60, 841.1425pt x 162.6075pt>
 File: Image7.png Graphic file (type png)
 <use Image7.png>
-Package pdftex.def Info: Image7.png  used on input line 218.
+Package pdftex.def Info: Image7.png  used on input line 227.
 (pdftex.def)             Requested size: 252.3447pt x 48.78262pt.
-<Image8.png, id=58, 756.8275pt x 381.425pt>
+ [10 <./Image4.png> <./Image5.png> <./Image6.png> <./Image7.png>]
+<Image8.png, id=68, 756.8275pt x 381.425pt>
 File: Image8.png Graphic file (type png)
 <use Image8.png>
-Package pdftex.def Info: Image8.png  used on input line 222.
-(pdftex.def)             Requested size: 189.2064pt x 95.356pt.
- [10 <./Image5.png> <./Image6.png> <./Image7.png> <./Image8.png>]
-<Image9.png, id=66, 594.22pt x 206.7725pt>
+Package pdftex.def Info: Image8.png  used on input line 233.
+(pdftex.def)             Requested size: 378.41283pt x 190.71202pt.
+
+Overfull \hbox (33.41283pt too wide) in paragraph at lines 233--234
+ [][] 
+ []
+
+[11 <./Image8.png>]
+<Image9.png, id=73, 594.22pt x 206.7725pt>
 File: Image9.png Graphic file (type png)
 <use Image9.png>
-Package pdftex.def Info: Image9.png  used on input line 234.
+Package pdftex.def Info: Image9.png  used on input line 246.
 (pdftex.def)             Requested size: 178.26736pt x 62.03223pt.
-<Image10.png, id=67, 594.22pt x 206.7725pt>
+<Image10.png, id=74, 594.22pt x 206.7725pt>
 File: Image10.png Graphic file (type png)
 <use Image10.png>
-Package pdftex.def Info: Image10.png  used on input line 238.
+Package pdftex.def Info: Image10.png  used on input line 250.
 (pdftex.def)             Requested size: 178.26736pt x 62.03223pt.
-<Image11.png, id=68, 594.22pt x 166.6225pt>
+<Image11.png, id=75, 594.22pt x 166.6225pt>
 File: Image11.png Graphic file (type png)
 <use Image11.png>
-Package pdftex.def Info: Image11.png  used on input line 252.
+Package pdftex.def Info: Image11.png  used on input line 264.
 (pdftex.def)             Requested size: 178.26736pt x 49.98712pt.
- [11 <./Image9.png> <./Image10.png> <./Image11.png>]
-<Image12.png, id=77, 451.6875pt x 369.38pt>
+ [12 <./Image9.png> <./Image10.png> <./Image11.png>]
+<Image12.png, id=84, 451.6875pt x 369.38pt>
 File: Image12.png Graphic file (type png)
 <use Image12.png>
-Package pdftex.def Info: Image12.png  used on input line 283.
+Package pdftex.def Info: Image12.png  used on input line 295.
 (pdftex.def)             Requested size: 112.92159pt x 92.34477pt.
-<Image13.png, id=78, 453.695pt x 130.4875pt>
+<Image13.png, id=85, 453.695pt x 130.4875pt>
 File: Image13.png Graphic file (type png)
 <use Image13.png>
-Package pdftex.def Info: Image13.png  used on input line 288.
+Package pdftex.def Info: Image13.png  used on input line 300.
 (pdftex.def)             Requested size: 113.42346pt x 32.62178pt.
- [12 <./Image12.png>]
-<Image14.png, id=83, 840.13875pt x 385.44pt>
+
+[13 <./Image12.png>]
+<Image14.png, id=91, 840.13875pt x 385.44pt>
 File: Image14.png Graphic file (type png)
 <use Image14.png>
-Package pdftex.def Info: Image14.png  used on input line 306.
+Package pdftex.def Info: Image14.png  used on input line 318.
 (pdftex.def)             Requested size: 252.04356pt x 115.63289pt.
- [13 <./Image13.png> <./Image14.png>] [14]
-<Image15.png, id=96, 468.75125pt x 237.88875pt>
+ [14 <./Image13.png> <./Image14.png>] [15]
+<Image15.png, id=103, 468.75125pt x 237.88875pt>
 File: Image15.png Graphic file (type png)
 <use Image15.png>
-Package pdftex.def Info: Image15.png  used on input line 344.
+Package pdftex.def Info: Image15.png  used on input line 356.
 (pdftex.def)             Requested size: 117.18752pt x 59.47203pt.
-<Image16.png, id=97, 544.0325pt x 122.4575pt>
+<Image16.png, id=104, 544.0325pt x 122.4575pt>
 File: Image16.png Graphic file (type png)
 <use Image16.png>
-Package pdftex.def Info: Image16.png  used on input line 349.
+Package pdftex.def Info: Image16.png  used on input line 361.
 (pdftex.def)             Requested size: 136.00778pt x 30.61429pt.
- [15 <./Image15.png> <./Image16.png>]
-<Image17.png, id=103, 469.755pt x 96.36pt>
+ [16 <./Image15.png> <./Image16.png>]
+<Image17.png, id=110, 469.755pt x 96.36pt>
 File: Image17.png Graphic file (type png)
 <use Image17.png>
-Package pdftex.def Info: Image17.png  used on input line 367.
+Package pdftex.def Info: Image17.png  used on input line 379.
 (pdftex.def)             Requested size: 234.87692pt x 48.17987pt.
- [16 <./Image17.png>] [17] (./THLR.aux) ) 
+ [17 <./Image17.png>] [18] (./THLR.aux) ) 
 Here is how much of TeX's memory you used:
- 3724 strings out of 478287
- 56136 string characters out of 5849289
+ 3738 strings out of 478287
+ 56520 string characters out of 5849289
  343318 words of memory out of 5000000
- 21839 multiletter control sequences out of 15000+600000
+ 21851 multiletter control sequences out of 15000+600000
  487277 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,12n,67p,518b,298s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,12n,67p,518b,301s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-s
 uper/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.en
 c}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
@@ -362,10 +379,10 @@ r/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr
 /share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/t
 ype1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super
 /sfti1000.pfb>
-Output written on THLR.pdf (17 pages, 782375 bytes).
+Output written on THLR.pdf (18 pages, 809023 bytes).
 PDF statistics:
- 195 PDF objects out of 1000 (max. 8388607)
- 101 compressed objects within 2 object streams
+ 202 PDF objects out of 1000 (max. 8388607)
+ 103 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 86 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 96 words of extra memory for PDF output out of 10000 (max. 10000000)
 

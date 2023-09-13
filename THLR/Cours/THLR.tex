@@ -187,6 +187,15 @@ Le langage $L$($A$) = \{w $\in \Sigma^{*} | A$ accepte w\} d'un automate $A$ est
     \item complétude : un automate $A$ est dit complet si $\forall$ $a$ $\in \Sigma$ et $\forall$ état $q$ de $A$, il existe depuis $q$ au moins une transition sortant nommé $a$
     \item lemme : si un automate $A$ est complet, alors pour tous les mots $w \in \Sigma^{*}$ il y a \textbf{au moins} une transition nommé $w$
 \end{itemize}
+
+À tout automate incomplet fini, on peut lui associer un automate complet, notamment grâce aux états puits. Exemple :
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{uncomplete_automaton.png}
+    \includegraphics[scale=0.3]{complete_automaton.png}
+    \caption{Automate incomplet (à gauche) et son équivalent complet (à droite)}   
+\end{figure}
+
 \subsection{Transitions spontanées :}
 Pour tout automate fini, on utilise une transition par lettre, mais on peut utiliser des $\varepsilon$ (mot vide) transitions (aka transitions spontanées), ce qui permet de prendre des transitions sans lire de lettre.\newline
 Contrairement aux automates, les algorithmes qui utilisent des $\varepsilon$-transitions multiples à partir d'un même état, donc par définition non-déterministe. Ces automates sont appelés \textit{automate fini non déterministe avec $\varepsilon$-transitions} ou en plus court $\varepsilon$-NFA.\newline
@@ -217,10 +226,13 @@ Voici les différents motifs pour la création d'un $\varepsilon$-NFA : (avec (a
     \begin{center}
 	\includegraphics[scale=0.3]{Image7.png}
     \end{center}
+    \newpage
     \item par exemple, à partir de la Regex a$^{*}$ + bc sur l'alphabet $\Sigma$ = \{a,b,c\} on obtient l'algorithme de Thompson suivant :
-    \begin{center}
-        \includegraphics[scale=0.25]{Image8.png}
-    \end{center}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.5]{Image8.png}
+    \end{figure}
+
     \item Soit e $\in$ Reg$_{\Sigma}$ une Regex et n le nombre d'occurences de \{$\varepsilon$,$\emptyset$,+,*, le nombre de lettres dans $\Sigma$\} (on exclue les parenthèses). Le nombre d'états est alors égale à 2n.
 
 À partir de l'automate obtenu par l'algorithme de Thompson, on réduit à 0 les $\varepsilon$-transitions, en reliant les différents états nécessaires à l'état initial. Puis on modifie les derniers états en les modifiant par des états finaux.
@@ -394,9 +406,10 @@ On considère un langage L rationnel (L$\in$Rat$_{\Sigma}$):
 	\item Tout langage rationnel vérifie le lemme de pompage mais tout langage qui vérifie le lemme de pompage n'est pas rationnel.
 	\item L'inclusion ne préserve pas la rationalité.
 	\item Il n'existe pas de mot à longueur infini.
-    	\item Soit L un langage ne contenant pas $\varepsilon$. $\varepsilon$ appartient à L* mais pas à L$^{+}$.
-    	\item Tout langage rationnel est décidable mais tout langage décidable n'est pas rationnel.
-    	\item $\varepsilon$ n'appartient à aucun alphabet, puisqu'il représente l'absence de lettres.
-    	\item L'union de 2 langages correspond au "+" dans l'arithmétique des regex.
+    \item Soit L un langage ne contenant pas $\varepsilon$. $\varepsilon$ appartient à L* mais pas à L$^{+}$.
+    \item Tout langage rationnel est décidable mais tout langage décidable n'est pas rationnel.
+    \item $\varepsilon$ n'appartient à aucun alphabet, puisqu'il représente l'absence de lettres.
+    \item L'union de 2 langages correspond au "+" dans l'arithmétique des regex.
+    \item Un automate qui contient des $\epsilon$-transitions n'est pas déterministe.
 \end{itemize}
 \end{document}

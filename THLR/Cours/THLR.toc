@@ -16,13 +16,13 @@
 \contentsline {subsection}{\numberline {5.1}Complétude :}{9}{}%
 \contentsline {subsection}{\numberline {5.2}Transitions spontanées :}{9}{}%
 \contentsline {subsection}{\numberline {5.3}Algorithme de Thompson :}{9}{}%
-\contentsline {section}{\numberline {6}Simplification des $\varepsilon $-NFA}{11}{}%
-\contentsline {section}{\numberline {7}Pruning et déterminisme}{12}{}%
-\contentsline {subsection}{\numberline {7.1}Pruning :}{12}{}%
-\contentsline {subsection}{\numberline {7.2}Déterminisme}{13}{}%
-\contentsline {section}{\numberline {8}Lemme de pompage}{14}{}%
-\contentsline {section}{\numberline {9}Minimisation des automates}{14}{}%
-\contentsline {section}{\numberline {10}Propriétés des langages rationnels}{16}{}%
-\contentsline {subsection}{\numberline {10.1}Algorithme de Brzozowski-McCluskey}{16}{}%
-\contentsline {subsection}{\numberline {10.2}Stabilité des propriétés des langages rationnels}{16}{}%
-\contentsline {section}{\numberline {11}Précisions à partir des questions de QCM}{16}{}%
+\contentsline {section}{\numberline {6}Simplification des $\varepsilon $-NFA}{12}{}%
+\contentsline {section}{\numberline {7}Pruning et déterminisme}{13}{}%
+\contentsline {subsection}{\numberline {7.1}Pruning :}{13}{}%
+\contentsline {subsection}{\numberline {7.2}Déterminisme}{14}{}%
+\contentsline {section}{\numberline {8}Lemme de pompage}{15}{}%
+\contentsline {section}{\numberline {9}Minimisation des automates}{15}{}%
+\contentsline {section}{\numberline {10}Propriétés des langages rationnels}{17}{}%
+\contentsline {subsection}{\numberline {10.1}Algorithme de Brzozowski-McCluskey}{17}{}%
+\contentsline {subsection}{\numberline {10.2}Stabilité des propriétés des langages rationnels}{17}{}%
+\contentsline {section}{\numberline {11}Précisions à partir des questions de QCM}{17}{}%
