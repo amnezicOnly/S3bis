@@ -130,7 +130,7 @@ Pour tout langage L, on a les propriétés suivantes :
 \begin{itemize}
     \item $\varepsilon \in L^{*}$, même si $\varepsilon \notin L$
     \item $\varepsilon \in L^{+}$ ssi $\varepsilon \in L$
-    \item $\emptyset^{*}$ = \{$\varepsilon$\}
+    \item $\emptyset^{*}$ = $\varepsilon$
     \item $\Sigma^{*}$ = $\Sigma^{*}$
 \end{itemize}
 \newpage
@@ -427,13 +427,13 @@ Ce théorème permet de donner l'algorithme de pruning:
 \subsection{Déterminisme}
 Petit rappel :
 \begin{quote}
-    Un NFA est dit déterministe si pour toute lettre $a$ et état $q$, il existe au plus une transition sortant de $q$ étiqueté par $a$.\newline
-    Un NFA est dit complet si pour toute lettre $a$ et état $q$, il existe au moins une transition sortant de $q$ étiqueté par $a$.\newline
+    Un automate est dit déterministe si pour toute lettre $a$ et état $q$, il existe au plus une transition sortant de $q$ étiqueté par $a$.\newline
+    Un automate est dit complet si pour toute lettre $a$ et état $q$, il existe au moins une transition sortant de $q$ étiqueté par $a$.\newline
 \end{quote}
 
 Théorème
 \begin{quote}
-    $\forall$ $A$ NFA sur un alphabet $\Sigma$, $\exists$ un équivalent DFA $A'$ sur $\Sigma$ 
+    $\forall$ $A$ NFA sur un alphabet $\Sigma$, $\exists$ un équivalent DFA $A'$ sur $\Sigma$, qui peut contenir au maximum 2$^{n}$ états.
 \end{quote}
 
 \begin{figure}[h]
@@ -441,6 +441,16 @@ Théorème
     \includegraphics[scale=0.3]{nfa_dfa.png}
     \caption{Un NFA et son équivalent DFA}
 \end{figure}
+\subsection{Comment déterminiser un NFA ?}
+Un NFA est un automate non déterministe, c'est-à-dire qu'il y a au moins un état qui possède deux arêtes distinctes portées par la même lettre.
+Pour passer un NFA à un DFA, il faut suivre les étapes suivantes:
+\begin{enumerate}
+	\item faire un tableau avec autant de colonnes que de lettres dans l'alphabet étudié
+	\item pour la première ligne, on commence par l'état initial (ou les états initiaux), et on note les états accessibles via la lettre de chaque colonne
+	\item on réitère l'opération avec les états trouvés à l'étape précédent
+	\item on crée tous les états qui sont dans la colonne
+	\item on les relie grâce au tableau
+\end{enumerate}
 \newpage
 
 
@@ -471,13 +481,14 @@ Lemme de pompage :
 \begin{quote}
     Soit un langage rationnel L $\in$ Rat$_{\Sigma}$, il existe un niveau de pompage n$_{0}$ tel que pour tout mot w$\in$L de longueur n$\geq$n$_{0}$, il existe 3 mots x,y et z $\in\Sigma^{*}$ tel que w = xyz, y $\neq\varepsilon$, and $L$(xy$^{*}$z)$\subseteq$L
 \end{quote}
-
+En français, si un automate à n états distincts accepte un mot de longueur n' tel que n<n', alors il y a forcément un cycle dans l'automate. Le seuil de pompage n est le nombre tel qu'il existe au moins un mot de longueur n tel qu'au moins un  état soit visité 2 fois.
+\newline
 Théorème :
 \begin{quote}
-    Le langage L = \{a$^{n}$b$^{n}$ | n$\in\mathbf{N}$\}, sur l'alphabet $\Sigma$=\{a,b\}, est décidable mais non rationnel.
+    Les langages du type L = \{a$^{n}$b$^{m}$ | n,m$\in\mathbf{N}$\}, sur l'alphabet $\Sigma$=\{a,b\}, est décidable mais non rationnel.
 \end{quote}
 
-Un langage rationnel est reconnaissable par un algorithme qui utilise une quantité constante de données qui  ne dépend pas de la taille de l'input.
+Un langage rationnel est reconnaissable par un algorithme qui utilise une quantité constante de données qui ne dépend pas de la taille de l'input.
 \newpage
 
 
@@ -599,18 +610,12 @@ On considère un langage L rationnel (L$\in$Rat$_{\Sigma}$):
 
 \section{Précisions à partir des questions de QCM}
 \begin{itemize}
-	\item Un langage peut être infini mais un alphabet est nécessairement fini.
-	\item Un langage récursif n'est pas défini par récurrence.
-	\item Le facteur d'un langage peut être le préfixe du suffixe et le suffixe du préfixe d'un langage.
 	\item L'étoile de Kleene d'un langage fini peut être infini.
 	\item Les langages rationnels sont stables par étoile de Kleene, concaténation et union.
 	\item Tout langage rationnel vérifie le lemme de pompage mais tout langage qui vérifie le lemme de pompage n'est pas rationnel.
 	\item L'inclusion ne préserve pas la rationalité.
-	\item Il n'existe pas de mot à longueur infini.
-    \item Soit L un langage ne contenant pas $\varepsilon$. $\varepsilon$ appartient à L* mais pas à L$^{+}$.
-    \item Tout langage rationnel est décidable mais tout langage décidable n'est pas rationnel.
-    \item $\varepsilon$ n'appartient à aucun alphabet, puisqu'il représente l'absence de lettres.
-    \item L'union de 2 langages correspond au "+" dans l'arithmétique des regex.
-    \item Un automate qui contient des $\varepsilon$-transitions n'est pas déterministe.
+    	\item Soit L un langage ne contenant pas $\varepsilon$. $\varepsilon$ appartient à L* mais pas à L$^{+}$.
+    	\item Tout langage rationnel est décidable mais tout langage décidable n'est pas rationnel.
+    	\item Un automate qui contient des $\varepsilon$-transitions n'est pas déterministe.
 \end{itemize}
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.21)  13 SEP 2023 11:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.6.21)  14 SEP 2023 15:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -349,39 +349,39 @@ File: nfa_dfa.png Graphic file (type png)
 <use nfa_dfa.png>
 Package pdftex.def Info: nfa_dfa.png  used on input line 441.
 (pdftex.def)             Requested size: 266.7988pt x 99.97426pt.
- [17 <./simp_pruned_aut.png> <./nfa_dfa.png>] [18]
-<Image15.png, id=112, 468.75125pt x 237.88875pt>
+ [17 <./simp_pruned_aut.png> <./nfa_dfa.png>] [18] [19]
+<Image15.png, id=116, 468.75125pt x 237.88875pt>
 File: Image15.png Graphic file (type png)
 <use Image15.png>
-Package pdftex.def Info: Image15.png  used on input line 515.
+Package pdftex.def Info: Image15.png  used on input line 526.
 (pdftex.def)             Requested size: 140.62645pt x 71.36716pt.
-<Image16.png, id=113, 544.0325pt x 122.4575pt>
+<Image16.png, id=117, 544.0325pt x 122.4575pt>
 File: Image16.png Graphic file (type png)
 <use Image16.png>
-Package pdftex.def Info: Image16.png  used on input line 521.
+Package pdftex.def Info: Image16.png  used on input line 532.
 (pdftex.def)             Requested size: 163.211pt x 36.73752pt.
- [19 <./Image15.png> <./Image16.png>]
-<Image17.png, id=122, 469.755pt x 96.36pt>
+ [20 <./Image15.png> <./Image16.png>]
+<Image17.png, id=125, 469.755pt x 96.36pt>
 File: Image17.png Graphic file (type png)
 <use Image17.png>
-Package pdftex.def Info: Image17.png  used on input line 556.
+Package pdftex.def Info: Image17.png  used on input line 567.
 (pdftex.def)             Requested size: 234.87692pt x 48.17987pt.
-<without_clusk.png, id=123, 424.58624pt x 191.71625pt>
+<without_clusk.png, id=126, 424.58624pt x 191.71625pt>
 File: without_clusk.png Graphic file (type png)
 <use without_clusk.png>
-Package pdftex.def Info: without_clusk.png  used on input line 570.
+Package pdftex.def Info: without_clusk.png  used on input line 581.
 (pdftex.def)             Requested size: 169.83148pt x 76.68513pt.
-<with_clusk.png, id=124, 879.285pt x 193.72375pt>
+<with_clusk.png, id=127, 879.285pt x 193.72375pt>
 File: with_clusk.png Graphic file (type png)
 <use with_clusk.png>
-Package pdftex.def Info: with_clusk.png  used on input line 571.
+Package pdftex.def Info: with_clusk.png  used on input line 582.
 (pdftex.def)             Requested size: 351.70778pt x 77.48811pt.
 
-Overfull \hbox (6.70778pt too wide) in paragraph at lines 570--572
+Overfull \hbox (6.70778pt too wide) in paragraph at lines 581--583
  [] 
  []
 
-[20 <./Image17.png> <./without_Clusk.png> <./with_Clusk.png>] [21] [22]
+[21 <./Image17.png> <./without_Clusk.png> <./with_Clusk.png>] [22] [23]
 (./THLR.aux) ) 
 Here is how much of TeX's memory you used:
  3759 strings out of 478287
@@ -409,10 +409,10 @@ ublic/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1
 texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/pu
 blic/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm17
 28.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on THLR.pdf (22 pages, 941768 bytes).
+Output written on THLR.pdf (23 pages, 943383 bytes).
 PDF statistics:
- 221 PDF objects out of 1000 (max. 8388607)
- 112 compressed objects within 2 object streams
+ 224 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  111 words of extra memory for PDF output out of 10000 (max. 10000000)
 
