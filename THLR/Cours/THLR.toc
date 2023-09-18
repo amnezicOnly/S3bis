@@ -25,7 +25,8 @@
 \contentsline {subsection}{\numberline {7.3}Comment déterminiser un NFA ?}{18}{}%
 \contentsline {section}{\numberline {8}Lemme de pompage}{19}{}%
 \contentsline {section}{\numberline {9}Minimisation des automates}{20}{}%
-\contentsline {section}{\numberline {10}Propriétés des langages rationnels}{21}{}%
-\contentsline {subsection}{\numberline {10.1}Algorithme de Brzozowski-McCluskey}{21}{}%
-\contentsline {subsection}{\numberline {10.2}Stabilité des propriétés des langages rationnels}{22}{}%
-\contentsline {section}{\numberline {11}Précisions à partir des questions de QCM}{23}{}%
+\contentsline {subsection}{\numberline {9.1}Algorithme de Moore}{21}{}%
+\contentsline {section}{\numberline {10}Propriétés des langages rationnels}{22}{}%
+\contentsline {subsection}{\numberline {10.1}Algorithme de Brzozowski-McCluskey}{22}{}%
+\contentsline {subsection}{\numberline {10.2}Stabilité des propriétés des langages rationnels}{23}{}%
+\contentsline {section}{\numberline {11}Précisions à partir des questions de QCM}{24}{}%

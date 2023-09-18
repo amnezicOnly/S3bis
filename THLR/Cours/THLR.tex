@@ -508,13 +508,13 @@ Un langage rationnel est reconnaissable par un algorithme qui utilise une quanti
 
 
 \section{Minimisation des automates}
-Le déterminisme d'un automate d'une regex créé un nombre très élevé d'états. Dans l'ordre on a :
+Le déterminisme d'un automate d'une regex créé un très grand nombre d'états. Dans l'ordre on a :
 \begin{enumerate}
     \item expression régulère : n états
     \item $\varepsilon$-NFA : 2n états
     \item NFA : 2n états
-    \item pruned NFA : $\leqslant$ 2n états
-    \item DFA : $\leqslant$ 2$^{2n}$
+    \item NFA émondé : $\leqslant$ 2n états
+    \item DFA : $\leqslant$ 2$^{2n}$ états
 \end{enumerate}
 
 États indistinguables:
@@ -535,12 +535,47 @@ Le déterminisme d'un automate d'une regex créé un nombre très élevé d'éta
 \end{quote}
 Théorème de Myhil-Nerode :
 \begin{quote}
-    Soit un langage rationnel L, il existe un unique DFA $A$ avec un nombre minimal d'états (= au nombre d'états indistinguables de L) tel que $L$($A$) = L. On dit que cet automate est l'automate canonique de L.
+    Soit un langage rationnel L, il existe un unique DFA $A$ avec un nombre minimal d'états tel que $L$($A$) = L. On dit que cet automate est l'automate canonique de L.
 \end{quote}
 
-Ainsi, si deux états p$_{1}$ et p$_{2}$ d'un DFA $A$ sont indistinguables et p$_{1}$ $\rightarrow$ (a) q$_{1}$ et p$_{2}$ $\rightarrow$ (a) q$_{2}$, alors q$_{1}$ et q$_{2}$ sont eux aussi indistinguables.
+Ainsi, si deux états p$_{1}$ et p$_{2}$ d'un DFA $A$ sont indistinguables et p$_{1}$ $\underrightarrow{a}$ q$_{1}$ et p$_{2}$ $\underrightarrow{a}$ q$_{2}$, alors q$_{1}$ et q$_{2}$ sont eux aussi indistinguables.
 
+Par exemple, dans cette automate :
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{indistagable.png}
+	\caption{Chaque classe d'équivalence est de la même couleur}
+\end{figure}
+
+On regarde pour chaque état quels sont les autres états de l'automate qui se comportent de la même manière. Puis on peut les regrouper pour minimiser l'automate.
 (section à compléter, pas compris la fin du ppt)
+
+\subsection{Algorithme de Moore}
+Algorithme :
+\begin{itemize}
+	\item Par définition, les états initiaux et acceptant sont dans deux classes différentes
+	\item On vérifie si deux états appartenant à la même classe ont les mêmes successeurs via une même lettre donnée
+	\item Si ce n'est pas le cas, on divise la classe en deux
+	\item On réitère l'algorithme jusqu'à ce que les classes soient stables
+\end{itemize}
+
+Pour appliquer l'algorithme
+\begin{enumerate}
+	\item on fait un tableau avec autant de colonnes que de lettres dans l'alphabet étudié
+	\item on prend une première ligne avec tous les états sauf les acceptants
+	\item on écrit dans le tableau à quels états on peut accéder en fonction des lettres
+	\item s'il y a minimum un état auquel on peut accéder avec minimum deux lettres différentes à un autre état, on recrée le tableau en coupant les états indistaguables trouvés.
+	\item on réitère l'opération jusqu'à qu'il n'y ait plus aucun conflit
+\end{enumerate}
+
+Pour plus de précisions, veuillez vous référez aix slides 11 à 17 du cours sur la minimisation des automates (cours 9).
+
+Ainsi, l'automate présenté plus haut, après algorithme de Moore, ressemblera à ça:
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.3]{indistagable2.png}
+	\caption{Automate après algorithme de Moore}
+\end{figure}
 
 \newpage
 
@@ -575,15 +610,20 @@ Cet algorithme a pour conséquence le théorème suivant :
 
 Pour se faire, voici les différentes étapes :
 \begin{enumerate}
-    \item tout d'abord, s'il y a plusieurs états initiaux, on met en place la structure suivante :
+    \item tout d'abord, s'il y a plusieurs états initiaux, on met en place la structure suivante : (figure 13)
         \begin{figure}[h]
             \centering
             \includegraphics[scale=0.4]{without_clusk.png}
             \includegraphics[scale=0.4]{with_clusk.png}
             \caption{On passe de la configuration en haut à celle en bas}
         \end{figure}
+    \item enlever chaque pont possible
+    \item enlever tous les états possibles
+    \item faire ça jusqu'à qu'on obtienne un état initial, un état final et une regex
 \end{enumerate}
+Si un état initial possède une entrée ou un état final une sortie, on rajoute une $\varepsilon$-transitions et ils deviennent état initial/final.
 
+\newpage
 \subsection{Stabilité des propriétés des langages rationnels}
 On considère un langage L rationnel (L$\in$Rat$_{\Sigma}$):
 \begin{itemize}
