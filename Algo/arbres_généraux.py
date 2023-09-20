@@ -47,8 +47,24 @@ def height_bin(B):
         C = C.sibling
     return max(temp)
 
-
-
 # Partie 2 : Parcours
+def DFS(T):
+    # traitement préfixe
+    for child in T.children:
+        # traitement intermédiaire
+        DFS(child)
+    #traitement suffixe
+    print(T.key)
+
+
+def DFS_bin(B):
+    #traitment préfixe
+    C = B.child
+    while C!=None:
+        #traitement intermédiaire ???
+        DFS_bin(C)
+        C = C.sibling
+    # traitement suffixe
+    print(B.key)
 
 # Partie 3 : Applications
