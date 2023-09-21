@@ -103,29 +103,38 @@ def DFS_bin(B):
 
 
 # Parcours largeur : BFS
-def BFS(T):
+def BFS(T): # avec marqueur de changement de niveau
     q = queue.Queue()
     q.enqueue(T)
-    # q.enqueue("/")
     while not(q.isempty()):
         elt = q.dequeue()
-        # if(elt=="/"):
-        #    print(elt)
-        #else:
-        print(elt.key,end=' ')
-        for child in (elt.children):
-            q.enqueue(child)
+        if(elt=="/"):
+            print("")
+        else:
+            q.enqueue("/")
+            print(elt.key,end=' ')
+            for child in (elt.children):
+                q.enqueue(child)
 
-def BFS_bin(B):
+def BFS_2(T):   # avec double file
+    pass
+
+def BFS_bin(B): # avec marqueur de changement de niveau
     q = queue.Queue()
     q.enqueue(B)
     while not(q.isempty()):
         elt = q.dequeue()
-        print(elt.key)
-        C = elt.child
-        while C!=None:
-            q.enqueue(C)
-            C = C.sibling
+        if(elt=="/"):
+            print("")
+        else:
+            print(elt.key)
+            C = elt.child
+            while C!=None:
+                q.enqueue(C)
+                C = C.sibling
+
+def BFS_bin_2(B):   # avec double file
+    pass
 
 # Partie 3 : Applications
 
