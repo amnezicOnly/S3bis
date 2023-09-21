@@ -1,0 +1,2 @@
+- mapping(<dataType1> => <dataType2>) <accessibilité> <nom du mapping> :
+    --> associe la dataType1 à la dataType2 sous le nom <nom du mapping>

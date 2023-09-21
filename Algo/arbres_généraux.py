@@ -48,23 +48,99 @@ def height_bin(B):
     return max(temp)
 
 # Partie 2 : Parcours
+
+# Parcours profondeur : DFS
+"""
+Structure de base du parcours profondeur d'un arbre général :
 def DFS(T):
     # traitement préfixe
-    for child in T.children:
-        # traitement intermédiaire
-        DFS(child)
-    #traitement suffixe
-    print(T.key)
+    if T.children==[]: # <=> T.nbchildren==0
+        # traitement feuille
+    else :
+        for i in range(T.nbchildren-1):
+            DFS(T.children[i])
+            # traitement intermédiaire
+        DFS(T.children[-1])
+        #traitement suffixe
+
+Structure de base du parcours profondeur d'un arbre général en bijection premier fils frère droit :     
+def DFS_bin(B):
+    # traitement préfixe
+    if not B.child:
+        # traitement feuille
+    else :
+        C = B.child
+        while C!=None:
+            DFS_bin(C)
+            # traitement intermédiaire
+            C = C.sibling
+        # traitement suffixe
+"""
+def DFS(T):
+    if(T.nbchildren==0):
+        print(T.key)
+    else:
+        # traitement préfixes
+        for i in range(T.nbchildren-1):
+            DFS(T.children[i])
+            # traitement intermédiaire : après l'appel de la fonction dans la boucle
+            
+        DFS(T.children[-1])
+        #traitement suffixe
+        print(T.key)
 
 
 def DFS_bin(B):
     #traitment préfixe
     C = B.child
     while C!=None:
-        #traitement intermédiaire ???
+        # traitement intermédiaire ???
+        # N'EST PAS UN ORDRE INDUIT
         DFS_bin(C)
         C = C.sibling
     # traitement suffixe
     print(B.key)
 
+
+# Parcours largeur : BFS
+def BFS(T):
+    q = queue.Queue()
+    q.enqueue(T)
+    # q.enqueue("/")
+    while not(q.isempty()):
+        elt = q.dequeue()
+        # if(elt=="/"):
+        #    print(elt)
+        #else:
+        print(elt.key)
+        for child in (elt.children):
+            q.enqueue(child)
+
+def BFS_bin(B):
+    q = queue.Queue()
+    q.enqueue(B)
+    while not(q.isempty()):
+        elt = q.dequeue()
+        print(elt.key)
+        C = elt.child
+        while C!=None:
+            q.enqueue(C)
+            C = C.sibling
+
 # Partie 3 : Applications
+
+def to_linear(T):
+    s = "("+str(T.key)
+    for child in (T.children):
+        s+=to_linear(child)
+    s+=")"
+    return s
+
+def to_linear_bin(B):
+    s = "("+str(B.key)
+    C = B.child
+    while C!=None:
+        s+=to_linear_bin(C)
+        C = C.sibling
+    s+=")"
+    return s

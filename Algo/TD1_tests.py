@@ -11,4 +11,10 @@ B1 = trees_examples.B1  # représentation bijection premier fils-frère droit
 # print(height_bin(B1))
 
 # DFS(T1)
-DFS_bin(B1)
+# DFS_bin(B1)
+
+BFS(T1)
+# BFS_bin(B1)
+
+# print(to_linear(T1))
+# print(to_linear_bin(B1))
