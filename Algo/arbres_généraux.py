@@ -112,7 +112,7 @@ def BFS(T):
         # if(elt=="/"):
         #    print(elt)
         #else:
-        print(elt.key)
+        print(elt.key,end=' ')
         for child in (elt.children):
             q.enqueue(child)
 
