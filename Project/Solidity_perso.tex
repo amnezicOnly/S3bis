@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{extarrows}
+\usepackage{soul}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\let\oldemptyset\emptyset
+\usepackage[T1]{fontenc}
+
+\author{Amnézic}
+\date{}
+\title{Solidity}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\begin{itemize}
+    \item hautement typé
+\end{itemize}
+
+\section{Type}
+(Commence à la page 53 du cours)
+\subsection{Types de variables}
+\subsubsection{Booléen :}
+Les deux seules valeurs possibles pour une variables booléenne sont: true ou false. On peut bien évidemment leur appliquer les opérations booléennes usuelles:
+\begin{itemize}
+    \item négation : !
+    \item et : \&\&
+    \item ou : ||
+    \item égalité : ==
+    \item inégalité : !=
+\end{itemize}
+
+\subsubsection{Entiers :}
+Signés et non-signés :
+Solidity inclut les uint (entiers non-signés) et int (entiers signés) dans les nombres entiers et permet d'appliquer les mêmes opérations aux uint qu'aux int, sans pour autant pouvoir les mélanger entre eux (langage hautement typé).\newline
+
+\noindent Rappel :
+\begin{quote}
+    La différence entre un entier signé et non-signé est la plage de nombre qu'il représente : les non-signés ne permettent pas de représenter les nombres négatifs. Soit un entier m codé sur n bits, alors :
+    \begin{itemize}
+        \item si m est non-signé, alors m$\in$[0;2$^{n}$-1]
+        \item si m est signé, alors m$\in$[-2$^{n-1}$-1;2$^{n-1}$-1]
+    \end{itemize}
+\end{quote}
+
+\noindent Astuce :
+\begin{quote}
+    Pour obtenir la valeur minimale ou maximale d'un type (numérique), il suffit d'utiliser la méthode type(<type>).min/max. 
+\end{quote}
+
+Les entiers peuvent être codés sur 8 à 256 bits (par pas de 8 : int8, int16, int32, ..., int248, int256). Si le nombre de bits n'est pas précisé, le nombre sera codé sur 256 bits par défaut. \newline \newline
+Les opérations :
+On peut appliquer aux entiers les opérations suivantes :
+\begin{itemize}
+    \item opérateurs arithmétiques : +, -, *, /, \%, ** (x**n = x$^{n}$)
+    \item comparateurs : ==, !=, <, <=, >=, >
+    \item opérateurs de décalage :
+    \begin{itemize}
+        \item à gauche : x $\ll$ n $\rightarrow$ rajoute n 0 à la droite de la représentation binaire de x
+        \item à droite : x $\gg$ n $\rightarrow$ on "supprime" les n bits de poids faible et on rajoute n fois 0 ou 1 (en fonction de la positivité de x) à la gauche du x obtenu
+    \end{itemize}
+    \item opérateurs sur les bits : \&(and), |(or), \^{}(xor), $\sim$(not) $\rightarrow$ on applique l'opérateur sur chaque pair de bit des nombres
+\end{itemize}
+
+\subsection{Nombres à virgule :}
+\textbf{Nombres à virgule fixe :}\newline
+Les nombres à virgule fixe sont un entre-deux entre les nombres entiers et flottants : les nombres entiers n'ont aucune partie décimale tandis que les nombres flottants ont un nombre théoriquement infini de chiffres après la virgule. Les nombres à virgule fixe est donc un type de données qui est constitué d'un nombre entier m de chiffres avant la virgule et d'un nombre entier n de chiffres après la virgule. Comme pour les entiers, le préfixe $u$ précise si le nombre est signé ou non. Par exemple :
+\begin{itemize}
+    \item fixed128x18 sera un nombre (possiblement négatif) qui aura 128 chiffres avant la virgule et 18 chiffres après
+    \item ufixed16x2 sera un nombre (obligatoirement positif car non-signé) qui aura 16 chiffres avant la virgule et 2 chiffres après
+\end{itemize}
+
+Ils supportent les mêmes opérateurs arithmétiques et de comparaisons que les entiers.
+
+\noindent Important :
+\begin{quote}
+    Avec ce type de données, m$\in$[8,16,32,...248,256] et n$\in$[0;80]
+\end{quote}
+
+\textbf{Fixed point numbers are not fully supported by Solidity yet. They can be declared, but cannot be assigned to or from}
+
+\subsection{Les adresses :}
+Ce type est un type qui assez caractéristiques de Solidity.
+
+\end{document}
