@@ -1,6 +1,7 @@
-.hex
-.aux
-.toc
-.log
-.pyc
+*.hex
+*.aux
+*.toc
+*.log
+*.pyc
+*.tst
 __pychache__/
