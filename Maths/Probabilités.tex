@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{extarrows}
+\usepackage{soul}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+\let\oldemptyset\emptyset
+\usepackage[T1]{fontenc}
+
+\author{Amnézic}
+\date{}
+\title{Probabilités}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section{Définition}
+\textbf{Définition}
+\begin{quote}
+    Soit $X$ une variable aléatoire finie entière. On note $X(\Omega)$ = [0,n] l'ensemble de ses valeurs possibles. Sa fonction génératrice est alors la fonction G$_{X}$ définie pour tout $t \in R$ par :
+    \[ G_{X}(t) = E(t^{X}) = \sum_{k=0}^{n} P(X=k)t^{k} \]
+\end{quote}
+
+\noindent \textbf{Remarques}
+\begin{enumerate}
+    \item La fonction G$_{X}$ est un polynôme en t : \[ G_{X}(t) = \sum_{k=0}^{n} P(X=k)t^{k} = p_{0} + p_{1}t + ... + p_{n}t^{n} \]
+    \item Si $\forall$k $\in$ [O,n], P(X=k)=P(Y=k) $\Longrightarrow$ X = Y
+\end{enumerate}
+
+\section{Calculs de l'espérance et de la variance}
+\textbf{Théorème}
+\begin{quote}
+    Soient X une variable aléatoire finie entière et G$_{X}$ sa fonction génératrice. On a alors :
+    \begin{itemize}
+        \item G$_{X}$(1) = 1
+        \item E($X$) = G$_{X}$'(1)
+        \item Var($X$) = G$_{X}$''(1) + G$_{X}$'(1) - (G$_{X}$'(1))$^{2}$
+    \end{itemize}
+\end{quote}
+
+La fonction G$_{X}$ contient toute l'information donnée par la loi de $X$. En particulier, on peut en déduire l'espérance et la variance de $X$.
+
+\section{Somme de varaibles aléatoire}
+\textbf{Théorème}
+Soient 2 variables aléatoires finies entières X et Y \textbf{indépendantes}, de fonctions génératrices G$_{X}$(t) et G$_{Y}$(t). La somme $X + Y$ admet alors une fonction génératrice :
+\[ G_{X+Y}(t) = G_{X}(t) \times G_{Y}(t) \]
+
+(loi binomiale à revoir)
+
+\section{Séries entières}
+\subsection{Définition}
+Soit x $\in R$. Une série entière est une série $\Sigma a_{n} x^{n}$ où $(a_{n})_{n \in N}$ est une suite réelle.Le terme générale de la série est donc une fonction de x de la forme $u_{n}$(x) = $a_{n}$(x)
+
+\textbf{Remarques}
+\begin{enumerate}
+    \item La série est toujours convergente en x=0. En effet, pour cette valeur de x, les termes $u_{n}$(x)=$a_{n}x^{n}$ sont tous nuls sauf $u_{0}$(x)=$a_{0}$ donc la série converge vers $a_{0}$.
+    \item Si la série converge en d'autres valeurs de x, alors sa limite dépend de x et on peut définir f(x) = $\sigma_{n=0}^{+\infty}a_{n}x^{n}$: l'ensemble des valeurs de x pour lesquelles la série converge est le domaine de convergence de la série. C'est aussi le domaine de définition $D_{f}$ de la fonction f.
+\end{enumerate}
+
+\subsection{Rayon de convergence}
+\textbf{Définiton}
+\begin{quote}
+    Soient ($a_{n}$) une suite réelle, $\Sigma a_{n}x^{n}$ la série entière définie par cette suite et la fonction f(x) = $\sigma_{n=0}^{+\infty}a_{n}x^{n}$.\newline
+    Alors il existe $R \in R_{+} \cup {+\infty}$ tel que :
+    \begin{enumerate}
+        \item $\forall x \in R tel que |x| ???$, la série converge absolument
+        \item $\forall x \in R tel que |x| > R$, la série diverge
+    \end{enumerate}
+\end{quote}
+\noindent R est appelé "rayon de convergence" de la série entière et ???.
+
+\noindent \textbf{Interpétation}
+\begin{enumerate}
+    \item Si R = 0, la série converge vers $a_{0}$ en x = 0, et diverge en toute valeur x telle que |x|>0. Ainsi, le domaine de définition de f est $D_{f}$ = {0}.
+    \item Si R$\in R_{+}^{*}$, 
+\end{enumerate}
+
+
+\end{document}

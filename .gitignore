@@ -2,5 +2,5 @@
 .aux
 .toc
 .log
-Algo/algopy/pychache/
-Algo/DM/DM2/algopy/__pychache__/
+.pyc
+__pychache__/

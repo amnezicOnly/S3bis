@@ -106,12 +106,14 @@ def DFS_bin(B):
 def BFS(T): # avec marqueur de changement de niveau
     q = queue.Queue()
     q.enqueue(T)
+    q.enqueue(None)
     while not(q.isempty()):
         elt = q.dequeue()
-        if(elt=="/"):
-            print("")
+        if(elt==None):
+            print()
+            if not q.isempty():
+                q.enqueue(None)
         else:
-            q.enqueue("/")
             print(elt.key,end=' ')
             for child in (elt.children):
                 q.enqueue(child)
@@ -134,7 +136,19 @@ def BFS_bin(B): # avec marqueur de changement de niveau
                 C = C.sibling
 
 def BFS_bin_2(B):   # avec double file
-    pass
+    q_out = queue.Queue()
+    q_in = queue.Queue()
+    q_out.enqueue(B.key)
+    while not q_out.isempty():
+        while not q_out.isempty():
+            B = q_out.dequeue()
+            print(B.key,end=' ')
+            C = B.child
+            while C:
+                q_in.enqueue(C)
+                C = C.sibling
+        print()
+        (q_in,q_out)=(q_out,q_in)
 
 # Partie 3 : Applications
 
@@ -153,3 +167,90 @@ def to_linear_bin(B):
         C = C.sibling
     s+=")"
     return s
+
+def from_linear(text):
+    pass
+
+def from_linear_bin(text):
+    pass
+
+def toDot(T):       # arbre général
+    s = "graph {\n"
+    q = queue.Queue()
+    q.enqueue(T)
+    while not q.isempty():
+        T = q.dequeue()
+        for child in T.children:
+            s += str(T.key) + " -- " + str(child.key) + "\n"
+    s+="}"
+    return s
+
+def toDot_bin(B):   # arbre binaire
+    s = "graph {\n"
+    q = queue.Queue()
+    q.enqueue(T)
+    while not q.isempty():
+        T = q.dequeue()
+        C = T.child
+        while C!=None:
+           s += str(T.key) + " -- " + str(C.key) + "\n" 
+           C = C.sibling
+    s+="}"
+    return s
+
+
+def find_sum(T,sum):
+    # vérifie s'il existe une brache dans l'arbre T dont la somme des valeurs est sum
+    pass
+
+def PME_interm(T,node,actual_depth,total_depth):
+    if T.nbchildren==0:
+        node+=1
+        total_depth+=actual_depth
+        return(node,actual_depth,total_depth)
+    else:
+        for child in(T.children):
+            temp = PME_interm(child,node,actual_depth+1,total_depth)
+            node+=temp[0]
+            total_depth+=temp[2]
+        return (node,actual_depth,total_depth)
+    
+def PME(T):
+    if T.nbchildren==0:
+        return 1
+    temp = PME_interm(T,0,0,0)
+    return temp[2]/temp[0]
+    
+
+def PME_interm_bin(B,node,actual_depth,total_depth):
+    if B.child==None:
+        node+=1
+        total_depth+=actual_depth
+        return(node,actual_depth,total_depth)
+    else:
+        C = B.child
+        while C!=None:
+            temp = PME_interm_bin(C,node,actual_depth+1,total_depth)
+            node+=temp[0]
+            total_depth+=temp[2]
+            C = C.sibling
+        return (node,actual_depth,total_depth)
+    
+def PME_bin(B):
+    if B.child==None:
+        return 1
+    temp = PME_interm_bin(B,0,0,0)
+    return temp[2]/temp[0]
+
+def bin_to_gen(B):
+    T = tree.Tree(B.key)
+    children = []
+    C = C.child
+    while C!=None:
+        bin_to_gen(C)
+        children.append(C)
+        C = C.sibling
+    return T
+
+def gen_to_bin(T):
+    pass

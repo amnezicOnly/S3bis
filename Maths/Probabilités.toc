@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Définition}{3}{}%
+\contentsline {section}{\numberline {2}Calculs de l'espérance et de la variance}{3}{}%
+\contentsline {section}{\numberline {3}Somme de varaibles aléatoire}{3}{}%
+\contentsline {section}{\numberline {4}Séries entières}{3}{}%
+\contentsline {subsection}{\numberline {4.1}Définition}{3}{}%
