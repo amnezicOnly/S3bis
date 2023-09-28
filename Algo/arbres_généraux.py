@@ -282,5 +282,24 @@ def gen_to_bin(T):
             C = A
     return B
 
+def get_sibling_number(B):
+    # compte le nombre d'enfants de B
+    i = 0
+    C = B.child
+    while C:
+        i+=1
+        C = C.sibling
+    return i
+
 def symmetric(T,B):
-    pass
+    # si la clé n'est pas la même ou qu'ils n'ont pas le même nombre d'enfant
+    if T.key!=B.key or T.nbchildren!=get_sibling_number(B):
+        return False
+    i = T.nbchildren-1
+    C = B.child
+    while i>-1 and C:
+        if symmetric(T.children[i],C)==False:
+            return False
+        i-=1
+        C = C.sibling
+    return True
