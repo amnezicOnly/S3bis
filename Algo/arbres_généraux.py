@@ -199,9 +199,18 @@ def toDot_bin(B):   # arbre binaire
     return s
 
 
-def find_sum(T,sum):
-    # vérifie s'il existe une brache dans l'arbre T dont la somme des valeurs est sum
-    pass
+def find_sum(B,sum):
+    # vérifie s'il existe une brache dans l'arbre  B dont la somme des valeurs est sum
+    if B.child==None:
+        return sum==B.key
+    else:
+        sum -= B.key
+        C = B.child
+        while C!=None:
+            if find_sum(C,sum):
+                return True
+            C = C.sibling
+        return False
 
 def PME_interm(T,node,actual_depth,total_depth):
     if T.nbchildren==0:
