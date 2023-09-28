@@ -22,4 +22,8 @@ B1 = trees_examples.B1  # représentation bijection premier fils-frère droit
 # print(PME(T1))
 # print(PME_bin(B1))
 
-print(find_sum(B1,24))
+# print(find_sum(B1,24))
+
+B = gen_to_bin(T1)
+
+print(height_bin(B1)==height_bin(B) and size_bin(B1)==size_bin(B))

@@ -211,6 +211,18 @@ def find_sum(B,sum):
                 return True
             C = C.sibling
         return False
+    
+def find_sum_bin(B,sum):
+    if B.child==None:
+        if sum==B.key:
+            return True
+    else:
+        if find_sum_bin(B.child,sum-B.key):
+            return True
+    if B.sibling:
+        if find_sum_bin(B.sibling,sum):
+            return True
+    return False
 
 def PME_interm(T,node,actual_depth,total_depth):
     if T.nbchildren==0:
@@ -253,13 +265,22 @@ def PME_bin(B):
 
 def bin_to_gen(B):
     T = tree.Tree(B.key)
-    children = []
-    C = C.child
+    C = B.child
     while C!=None:
-        bin_to_gen(C)
-        children.append(C)
+        T.children.append(bin_to_gen(C))
         C = C.sibling
     return T
 
 def gen_to_bin(T):
+    B = treeasbin.TreeAsBin(T.key)
+    if T.nbchildren!=0:
+        B.child = gen_to_bin(T.children[0])
+        C = B.child
+        for i in range(1,T.nbchildren):
+            A = gen_to_bin(T.children[i])
+            A = C.sibling
+            C = A.sibling
+    return B
+
+def symmetric(T,B):
     pass
