@@ -278,8 +278,8 @@ def gen_to_bin(T):
         C = B.child
         for i in range(1,T.nbchildren):
             A = gen_to_bin(T.children[i])
-            A = C.sibling
-            C = A.sibling
+            C.sibling = A
+            C = A
     return B
 
 def symmetric(T,B):

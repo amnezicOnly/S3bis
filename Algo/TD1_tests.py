@@ -26,4 +26,4 @@ B1 = trees_examples.B1  # représentation bijection premier fils-frère droit
 
 B = gen_to_bin(T1)
 
-print(height_bin(B1)==height_bin(B) and size_bin(B1)==size_bin(B))
+print(to_linear_bin(B1)==to_linear_bin(B))
