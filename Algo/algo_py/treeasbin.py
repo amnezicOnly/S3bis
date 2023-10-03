@@ -53,12 +53,7 @@ def dot(B):
             child = child.sibling
     s += "}"
     return s
-
-
-
-
-
-
+    
 def display(B):
     """Render a Tree for in-browser display.
 
@@ -100,7 +95,7 @@ def to_linear(B):
         C = C.sibling
     s += ')'
     return s
-
+    
 def save(B, filename):
     """save the linear representation of a tree in a text file.
 

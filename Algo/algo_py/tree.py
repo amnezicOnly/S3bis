@@ -64,10 +64,7 @@ def dot(T):
             s = s + "   " + str(id(T)) + " -- " + str(id(child)) + "\n"
             q.enqueue(child)
     s += "}"
-    return s
-        
-
-
+    return s        
 
 def display(T):
     """Render a Tree for in-browser display.
@@ -111,7 +108,7 @@ def to_linear(T):
         s += to_linear(child)
     s += ')'
     return s
-
+    
 def save(T, filename):
     """save the linear representation of a tree in a text file.
 

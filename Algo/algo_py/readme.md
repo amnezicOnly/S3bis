@@ -43,7 +43,12 @@ You can now create image files:
 Using the `display` functions in `tree.py` and `treeasbin.py` with IPython (spyder, jupyter..)
 - install the Graphviz Python module
 
-  In Python console:
+  With Anaconda, in a terminal:
+  ```bash
+  conda install python-graphviz
+  ```
+
+  Or in Python console:
 	```Python
 	pip install Graphviz
 	```
