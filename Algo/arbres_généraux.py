@@ -188,7 +188,7 @@ def toDot(T):       # arbre général
 def toDot_bin(B):   # arbre binaire
     s = "graph {\n"
     q = queue.Queue()
-    q.enqueue(T)
+    q.enqueue(B)
     while not q.isempty():
         T = q.dequeue()
         C = T.child
@@ -282,6 +282,14 @@ def gen_to_bin(T):
             C = A
     return B
 
+def gen_to_bin2(T):
+    first = None
+    for i in range(T.nbchildren-1,-1,-1):
+        new = gen_to_bin2(T.children[i])
+        new.sibling = first
+        first = new
+    return treeasbin.TreeAsBin(T.key,first,None)
+
 def get_sibling_number(B):
     # compte le nombre d'enfants de B
     i = 0
@@ -303,3 +311,31 @@ def symmetric(T,B):
         i-=1
         C = C.sibling
     return True
+
+def symmetric2(T,B):
+    if T.key==B.key:
+        n = T.nbchildren
+        i = n-1
+        C = B.child
+        while i>=0 and C:
+            if symmetric2(T.children[i],C)==False:
+                return False
+            i-=1
+            C = C.sibling
+        return i<0 and not C
+    else:
+        return False
+    
+def symmetric_correc(T,B):
+    if T.key!=B.key:
+        return False
+    else:
+        C = B.child
+        i = T.nbchildren-1
+        while C and i>0 and symmetric_correc(T.children[i],C):
+            C = C.sibling
+            i-=1
+        return C==None and i==-1
+    
+def from_linear_gen(str):
+    pass

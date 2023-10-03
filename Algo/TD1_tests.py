@@ -4,6 +4,14 @@ from arbres_généraux import *
 T1 = trees_examples.T1  # représentation générale
 B1 = trees_examples.B1  # représentation bijection premier fils-frère droit
 
+T6 = trees_examples.T6
+
+T7 = trees_examples.T7
+B7 = gen_to_bin2(T7)
+
+T8 = trees_examples.T8
+B8 = gen_to_bin2(T8)
+
 # print(size(T1))
 # print(size_bin(B1))
 
@@ -24,6 +32,6 @@ B1 = trees_examples.B1  # représentation bijection premier fils-frère droit
 
 # print(find_sum(B1,24))
 
-B = gen_to_bin(T1)
 
-print(to_linear_bin(B1)==to_linear_bin(B))
+print(symmetric(T6,B7))
+print(symmetric(T6,B8))
