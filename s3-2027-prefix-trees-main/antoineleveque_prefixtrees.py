@@ -146,19 +146,18 @@ def buildlexicon(T, filename):
 def addword(T, w):
     """ add the word w (str) not empty in the tree T (ptree.Tree)
     """
-    if searchword(T,w)==False:
-        n = 0
-        C = T
-        longueur = len(w)
-        while n<longueur-1 and _contains(C,w[n])[0]:
-            index = _contains(C,w[n])[1]
-            n+=1
-            C = C.children[index]
-        while n<longueur:
-            index = _contains(C,w[n])[1]
-            C.children.insert(index,ptree.Tree((w[n],n==longueur-1)))
-            n+=1
-            C = C.children[index]
+    n = 0
+    C = T
+    longueur = len(w)
+    while n<longueur and _contains(C,w[n])[0]:
+        index = _contains(C,w[n])[1]
+        n+=1
+        C = C.children[index]
+    while n<longueur:
+        index = _contains(C,w[n])[1]
+        C.children.insert(index,ptree.Tree((w[n],n==longueur-1)))
+        n+=1
+        C = C.children[index]
 
 def buildtree(filename):
     """ build the prefix tree from the lexicon in the file filename (str)
