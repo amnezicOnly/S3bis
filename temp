@@ -1,0 +1,47 @@
+def _contains(L,x):
+    """
+    Auxiliary function
+    L : a sorted list of children ((char,bool)) by alphabetical order
+    x : a character (string)
+    return (bool,int)
+    renvoie la place x dans la liste L, ou l'indice auquel il devrait être sinon
+    """
+    longueur = len(L)
+    if longueur==0:
+        return (False,0)
+    else:
+        i = 0
+        while i<longueur and x<L[i][0]:
+            i+=1
+        return (L[i-1][0]==x,i)
+    
+def _deep_copy(C):
+    L = []
+    for child in C.children:
+        L.append(child.key)
+    return L
+
+
+def addword(T, w):
+    """ add the word w (str) not empty in the tree T (ptree.Tree)
+    """
+    n = 0
+    length = len(w)
+    C = T
+    while n<length-1 and _contains(_deep_copy(C),w[n])[0]:
+        # si une partie du mot est déjà dans l'arbre, on suit le chemin maximal
+        n+=1
+        count = _contains(_deep_copy(C),w[n])[1]
+        C = C.children[count]
+    if n==length-1 and T.key[1]==False:
+        # si le mot entier est déjà dans l'arbre mais n'est pas considéré comme un mot, on change son booléen
+        T.key[1]=True
+    else:
+        # on est dans le cas où il manque une partie du mot à écrire
+        # on va donc créer les liens les uns à la suite des autres
+        while n!=length-1:
+            # on rajoute toutes les lettres sauf la dernière
+            C.children.insert(_contains(_deep_copy(C),w[n])[1],ptree.Tree((w[n],False)))
+            n+=1
+            C = C.children[0]
+        C.children.append(ptree.Tree((w[n],True)))

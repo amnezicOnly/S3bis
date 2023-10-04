@@ -46,23 +46,16 @@ def _word_list(T,liste,word):
         for child in T.children:
             _word_list(child,liste,word)
 
-def _contains(L,x):
-    """
-    Auxiliary function
-    L : a list of children ((char,bool))
-    x : a character (string)
-    Check if the element x is in the list L. Return also the index of the element in L, L lenght otherwise
-    return type (bool,int)
-    """
-    state = False
-    i=0
-    while i<len(L) and state==False:
-        state = ((L[i]).key[0])==x
+def _contains(C,x):
+    if C.nbchildren==0:
+        return (False,0)
+    i = 0
+    while i<C.nbchildren and x<(C.children[i]).key[0]:
         i+=1
-    if state==False:
-        return (False,i)
-    else:
-        return (True,i-1)
+    state = ((C.children[i]).key[0]==x,i)
+    return state
+    
+
 
 ##############################################################################
 ## Measure
@@ -152,17 +145,18 @@ def buildlexicon(T, filename):
 def addword(T, w):
     """ add the word w (str) not empty in the tree T (ptree.Tree)
     """
-    i = 0
+    n = 0
     C = T
-    while i<len(w)-1 and _contains(C.children,w[i])!=(False,C.nbchildren):
-        temp = (_contains(C.children,w[i]))[1]
-        i+=1
-        C = C.children[temp]
-    while i<len(w):
-        C.children.append(ptree.Tree((w[i],i==len(w)-1)))
-        i+=1
-        temp2 = C.nbchildren
-        C = C.children[temp2-1]
+    longueur = len(w)
+    while n<longueur-1 and _contains(C,w[n])[0]:
+        index = _contains(C,w[n])[1]
+        n+=1
+        C = C.children[index]
+    while n<longueur:
+        index = _contains(C,w[n])[1]
+        C.children.insert(index,ptree.Tree((w[n],n==longueur-1)))
+        n+=1
+        C = C.children[index]
 
 def buildtree(filename):
     """ build the prefix tree from the lexicon in the file filename (str)
@@ -170,6 +164,7 @@ def buildtree(filename):
     """
     saveFile = open(filename, 'r')
     liste = saveFile.readlines()
+    saveFile.close()
     T = ptree.Tree(["",False])
     for word in liste:
         addword(T,word.strip())
