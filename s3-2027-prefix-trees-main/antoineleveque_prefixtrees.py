@@ -47,15 +47,21 @@ def _word_list(T,liste,word):
             _word_list(child,liste,word)
 
 def _contains(C,x):
+    # C : un ptree
+    # x : un char
+    # renvoie le couple (bool,int) qui indique si (x,False/True) est dans C.children
+    # si oui --> bool = True et int = l'index auquel se trouve l'arbre représenté par le noeud (x,False/True)
+    # si non --> bool = False et int = l'index auquel devrait se trouver l'arbre représenté par le noeud (x,False/True)
+    # cette fonction permet d'ajouter des mots dans l'ordre alphabétique
     if C.nbchildren==0:
         return (False,0)
     i = 0
-    while i<C.nbchildren and x<(C.children[i]).key[0]:
+    while i<C.nbchildren and x>(C.children[i]).key[0]:
+    # x>C.children[i].key[0]:
         i+=1
-    state = ((C.children[i]).key[0]==x,i)
-    return state
-    
-
+    if i==C.nbchildren:
+        return (False,i)
+    return ((C.children[i]).key[0]==x,i)
 
 ##############################################################################
 ## Measure
@@ -71,7 +77,7 @@ def countwords(T):
         count += countwords(child)
     return count
 
-def averagelength(T,word_count=0,actual_depth=0):
+def averagelength(T):
     """ average word length in the prefix tree T (ptree.Tree)
     return type: float"""
     return _count_height(T,0,0)/countwords(T)    
@@ -101,26 +107,21 @@ def longestword(T):
             long = len(elt)
     return word
                         
-def searchword(T, w, n=0):
+def searchword(T, w):
     """ search for the word w (str) not empty in the prefix tree T (ptree.Tree)
     return type: bool
     """
-    long = len(w)
-    if n==long:
-        return T.key==[w[-1],True]
-    if T.children==0:
-        return False
+    n = len(w)
     i = 0
-    while i<(T.nbchildren-1):
-        if (T.children[i]).key[0]==w[n]:
-            return searchword(T.children[i],w,n+1)
+    C = T
+    while i<n:
+        temp = _contains(C,w[i])
+        if temp[0]==False:
+            return False
         i+=1
-    if i==T.nbchildren-1:
-        if (T.children[i]).key[0]==w[n]:
-            return searchword(T.children[i],w,n+1)
-        return False
-    return False
-
+        C = C.children[temp[1]]
+    return C.key==(w[-1],True)
+        
 def hangman(T, pattern):
     """ Find all solutions for a Hangman puzzle in the prefix tree T: 
         words that match the pattern (str not empty) where letters to fill are replaced by '_'
@@ -145,18 +146,19 @@ def buildlexicon(T, filename):
 def addword(T, w):
     """ add the word w (str) not empty in the tree T (ptree.Tree)
     """
-    n = 0
-    C = T
-    longueur = len(w)
-    while n<longueur-1 and _contains(C,w[n])[0]:
-        index = _contains(C,w[n])[1]
-        n+=1
-        C = C.children[index]
-    while n<longueur:
-        index = _contains(C,w[n])[1]
-        C.children.insert(index,ptree.Tree((w[n],n==longueur-1)))
-        n+=1
-        C = C.children[index]
+    if searchword(T,w)==False:
+        n = 0
+        C = T
+        longueur = len(w)
+        while n<longueur-1 and _contains(C,w[n])[0]:
+            index = _contains(C,w[n])[1]
+            n+=1
+            C = C.children[index]
+        while n<longueur:
+            index = _contains(C,w[n])[1]
+            C.children.insert(index,ptree.Tree((w[n],n==longueur-1)))
+            n+=1
+            C = C.children[index]
 
 def buildtree(filename):
     """ build the prefix tree from the lexicon in the file filename (str)
