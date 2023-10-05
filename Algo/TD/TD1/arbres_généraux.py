@@ -168,12 +168,6 @@ def to_linear_bin(B):
     s+=")"
     return s
 
-def from_linear(text):
-    pass
-
-def from_linear_bin(text):
-    pass
-
 def toDot(T):       # arbre général
     s = "graph {\n"
     q = queue.Queue()
@@ -337,5 +331,19 @@ def symmetric_correc(T,B):
             i-=1
         return C==None and i==-1
     
-def from_linear_gen(str):
-    pass
+def _from_linear(s,i=0):
+    i+=1
+    key=""
+    while s[i]!="(" and s[i]!=")":
+        key+=s[i]
+        i+=1
+    T=tree.Tree(int(key),[])
+    while s[i]!=")":
+        (C,i) = _from_linear(s,i)
+        T.children.append(C)
+    i+=1
+    return (T,i)
+
+def from_linear(s):
+    (T,_)=_from_linear(s)
+    return T
