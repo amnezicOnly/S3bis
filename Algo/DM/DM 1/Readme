@@ -1,5 +1,0 @@
-Note : 15,02
-Erreurs :
-	- addWord : pas compris l'erreur mais y en a (cf screenshot)
-	- buildtree : l'arbre contient plusieurs fois des mêmes mots
-	- buildtree : l'arbre doit être trié
