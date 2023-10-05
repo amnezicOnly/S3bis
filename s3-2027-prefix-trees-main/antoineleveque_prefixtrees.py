@@ -37,8 +37,9 @@ def _word_list(T,liste,word):
     T : un prefix tree
     liste : une liste de string
     word : une string
+    long_max : int qui correspond à la longueur maximal d'un mot
     Ajoute au fur et à mesure du parcours de l'arbre, le mot word dans la liste liste quand T.key[1]==True
-    """
+        """
     word+=T.key[0]
     if T.key[1]:
         liste.append(word)
@@ -63,6 +64,26 @@ def _contains(C,x):
         return (False,i)
     return ((C.children[i]).key[0]==x,i)
 
+def _hangWord(T, pattern,longueur,i,L,word=""):
+    # T : prefix tree
+    # pattern : string --> mot à deviner
+    # longueur : int --> taille de pattern
+    # i : int --> hauteur dans l'arbre
+    # L : liste de string --> liste des mots qui respectent pattern
+    # word : string --> mot formé jusqu'au noeud actuel
+    # Ajoute à la liste L tous les mots qui respectent pattern
+    word+=T.key[0]
+    if i==longueur-1 and T.key[1]:
+        L.append(word)
+    elif i<longueur-1:
+        i+=1
+        C = T
+        if pattern[i]!="_" and _contains(C,pattern[i])[0]:
+            index = _contains(C,pattern[i])[1]
+            _hangWord(C.children[index],pattern,longueur,i,L,word)
+        elif pattern[i]=="_":
+            for child in C.children:
+                _hangWord(child,pattern,longueur,i,L,word)
 ##############################################################################
 ## Measure
 
@@ -121,15 +142,22 @@ def searchword(T, w):
         i+=1
         C = C.children[temp[1]]
     return C.key==(w[-1],True)
-        
+
 def hangman(T, pattern):
     """ Find all solutions for a Hangman puzzle in the prefix tree T: 
         words that match the pattern (str not empty) where letters to fill are replaced by '_'
     return type: str list
     """
-    #FIXME
-    pass
-
+    longueur = len(pattern)
+    C = T
+    L = []
+    if pattern[0]!="_" and _contains(C,pattern[0])[0]:
+        index = _contains(C,pattern[0])[1]
+        _hangWord(C.children[index],pattern,longueur,0,L,"")
+    elif pattern[0]=="_":
+        for child in C.children:
+            _hangWord(child,pattern,longueur,0,L,"")
+    return L
 
 ###############################################################################
 ## Build
