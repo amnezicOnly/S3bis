@@ -47,22 +47,27 @@ def _word_list(T,liste,word):
         for child in T.children:
             _word_list(child,liste,word)
 
-def _contains(C,x):
+def _contains_dicho(C,x):
     # C : un ptree
     # x : un char
-    # renvoie le couple (bool,int) qui indique si (x,False/True) est dans C.children
-    # si oui --> bool = True et int = l'index auquel se trouve l'arbre représenté par le noeud (x,False/True)
-    # si non --> bool = False et int = l'index auquel devrait se trouver l'arbre représenté par le noeud (x,False/True)
-    # cette fonction permet d'ajouter des mots dans l'ordre alphabétique
+    # recherche dichotomique de la lettre x dans la liste des fils de C
+    # renvoie le couple (bool : x est dans les fils de C, int : l'index où est ou serait x dans les enfants de C)
     if C.nbchildren==0:
-        return (False,0)
-    i = 0
-    while i<C.nbchildren and x>(C.children[i]).key[0]:
-    # x>C.children[i].key[0]:
-        i+=1
-    if i==C.nbchildren:
-        return (False,i)
-    return ((C.children[i]).key[0]==x,i)
+        return (False,0)  
+
+    start = 0
+    end = C.nbchildren-1
+    while start<=end:
+        mid = (start+end)//2
+        val_mid = C.children[mid].key[0]
+
+        if val_mid==x:
+            return (True,mid)
+        elif val_mid<x:
+            start = mid+1
+        elif val_mid>x:
+            end = mid-1
+    return (False,start)
 
 def _hangWord(T, pattern,longueur,i,L,word=""):
     # T : prefix tree
@@ -72,14 +77,15 @@ def _hangWord(T, pattern,longueur,i,L,word=""):
     # L : liste de string --> liste des mots qui respectent pattern
     # word : string --> mot formé jusqu'au noeud actuel
     # Ajoute à la liste L tous les mots qui respectent pattern
+    print(T.key[0])
     word+=T.key[0]
     if i==longueur-1 and T.key[1]:
         L.append(word)
     elif i<longueur-1:
         i+=1
         C = T
-        if pattern[i]!="_" and _contains(C,pattern[i])[0]:
-            index = _contains(C,pattern[i])[1]
+        if pattern[i]!="_" and _contains_dicho(C,pattern[i])[0]:
+            index = _contains_dicho(C,pattern[i])[1]
             _hangWord(C.children[index],pattern,longueur,i,L,word)
         elif pattern[i]=="_":
             for child in C.children:
@@ -136,7 +142,7 @@ def searchword(T, w):
     i = 0
     C = T
     while i<n:
-        temp = _contains(C,w[i])
+        temp = _contains_dicho(C,w[i])
         if temp[0]==False:
             return False
         i+=1
@@ -151,8 +157,8 @@ def hangman(T, pattern):
     longueur = len(pattern)
     C = T
     L = []
-    if pattern[0]!="_" and _contains(C,pattern[0])[0]:
-        index = _contains(C,pattern[0])[1]
+    if pattern[0]!="_" and _contains_dicho(C,pattern[0])[0]:
+        index = _contains_dicho(C,pattern[0])[1]
         _hangWord(C.children[index],pattern,longueur,0,L,"")
     elif pattern[0]=="_":
         for child in C.children:
@@ -171,21 +177,62 @@ def buildlexicon(T, filename):
     for elt in Wordlist:
         saveFile.write(elt+"\n")
 
+def addword2(T,w):
+    n = 0
+    C = T
+    longueur = len(w)
+    while n<longueur-1 and _contains_dicho(C,w[n])[0]:
+        # si une partie du mot est déjà dans l'arbre, on descend au maximum
+        index = _contains_dicho(C,w[n])[1]
+        n+=1
+        C = C.children[index]
+    if n==longueur-1 and _contains_dicho(C,w[n])[0]:
+        # si la dernière lettre est déjà dans l'arbre, on la passe en True
+        index = _contains_dicho(C,w[n])[1]
+        C.children[index].key = (w[n],True)
+    # ici on est dans le cas où il manque des lettres au mot
+    # on ajoute donc les arbres un par un
+    else:
+        while n<longueur-1:
+            # cas où le reste du mot n'existe pas
+            # on ajoute toutes les lettres sauf la dernière
+            C.children.append(ptree.Tree((w[n],False)))
+            n+=1
+            C = C.children[0]
+        # on ajoute la dernière lettre et on la passe en True
+        C.children.append(ptree.Tree((w[n],False)))
+
+
+
 def addword(T, w):
     """ add the word w (str) not empty in the tree T (ptree.Tree)
     """
     n = 0
     C = T
     longueur = len(w)
-    while n<longueur and _contains(C,w[n])[0]:
-        index = _contains(C,w[n])[1]
+    while n<longueur-1 and _contains_dicho(C,w[n])[0]:
+        # on descend le plus profond dans l'arbre jusqu'à l'avant-dernier caractère
+        index = _contains_dicho(C,w[n])[1]
         n+=1
         C = C.children[index]
-    while n<longueur:
-        index = _contains(C,w[n])[1]
-        C.children.insert(index,ptree.Tree((w[n],n==longueur-1)))
-        n+=1
-        C = C.children[index]
+    # si on est à la dernière lettre
+    if n==longueur-1 and _contains_dicho(C,w[n])[0]:
+        # si la lettre est dans la liste des fils
+        index = _contains_dicho(C,w[n])[1]
+        temp = C.children[index].key[0]
+        C.children[index].key = (temp,True)
+    elif n==longueur-1 and _contains_dicho(C,w[n])[0]==False:
+        # si la lettre n'est pas comprise dans la liste des files
+        C.children.insert(_contains_dicho(C,w[n])[1],ptree.Tree((w[n],True)))
+    else:
+        # on est dans le cas où le reste du mot n'est pas dans l'arbre actuel
+        while n<longueur-1:
+            temp = _contains_dicho(C,w[n])
+            C.children.insert(temp[1],ptree.Tree((w[n],False)))
+            n+=1
+            C = C.children[temp[1]]
+        C.children.insert( _contains_dicho(C,w[n])[1],ptree.Tree((w[n],True)))
+
 
 def buildtree(filename):
     """ build the prefix tree from the lexicon in the file filename (str)
@@ -196,5 +243,6 @@ def buildtree(filename):
     saveFile.close()
     T = ptree.Tree(["",False])
     for word in liste:
+        liste2 = wordlist(T)
         addword(T,word.strip())
     return T

@@ -62,3 +62,20 @@ def max(B):
     while C.children!=[]:
         C = C.children[-1]
     return C.keys[-1]
+
+def recherche_dichotomique(liste, element):
+    debut = 0
+    fin = len(liste) - 1
+
+    while debut <= fin:
+        milieu = (debut + fin) // 2
+        valeur_milieu = liste[milieu]
+
+        if valeur_milieu == element:
+            return milieu
+        elif valeur_milieu < element:
+            debut = milieu + 1
+        else:
+            fin = milieu - 1
+
+    return debut 
