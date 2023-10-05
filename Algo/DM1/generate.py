@@ -21,4 +21,4 @@ def generate_word_file(n, output_file):
                 file.write(word + '\n')
 
 
-generate_word_file(30,"output.txt")
+generate_word_file((1000*1000)*1,"output.txt")

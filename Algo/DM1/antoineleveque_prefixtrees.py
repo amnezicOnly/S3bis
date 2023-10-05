@@ -243,6 +243,5 @@ def buildtree(filename):
     saveFile.close()
     T = ptree.Tree(["",False])
     for word in liste:
-        liste2 = wordlist(T)
         addword(T,word.strip())
     return T
