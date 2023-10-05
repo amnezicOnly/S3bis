@@ -177,33 +177,6 @@ def buildlexicon(T, filename):
     for elt in Wordlist:
         saveFile.write(elt+"\n")
 
-def addword2(T,w):
-    n = 0
-    C = T
-    longueur = len(w)
-    while n<longueur-1 and _contains_dicho(C,w[n])[0]:
-        # si une partie du mot est déjà dans l'arbre, on descend au maximum
-        index = _contains_dicho(C,w[n])[1]
-        n+=1
-        C = C.children[index]
-    if n==longueur-1 and _contains_dicho(C,w[n])[0]:
-        # si la dernière lettre est déjà dans l'arbre, on la passe en True
-        index = _contains_dicho(C,w[n])[1]
-        C.children[index].key = (w[n],True)
-    # ici on est dans le cas où il manque des lettres au mot
-    # on ajoute donc les arbres un par un
-    else:
-        while n<longueur-1:
-            # cas où le reste du mot n'existe pas
-            # on ajoute toutes les lettres sauf la dernière
-            C.children.append(ptree.Tree((w[n],False)))
-            n+=1
-            C = C.children[0]
-        # on ajoute la dernière lettre et on la passe en True
-        C.children.append(ptree.Tree((w[n],False)))
-
-
-
 def addword(T, w):
     """ add the word w (str) not empty in the tree T (ptree.Tree)
     """
@@ -226,12 +199,15 @@ def addword(T, w):
         C.children.insert(_contains_dicho(C,w[n])[1],ptree.Tree((w[n],True)))
     else:
         # on est dans le cas où le reste du mot n'est pas dans l'arbre actuel
+        temp = _contains_dicho(C,w[n])
+        C.children.insert(temp[1],ptree.Tree((w[n],False)))
+        n+=1
+        C = C.children[temp[1]]
         while n<longueur-1:
-            temp = _contains_dicho(C,w[n])
-            C.children.insert(temp[1],ptree.Tree((w[n],False)))
+            C.children.append(ptree.Tree((w[n],False)))
             n+=1
-            C = C.children[temp[1]]
-        C.children.insert( _contains_dicho(C,w[n])[1],ptree.Tree((w[n],True)))
+            C = C.children[0]
+        C.children.insert(0,ptree.Tree((w[n],True)))
 
 
 def buildtree(filename):
