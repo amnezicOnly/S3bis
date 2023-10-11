@@ -78,4 +78,17 @@ def recherche_dichotomique(liste, element):
         else:
             fin = milieu - 1
 
-    return debut 
+    return debut
+
+def search(B,n):
+    if B==None:
+        return None
+    C = B
+    index = recherche_dichotomique(C.keys,n)
+    while True:
+        if C.keys[n]==n:
+            return (C,index)
+        if C.children==[]:
+            return None
+        C = C.children[index]
+        index = recherche_dichotomique(C.keys,n)     
