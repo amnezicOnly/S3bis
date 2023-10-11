@@ -91,4 +91,38 @@ def search(B,n):
         if C.children==[]:
             return None
         C = C.children[index]
-        index = recherche_dichotomique(C.keys,n)     
+        index = recherche_dichotomique(C.keys,n)
+
+
+"""
+Ex 2.3:
+1) a) 
+
+
+"""
+
+def _searc_correct(B,x):
+    i = recherche_dichotomique(B,x)
+    if i<B.nbkeys and B.keys[i]==x:
+        return (B,i)
+    elif not B.children:
+        return None
+    else:
+        return _searc_correct(B.children[i],x)
+    
+def searc_correct(B,x):
+    if not B:
+        return None
+    return _searc_correct(B,x)
+
+def split(B,i):
+    mid = B.degree-1
+    L = B.children[i]
+    R = btree.BTree()
+    R.keys = L.keys[mid+1]
+    B.keys.insert(i,L.keys[mid])
+    L.keys = L.keys[:mid]
+    if L.children:
+        R.children = L.children[mid+1]
+        L.children = L.children[:mid+1]
+    B.children.insert(i+1,R)

@@ -176,6 +176,7 @@ def buildlexicon(T, filename):
     saveFile = open(filename,"w")
     for elt in Wordlist:
         saveFile.write(elt+"\n")
+    saveFile.close()
 
 def addword(T, w):
     """ add the word w (str) not empty in the tree T (ptree.Tree)
