@@ -31,4 +31,10 @@ start_test = time.time()
 arbre2 = rendu.buildtree("/home/amnezic/Desktop/S3bis/Algo/output.txt")
 end_test = time.time()
 diff_test = end_test-start_test
-print("2 000 000 : " + str(diff_test))
+print("3 000 000 : " + str(diff_test))
+start_test = time.time()
+pme = rendu.averagelength(arbre2)
+end_test = time.time()
+print("PME = " + pme)
+print("PME time : " + str(end_test-start_test))
+

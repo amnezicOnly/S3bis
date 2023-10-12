@@ -221,7 +221,7 @@ def addword(T, w):
             C.children.append(ptree.Tree((w[n],True)))
 
 
-def buildtree_line(filename):
+def buildtree(filename):
     """ build the prefix tree from the lexicon in the file filename (str)
     return type: ptree.Tree
     """
@@ -232,12 +232,4 @@ def buildtree_line(filename):
         addword(T,word)
         word = (lexicon.readline()).strip()
     lexicon.close()
-    return T
-
-def buildtree_lines(filename):
-    with open(filename, 'r') as file:
-        mots = [line.strip() for line in file]
-    T = ptree.Tree(['',False])
-    for word in mots:
-        addword(T,word)
     return T

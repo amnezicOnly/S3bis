@@ -3,27 +3,26 @@ Vector_001		dc.l		Main
 				org			$500
 			
 Main			movea.l		#String2,a0
-				;jsr			RemoveSpace	;fonctionne
-				;jsr			IsCharError	;fonctionne
+				jsr			RemoveSpace	;fonctionne
+				jsr			IsCharError	;fonctionne
 				jsr			IsMaxError
 				illegal
 			
 RemoveSpace		movem.l		a0/a1/d0,-(a7)
-				clr.l		d0
 				movea.l		a0,a1
 
 \loop			move.b		(a1)+,d0
-				tst.b		d0
 				beq			\quit
 				cmpi.b		#' ',d0
 				beq			\loop
-				move.b		d0,(a0)
-				addq.l		#1,a0
+				move.b		d0,(a0)+
 				bra			\loop
 				
 \quit			move.b		d0,(a0)
 				movem.l		(a7)+,d0/a1/a0
 				rts
+				
+
 				
 				
 				
@@ -53,17 +52,20 @@ IsCharError		movem.l		a0/d0,-(a7)
 \Quit			movem.l		(a7)+,d0/a0
 				rts
 				
+
 				
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
+StrLen			move.l		a0,-(a7)
+			
+\loop			tst.b		(a0)+
+				beq			\quit
+			
+				addq.l		#1,d0
+				bra			\loop
+			
+\quit			movea.l		(a7)+,a0
+				rts			
 				
 				
 IsMaxError		movem.l		a0/d0,-(a7)
@@ -83,9 +85,9 @@ IsMaxError		movem.l		a0/d0,-(a7)
 				bhi			\True
 				cmpi.b		#'6',(a0)+
 				bhi			\True
-				cmpi.b		#'7',(a1)+
+				cmpi.b		#'7',(a0)+
 				bhi			\True
-				tst.b		(a1)
+				tst.b		(a0)
 				bne			\True
 				bra			\False
 				
@@ -101,17 +103,7 @@ IsMaxError		movem.l		a0/d0,-(a7)
 				
 				
 
-StrLen			movem.l		a0/d0,-(a7)
-				clr.l		d0
-			
-\loop			tst.b		(a0)+
-				beq			\quit
-			
-				addq.l		#1,d0
-				bra			\loop
-			
-\quit			movea.l		(a7)+,a0
-				rts		
+	
 
 String1			dc.b	"1  2+3 5",0
-String2			dc.b	"32",0
+String2			dc.b	"3 2 7 6 7",0
