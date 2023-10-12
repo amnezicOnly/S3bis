@@ -129,7 +129,7 @@ def split(B,i):
 
 """
 * i = position "virtuelle" de x dans la racine
-    x \in racine --> Stop
+    x appartient à la racine --> Stop
 
 si feuille :
     ajouter x en position i dans racine
@@ -141,7 +141,31 @@ si noeud interne :
         si x>clé remontée
             i++
     --> insérer x dans fils i
-
-
-
 """
+
+def _insert(B,x):
+    index = recherche_dichotomique(B.keys,x)
+    # à compléter
+    if index<B.nbkeys and x==B.keys[index]:
+        raise Exception("x in B")
+    if B.children==[]:
+        B.keys.insert(index,x)
+    else:
+        if B.children[index].nbkeys==2*B.degree-1:
+            if B.children[index].keys[B.degree-1]:
+                raise Exception("x in B")
+            split(B,index)
+            if x>B.keys[index]:
+                index+=1
+        _insert(B.children[index],x)
+
+
+
+def insert(B,x):
+    if B==None:
+        return btree.BTree([x],[])
+    else:
+        if B.nbkeys==2*B.degree-1:
+            B = btree.BTree([],[B])
+            split(B,0)
+        _insert(B,x)

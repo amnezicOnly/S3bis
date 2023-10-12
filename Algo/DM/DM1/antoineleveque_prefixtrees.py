@@ -7,7 +7,7 @@ Prefix Trees homework
 2023-10 - S3
 @author: antoine.leveque"""
 
-from algopy import ptree
+from DM.DM1.algo_py import ptree
 
 ###############################################################################
 # Do not change anything above this line, except your login!
@@ -222,10 +222,11 @@ def buildtree(filename):
     """ build the prefix tree from the lexicon in the file filename (str)
     return type: ptree.Tree
     """
-    saveFile = open(filename, 'r')
-    liste = saveFile.readlines()
-    saveFile.close()
+    lexicon = open(filename, 'r')
     T = ptree.Tree(["",False])
-    for word in liste:
-        addword(T,word.strip())
+    word = (lexicon.readline()).strip()
+    while word:
+        addword(T,word)
+        word = (lexicon.readline()).strip()
+    lexicon.close()
     return T

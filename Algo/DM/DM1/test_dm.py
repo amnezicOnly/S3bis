@@ -27,4 +27,4 @@ buildlexicon(arbre,"test.txt")
 liste3 = lire_mots("test.txt")
 print(len(liste3))
 
-print(mots_manquants(liste3,liste2))
+print(mots_manquants(liste3,sorted(liste1)))
