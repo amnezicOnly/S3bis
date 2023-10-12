@@ -126,3 +126,22 @@ def split(B,i):
         R.children = L.children[mid+1]
         L.children = L.children[:mid+1]
     B.children.insert(i+1,R)
+
+"""
+* i = position "virtuelle" de x dans la racine
+    x \in racine --> Stop
+
+si feuille :
+    ajouter x en position i dans racine
+
+si noeud interne :
+    si racine(fils i)==2t-noeuds
+        si x = clé centrale du fils i --> Stop
+        éclater fils i
+        si x>clé remontée
+            i++
+    --> insérer x dans fils i
+
+
+
+"""

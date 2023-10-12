@@ -7,7 +7,7 @@ Prefix Trees homework
 2023-10 - S3
 @author: antoine.leveque"""
 
-from algo_py import ptree
+from algopy import ptree
 
 ###############################################################################
 # Do not change anything above this line, except your login!
@@ -90,6 +90,19 @@ def _hangWord(T, pattern,longueur,i,L,word=""):
         elif pattern[i]=="_":
             for child in C.children:
                 _hangWord(child,pattern,longueur,i,L,word)
+
+def _addWordInFile(T,file,word):
+    # T : un prefix tree
+    # file : le fichier dans lequel on va ajouter les mots au fur et à mesure
+    # word : le mot formé depuis la racine jusqu'au noeud actuel
+    # pas de return
+    # parcours profondeur : rajoute les mots (dans l'ordre alphabétique) dans le fichier file quand le noeud est True
+    word+=T.key[0]
+    if T.key[1]:
+        file.write(word+"\n")
+    if T.nbchildren!=0:
+        for child in T.children:
+            _addWordInFile(child,file,word)
 ##############################################################################
 ## Measure
 
@@ -167,15 +180,9 @@ def hangman(T, pattern):
 
 ###############################################################################
 ## Build
-
-def buildlexicon(T, filename):
-    """ save the tree T (ptree.Tree) in the new file filename (str)
-    """
-    
-    Wordlist = wordlist(T)
+def buildlexicon(T,filename):
     saveFile = open(filename,"w")
-    for elt in Wordlist:
-        saveFile.write(elt+"\n")
+    _addWordInFile(T,saveFile,"")
     saveFile.close()
 
 def addword(T, w):

@@ -1,23 +1,30 @@
 from antoineleveque_prefixtrees import *
-import prefixtreesexample as ptree
 
 def lire_mots(fichier):
     with open(fichier, 'r') as file:
         mots = [line.strip() for line in file]
     return mots
 
-def trouver_mots_manquants(liste1, liste2):
-    mots_manquants = []
+def mots_manquants(L1,L2):
+    n1 = len(L1)
+    n2 = len(L2)
+    if n1!=n2:
+        return "L1!=L2 longueur"
+    else:
+        L = []
+        for i in range(n1):
+            if L1[i]!=L2[i]:
+                L.append(L1[i])
+        return L
 
-    for i, mot in enumerate(liste1):
-        if mot not in liste2:
-            mots_manquants.append((mot, i))
 
-    return mots_manquants
+liste1 = lire_mots("/home/amnezic/Desktop/S3bis/Algo/output.txt")
+arbre = buildtree("/home/amnezic/Desktop/S3bis/Algo/output.txt")
+liste2 = wordlist(arbre)
+print(len(liste1))
+print(len(liste2))
+buildlexicon(arbre,"test.txt")
+liste3 = lire_mots("test.txt")
+print(len(liste3))
 
-def trouver_mots_manquants_bis(liste1, liste2):
-    mots_manquants = [mot for mot in liste1 if mot not in liste2]
-    return mots_manquants
-
-arbre = buildtree("/home/amnezic/Desktop/S3bis/Algo/DM1/lexicons/liste.txt")
-print(len(wordlist(arbre)))
+print(mots_manquants(liste3,liste2))
