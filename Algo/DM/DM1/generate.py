@@ -36,6 +36,6 @@ def generate_words(number):
     output.close()
         
 start = time.time()
-generate_words(1000*1000*5)
+generate_words(1000*1000)
 end = time.time()
 print(str(end-start))

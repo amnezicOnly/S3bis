@@ -17,16 +17,20 @@ from algo_py import ptree
 
 ##############################################################################
 # Fonctions auxiliaires
-
-def _averagelength(T,node,actual_depth,total_depth):
-    if T.key[1]:
-        node+=1
-        total_depth+=actual_depth
-    for child in(T.children):
-        temp = _averagelength(child,0,actual_depth+1,0)
-        node+=temp[0]
-        total_depth+=temp[2]
-    return (node,actual_depth,total_depth)
+def _count_height(T,height,res):
+    """
+    Auxiliary function
+    T : a prefix tree T (ptree.Tree)
+    height : the initial height (int)
+    res : the result (int)
+    return the result of the sum of all the words's height in the T tree
+    return type : int
+    """
+    if T.key[1]==True:
+        res+=height
+    for child in T.children:
+        res = _count_height(child,height+1,res)
+    return res
 
 def _word_list(T,liste,word):
     """
@@ -41,7 +45,8 @@ def _word_list(T,liste,word):
         liste.append(word)
     if T.nbchildren!=0:
         for child in T.children:
-            _word_list(child,liste,word)
+            _word_list(child,liste,word)  
+
 
 def _contains_dicho(C,x):
     # C : un ptree
@@ -73,18 +78,32 @@ def _hangWord(T, pattern,longueur,i,L,word=""):
     # L : liste de string --> liste des mots qui respectent pattern
     # word : string --> mot formé jusqu'au noeud actuel
     # Ajoute à la liste L tous les mots qui respectent pattern
+    print(T.key[0])
     word+=T.key[0]
     if i==longueur-1 and T.key[1]:
         L.append(word)
     elif i<longueur-1:
         i+=1
         C = T
-        temp = _contains_dicho(C,pattern[i])
-        if pattern[i]!="_" and temp[0]:
-            _hangWord(C.children[temp[1]],pattern,longueur,i,L,word)
+        if pattern[i]!="_" and _contains_dicho(C,pattern[i])[0]:
+            index = _contains_dicho(C,pattern[i])[1]
+            _hangWord(C.children[index],pattern,longueur,i,L,word)
         elif pattern[i]=="_":
             for child in C.children:
                 _hangWord(child,pattern,longueur,i,L,word)
+
+def _addWordInFile(T,file,word):
+    # T : un prefix tree
+    # file : le fichier dans lequel on va ajouter les mots au fur et à mesure
+    # word : le mot formé depuis la racine jusqu'au noeud actuel
+    # pas de return
+    # parcours profondeur : rajoute les mots (dans l'ordre alphabétique) dans le fichier file quand le noeud est True
+    word+=T.key[0]
+    if T.key[1]:
+        file.write(word+"\n")
+    if T.nbchildren!=0:
+        for child in T.children:
+            _addWordInFile(child,file,word)
 ##############################################################################
 ## Measure
 
@@ -99,11 +118,10 @@ def countwords(T):
         count += countwords(child)
     return count
 
-    
 def averagelength(T):
-    temp = _averagelength(T,0,0,0)
-    return temp[2]/temp[0]
-
+    """ average word length in the prefix tree T (ptree.Tree)
+    return type: float"""
+    return _count_height(T,0,0)/countwords(T)    
 
 ###############################################################################
 ## Search and list
@@ -153,9 +171,9 @@ def hangman(T, pattern):
     longueur = len(pattern)
     C = T
     L = []
-    temp = _contains_dicho(C,pattern[0])
-    if pattern[0]!="_" and temp[0]:
-        _hangWord(C.children[temp[1]],pattern,longueur,0,L,"")
+    if pattern[0]!="_" and _contains_dicho(C,pattern[0])[0]:
+        index = _contains_dicho(C,pattern[0])[1]
+        _hangWord(C.children[index],pattern,longueur,0,L,"")
     elif pattern[0]=="_":
         for child in C.children:
             _hangWord(child,pattern,longueur,0,L,"")
@@ -163,15 +181,10 @@ def hangman(T, pattern):
 
 ###############################################################################
 ## Build
-
-def buildlexicon(T, filename):
-    """ save the tree T (ptree.Tree) in the new file filename (str)
-    """
-    
-    Wordlist = wordlist(T)
+def buildlexicon(T,filename):
     saveFile = open(filename,"w")
-    for elt in Wordlist:
-        saveFile.write(elt+"\n")
+    _addWordInFile(T,saveFile,"")
+    saveFile.close()
 
 def addword(T, w):
     """ add the word w (str) not empty in the tree T (ptree.Tree)
@@ -208,15 +221,15 @@ def addword(T, w):
             # on ajoute la dernière lettre et on la passe à True
             C.children.append(ptree.Tree((w[n],True)))
 
-
 def buildtree(filename):
     """ build the prefix tree from the lexicon in the file filename (str)
     return type: ptree.Tree
     """
-    saveFile = open(filename, 'r')
-    liste = saveFile.readlines()
-    saveFile.close()
+    lexicon = open(filename, 'r')
     T = ptree.Tree(["",False])
-    for word in liste:
-        addword(T,word.strip())
+    word = (lexicon.readline()).strip()
+    while word:
+        addword(T,word)
+        word = (lexicon.readline()).strip()
+    lexicon.close()
     return T
