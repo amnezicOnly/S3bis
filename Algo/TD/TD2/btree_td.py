@@ -79,28 +79,12 @@ def recherche_dichotomique(liste, element):
             fin = milieu - 1
 
     return debut
-
-def search(B,n):
-    if B==None:
-        return None
-    C = B
-    index = recherche_dichotomique(C.keys,n)
-    while True:
-        if C.keys[n]==n:
-            return (C,index)
-        if C.children==[]:
-            return None
-        C = C.children[index]
-        index = recherche_dichotomique(C.keys,n)
-
-
 """
 Ex 2.3:
 1) a) 
 
 
 """
-
 def _searc_correct(B,x):
     i = recherche_dichotomique(B,x)
     if i<B.nbkeys and B.keys[i]==x:
@@ -145,7 +129,6 @@ si noeud interne :
 
 def _insert(B,x):
     index = recherche_dichotomique(B.keys,x)
-    # à compléter
     if index<B.nbkeys and x==B.keys[index]:
         raise Exception("x in B")
     if B.children==[]:

@@ -1,5 +1,5 @@
 import time
-import DM.DM1.antoineleveque_prefixtrees as rendu
+import antoineleveque_prefixtrees as rendu
 
 def lire_mots(fichier):
     with open(fichier, 'r') as file:
@@ -20,10 +20,10 @@ def mots_manquants(L1,L2):
 
 
 
-print("Tests Misérable")
+print("Test WeOnlyLie.txt")
 start = time.time()
 start_test = time.time()
-arbre = rendu.buildtree("/home/amnezic/Documents/S3bis/Algo/miserable.txt")
+arbre = rendu.buildtree("/home/amnezic/Desktop/S3bis/Algo/DM/DM1/output.txt")
 end_test = time.time()
 print("Temps pour buildtree: " + str(end_test-start_test))
 start_test = time.time()
@@ -31,8 +31,6 @@ rendu.buildlexicon(arbre,"lexicon_miserable.txt")
 end_test = time.time()
 print("Temps pour buildlexicon:" + str(end_test-start_test))
 start_test = time.time()
-count = rendu.countwords(arbre)
-print(count)
 end_test = time.time()
 print("Temps pour countwords:" + str(end_test-start_test))
 start_test = time.time()

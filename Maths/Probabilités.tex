@@ -32,7 +32,7 @@
 \noindent \textbf{Remarques}
 \begin{enumerate}
     \item La fonction G$_{X}$ est un polynôme en t : \[ G_{X}(t) = \sum_{k=0}^{n} P(X=k)t^{k} = p_{0} + p_{1}t + ... + p_{n}t^{n} \]
-    \item Si $\forall$k $\in$ [O,n], P(X=k)=P(Y=k) $\Longrightarrow$ X = Y
+    \item $G_{X}$ = $G_{Y}$ $\nRightarrow$ X = Y
 \end{enumerate}
 
 \section{Calculs de l'espérance et de la variance}
@@ -48,40 +48,66 @@
 
 La fonction G$_{X}$ contient toute l'information donnée par la loi de $X$. En particulier, on peut en déduire l'espérance et la variance de $X$.
 
-\section{Somme de varaibles aléatoire}
+\section{Somme de variables aléatoire}
+\subsection{Fonction génératrice d'une somme}
 \textbf{Théorème}
 Soient 2 variables aléatoires finies entières X et Y \textbf{indépendantes}, de fonctions génératrices G$_{X}$(t) et G$_{Y}$(t). La somme $X + Y$ admet alors une fonction génératrice :
 \[ G_{X+Y}(t) = G_{X}(t) \times G_{Y}(t) \]
 
-(loi binomiale à revoir)
+\section{Cas de la loi binomiale:}
+Rappels
+\begin{quote}
+    Soient des nombres p $\in$ [0,1] et n $\in N$. une variable binomiale Y de paramètres (n,p) est une somme de n variables de Bernouill indépendantes $X_{i}$, i$\in$[[1,n]] de paramètres p :\newline
+    Y = $X_{1} = X_{2} + ... + X{n}$ avec $\forall$i$\in$[[1,n]], P($X_{i}$=1)=p et P($X_{i}$=0)=(1-p)
+\end{quote}
+
+Fonction génératrice et loi de Y:
+
 
 \section{Séries entières}
 \subsection{Définition}
-Soit x $\in R$. Une série entière est une série $\Sigma a_{n} x^{n}$ où $(a_{n})_{n \in N}$ est une suite réelle.Le terme générale de la série est donc une fonction de x de la forme $u_{n}$(x) = $a_{n}$(x)
+Soit x$\in R$. Une série entière est une série $\Sigma a_{n} x^{n}$ où $(a_{n})_{n \in N}$ est une suite réelle.Le terme général de la série est donc une fonction de x de la forme $u_{n}$(x) = $a_{n}x^{n}$
 
 \textbf{Remarques}
 \begin{enumerate}
     \item La série est toujours convergente en x=0. En effet, pour cette valeur de x, les termes $u_{n}$(x)=$a_{n}x^{n}$ sont tous nuls sauf $u_{0}$(x)=$a_{0}$ donc la série converge vers $a_{0}$.
-    \item Si la série converge en d'autres valeurs de x, alors sa limite dépend de x et on peut définir f(x) = $\sigma_{n=0}^{+\infty}a_{n}x^{n}$: l'ensemble des valeurs de x pour lesquelles la série converge est le domaine de convergence de la série. C'est aussi le domaine de définition $D_{f}$ de la fonction f.
+    \item Si la série converge en d'autres valeurs de x, alors sa limite dépend de x et on peut définir f(x) = $\Sigma_{n=0}^{+\infty}a_{n}x^{n}$.\newline L'ensemble des valeurs de x pour lesquelles la série converge est le domaine de convergence de la série. C'est aussi le domaine de définition $D_{f}$ de la fonction f.
 \end{enumerate}
 
 \subsection{Rayon de convergence}
 \textbf{Définiton}
 \begin{quote}
-    Soient ($a_{n}$) une suite réelle, $\Sigma a_{n}x^{n}$ la série entière définie par cette suite et la fonction f(x) = $\sigma_{n=0}^{+\infty}a_{n}x^{n}$.\newline
+    Soient ($a_{n}$) une suite réelle, $\Sigma a_{n}x^{n}$ la série entière définie par cette suite et la fonction f(x) = $\Sigma_{n=0}^{+\infty}a_{n}x^{n}$.\newline
     Alors il existe $R \in R_{+} \cup {+\infty}$ tel que :
     \begin{enumerate}
-        \item $\forall x \in R tel que |x| ???$, la série converge absolument
-        \item $\forall x \in R tel que |x| > R$, la série diverge
+        \item $\forall$x$\in R$ tel que |x|<R, la série converge absolument.
+        \item $\forall$x$\in R$ tel que |x|>R, la série diverge.
     \end{enumerate}
 \end{quote}
-\noindent R est appelé "rayon de convergence" de la série entière et ???.
+\noindent R est appelé "rayon de convergence" de la série entière et l'ensemble {x$\in R$, |x|<R} = $]-R;R[$ est apellé disque ouvert de convergence de la série.
 
-\noindent \textbf{Interpétation}
+\subsection{Propriétés de la fonction somme: continuité, dérivé et intégration}
+Soit $\Sigma a_{n}x^{n}$ une série entière.\newline
+\textbf{Série dérivée}
+\begin{quote}
+    Sa série dérivée est la série $\Sigma n a_{n}x^{n-1}$. Son terme général, qui est non nul à partir du rang n=1, est égal à la dérivée du monôme $a_{n}x^{n}$.\newline
+    La série dérivée est aussi une série entière: en posant: $b_{n}$= (n+1)$a_{n+1}$, elle s'écrit $\Sigma b_{n}x^{n}$.
+\end{quote}
+
+\noindent \textbf{Série intégrée}
+\begin{quote}
+    Sa série intégrée est la série $\Sigma a_{n}\frac{x^{n+1}}{n+1}$. on parle de série intégrée car son terme génral est la primitive de $a_{n}x^{n}$ qui vaut 0 en x=0.\newline
+    La série intégrée est aussi une série entière: en posant $c_{n}$ = $\frac{a_{n-1}}{n}$, elle s'écrit $\Sigma c_{n}x^{n}$.
+\end{quote}
+
+\noindent Le théorème dit simplement que la fonction somme de la série peut se dériver et s'intégrer de la même manière qu'un polynôme. La série entière se manipule comme un polynôme de degré infini. Mais il y a une contrainte : il faut que x$\in$]-R;R[!
+
+\subsection{Fonctions de référence}
 \begin{enumerate}
-    \item Si R = 0, la série converge vers $a_{0}$ en x = 0, et diverge en toute valeur x telle que |x|>0. Ainsi, le domaine de définition de f est $D_{f}$ = {0}.
-    \item Si R$\in R_{+}^{*}$, 
+    \item $e^{x}$ = $\Sigma_{n=0}^{+\infty} \frac{x^{n}}{n!}$ : R = +$\infty$
+    \item ln(1+x) = $\Sigma_{n=1}^{+\infty} (-1)^{n-1} \frac{x^{n}}{n}$ : R = 1
+    \item (1+x)$^{\alpha}$ = $\Sigma_{n=0}^{+\infty} \frac{\alpha(\alpha-1)...(\alpha-n+1)}{n!} x^{n}$ : R = +$\infty$ is n>0, 1 sinon
+    \item $\frac{1}{1\pm x}$ = $\Sigma_{n=0}^{+\infty} (\pm 1)^{n} x^{n}$ : R = 1
+    \item $\sin(x) et \cos(x)$ : R = +$\infty$
 \end{enumerate}
-
-
 \end{document}
