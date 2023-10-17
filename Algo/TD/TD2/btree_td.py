@@ -32,7 +32,7 @@ BTree :
 
 """
 
-from algo_py import btree,queue
+from algo_py import btree
 
 def __BtreeToList(B, L):
     if B.children == []:
@@ -155,7 +155,36 @@ def insert(B,x):
 
 
 """
-Suppression d'un élément dans un arbre B
+Suppression d'un élément dans un arbre B :
+i = position (virtuelle ou non) de x dans la racine
 
+x n'appartient pas à la racine :
+    - cas feuille : virer x du noeud
+    - cas noeud interne :
+        - si fils i = t-noeud :
+            1 - rotation gauche fils i+1 --> fils i si fils i+1 existe et racine != t-noeud
+            2 - rotation droite fils i-1 --> fils i si fils i-1 existe et racine != t-noeud
+            3 - (fusion fils i et i+1 --> fils i) ou (fusion fils i et i-1 --> fils i-1)
+        supprimer x dans le sous-arbre i
 
+x appartient à la racine :
+    - cas feuille : rien
+    - cas noeud interne :
+        1 - remplacer x par max(sous-arbre i) si ??
+            supprimer max(sous-arbre i)
+        2 - remplacer x par min(sous-arbre i+1) si ??
+            supprimer min(sous-arbre i+1)
+        3 - fusion fils i et i+1:
+            supprimer x du fils i
 """
+
+def leftRotation(B,i):
+    L = B.children[i]
+    R = B.children[i+1]
+    L.keys.append(B.keys[i])
+    B.keys[i] = R.keys.pop(0)
+    if L.children:
+        L.children.append(R.children.pop(0))
+
+def rightRotation(B,i):
+    pass
