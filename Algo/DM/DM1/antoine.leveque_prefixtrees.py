@@ -78,7 +78,6 @@ def _hangWord(T, pattern,longueur,i,L,word=""):
     # L : liste de string --> liste des mots qui respectent pattern
     # word : string --> mot formé jusqu'au noeud actuel
     # Ajoute à la liste L tous les mots qui respectent pattern
-    print(T.key[0])
     word+=T.key[0]
     if i==longueur-1 and T.key[1]:
         L.append(word)

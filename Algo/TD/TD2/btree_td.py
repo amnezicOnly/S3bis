@@ -152,3 +152,10 @@ def insert(B,x):
             B = btree.BTree([],[B])
             split(B,0)
         _insert(B,x)
+
+
+"""
+Suppression d'un élément dans un arbre B
+
+
+"""
