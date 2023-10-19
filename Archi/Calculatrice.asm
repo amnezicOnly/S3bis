@@ -4,8 +4,9 @@ Vector_001		dc.l		Main
 			
 Main			movea.l		#String2,a0
 				jsr			RemoveSpace	;fonctionne
-				jsr			IsCharError	;fonctionne
-				jsr			IsMaxError
+				;jsr			IsCharError	;fonctionne
+				jsr			Convert		;fonctionne
+				;jsr			IsMaxError
 				illegal
 			
 RemoveSpace		movem.l		a0/a1/d0,-(a7)
@@ -24,7 +25,16 @@ RemoveSpace		movem.l		a0/a1/d0,-(a7)
 				
 
 				
-				
+StrLen			movem.l		a0/d1,-(a7)
+			
+\loop			move.b		(a0)+,d1
+				beq			\quit
+			
+				addq.l		#1,d0
+				bra			\loop
+			
+\quit			movem.l		(a7)+,d1/a0
+				rts			
 				
 				
 				
@@ -50,22 +60,11 @@ IsCharError		movem.l		a0/d0,-(a7)
 				bra			\Quit
 
 \Quit			movem.l		(a7)+,d0/a0
-				rts
+				rts	
 				
 
 				
 				
-				
-StrLen			move.l		a0,-(a7)
-			
-\loop			tst.b		(a0)+
-				beq			\quit
-			
-				addq.l		#1,d0
-				bra			\loop
-			
-\quit			movea.l		(a7)+,a0
-				rts			
 				
 				
 IsMaxError		movem.l		a0/d0,-(a7)
@@ -99,11 +98,38 @@ IsMaxError		movem.l		a0/d0,-(a7)
 
 \quit			movem.l		(a7)+,d0/a0
 				rts
+
+Convert			tst.b		(a0)
+				beq			\error
+				jsr			IsCharError
+				beq			\error
+				jsr			IsMaxError
+				beq			\error
+				jsr			Atoui
+				bra			\true
+						
+\error			andi.b  	#%11111011,ccr  ; Positionne le flag Z à 0 (false)
+				jsr			\quit
+
+\true			ori.b		   	#%00000100,ccr  ; Positionne le flag Z à 1 (true)
+
+\quit			rts
+		
+Atoui			movem.l	a0/d1,-(a7)
+				clr.l	d1
 				
-				
-				
+\loop			move.b	(a0)+,d1
+				tst.b	d1
+				beq		\quit
+				subi.w	#'0',d1
+				mulu.w	#10,d0
+				add.w	d1,d0
+				bra		\loop
+							
+\quit			movem.l	(a7)+,d1/a0
+				rts			
 
 	
 
 String1			dc.b	"1  2+3 5",0
-String2			dc.b	"3 2 7 6 7",0
+String2			dc.b	"3 2 ",0
