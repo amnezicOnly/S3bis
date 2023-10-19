@@ -51,13 +51,13 @@ def BtreeToList(B):
         __BtreeToList(B, L)
     return L
 
-def min(B):
+def getMin(B):
     C = B
     while C.children!=[]:
         C = C.children[0]
     return C.keys[0]
 
-def max(B):
+def getMax(B):
     C = B
     while C.children!=[]:
         C = C.children[-1]
@@ -188,3 +188,43 @@ def leftRotation(B,i):
 
 def rightRotation(B,i):
     pass
+
+def merge(B,i):
+    pass
+
+def _delete(B,x):
+    i = recherche_dichotomique(B.keys,x)
+    if B.children:
+        if i<B.nbkeys and x==B.keys[i]:
+            if B.children[i].nbkeys>B.children[i+1].nbkeys:
+                B.keys[i] = getMax(B.children[i])
+                _delete(B.children[i],B.keys[i])
+            elif B.children[i+1].nbkeys>B.degree-1:
+                B.keys[i] = getMin(B.children[i+1])
+                _delete(B.children[i+1],B.keys[i])
+            else:
+                merge(B,i)
+                _delete(B.children[i],x)
+        else:
+            if B.children[i].nbkeys==B.degree-1:
+                if i>0 and B.children[i-1].nbkeys>B.degree-1:
+                    rightRotation(B,i)
+                elif i<B.nbkeys and B.children[i+1].nbkeys>B.degree-1:
+                    leftRotation(B,i)
+                else:
+                    if i == B.nbkeys:
+                        i-=1
+                    merge(B,i)
+            _delete(B.children[i],x)
+    else:
+        if i<B.nbkeys and x==B.keys[i]:
+            B.keys.pop(i)
+
+def delete(B,x):
+    if B!=None:
+        _delete(B,x)
+        if B.nbkeys>0:
+            return B
+        elif B.children:
+            return B.children[0]
+    return None
