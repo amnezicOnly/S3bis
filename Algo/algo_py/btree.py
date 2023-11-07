@@ -92,26 +92,6 @@ def to_linear(B):
         return ""
         
 
-def __values(B, L):
-    if B.children == []:
-        for i in range(B.nbkeys):   # L += B.keys
-            L.append(B.keys[i])
-    else:
-        for i in range(B.nbkeys):
-            __values(B.children[i], L)
-            L.append(B.keys[i])
-        __values(B.children[B.nbkeys], L)
-
-def values(B):
-    L = []
-    if B:
-        __values(B, L)
-    return L
- 
-
-
-
-
 
 ################ Display: Serval's version
 

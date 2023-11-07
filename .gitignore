@@ -5,3 +5,5 @@
 *.pyc
 *.tst
 __pychache__/
+*.pyg
+*.pytxcode
