@@ -1,12 +1,15 @@
-				org			$4
+				org			$0
+Vector_000		dc.l		$ffb500
 Vector_001		dc.l		Main
 				org			$500
 			
-Main			movea.l		#String2,a0
+Main			;lea			String2,a0
+				;move.b		#24,d1
+				;move.b		#20,d2
+				;jsr			Print
 				jsr			RemoveSpace	;fonctionne
-				;jsr			IsCharError	;fonctionne
 				jsr			Convert		;fonctionne
-				;jsr			IsMaxError
+				
 				illegal
 			
 RemoveSpace		movem.l		a0/a1/d0,-(a7)
@@ -127,9 +130,44 @@ Atoui			movem.l	a0/d1,-(a7)
 				bra		\loop
 							
 \quit			movem.l	(a7)+,d1/a0
+				rts
+				
+				
+Print			movem.l	a0/d1/d0,-(a7)
+				clr.l	d0
+
+\loop			move.b	(a0)+,d0
+				tst.b	d0
+				beq		\quit
+				jsr		PrintChar
+				addi.l	#1,d1
+				bra		\loop
+				
+\quit			movem.l	(a7)+,d0/d1/a0
 				rts			
+				
+
+
+PrintChar		incbin	"PrintChar.bin"
+
+
+NextOp			tst.b	(a0)
+				beq		\quit
+				cmpi.b	#'+',(a0)
+				beq		\quit
+				cmpi.b	#'-',(a0)
+				beq		\quit
+				cmpi.b	#'*',(a0)
+				beq		\quit
+				cmpi.b	#'%',(a0)
+				beq		\quit
+				addq.l	#1,a0
+				bra		NextOp
+
+\quit			rts
 
 	
 
 String1			dc.b	"1  2+3 5",0
-String2			dc.b	"3 2 ",0
+String2			dc.b	"Hello World",0
+String3			dc.b	" 3 2",0
