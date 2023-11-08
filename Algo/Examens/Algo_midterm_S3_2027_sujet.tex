@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{verbatim}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+%\usepackage{soul}
+%\usepackage[T1]{fontenc}
+
+\author{}
+\date{}
+\title{Midterm Algo 2027}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Exercice 1 (Haches et graphes... - \textit{6 points})}
+\begin{enumerate}
+    \item Donnez une méthode de hachage direct.
+    \item Quel problème apparait avec le hachage coalescent?
+    \item Qu'est-ce qu'une collision primaire?
+    \item Qu'est-ce que l'ordre d'un graphe non-orienté?
+    \item Un sommet isolé est:\newline\newline
+    Soit le graphe G=<S,A> orienté tel que : S={1,2,3,4,5,6,7,8,9} et\newline
+    A={(1,2),(1,6),(2,3),(2,5),(3,1),(3,4),(3,5),(4,5),(4,8),(6,2),(6,5),(7,5),(7,6),(7,8),(7,8),(8,5),(8,9),(9,4),(9,7)}
+    \item Remplir le tableau des demi-degrés extérieurs des sommets G.
+    \item Le graphe est-il fortement connexe?
+    \item Si non, combien possède t-il de composantes fortement connexes?
+    \item S'ils existent, les sommets de G de degré différent de 4 sont:
+    \item S'ils existent, les sommets de G de demi-degré intérieur égal à 0 sont:
+\end{enumerate}
+
+\noindent\textbf{Exercice 2 (Level from x - \textit{5 points})}
+Insérer figure 1 ici\newline
+Écrire la fonction  \verb|keys_after(T:tree,x:int)| qui retourne la liste des clés dans l'arbre général T (implémentation "classique") se trouvant après la \textbf{première} avleur x trouvée sur le même niveau que x.\newline
+
+\noindent\textbf{Exercice 3 (Average subtrees - \textit{6 points})}\newline
+\indent Dans un arbre général, on cherche à savoir si un noeud n'a aucun sous-arbre dont la moyenne des clés est strictement supérieur à la clé de ce noeud.\newline
+\indent Par exemple, l'arbre de la figure 2 ne respecte pas la propriété: la moyenne des clés du premier sous-arbre du noued contenant 4 est supérieur à 4.\newline
+Insérer figure 2 et 3\newline
+Par contre l'arbre de la figure 3 respecte bien la propriété :
+\begin{itemize}
+  \item Le noeud contenant 15:
+  \begin{itemize}
+    \item la moyenne des clés du premier sous-arbre est 2
+    \item la moyenne des clés du deuxième sous-arbre est 5 = (8+11+2+5+0+4)/6
+  \end{itemize}
+  \item Noeud contenant 8: la moyenne des clés du premier sous-arbre est 5, inférieure à 8
+  \item Tous les autres sous-arbres sont réduits à une feuille dont la clé est inférieure à celle du père.
+\end{itemize}
+
+Écrire la fonction \verb|average_subtrees(B:TreeAsBin)| qui vérifie si l'arbre B en implémentation premier fils-frère droit respecte la propriété.\newline
+
+\noindent\textbf{Exercice 4 (B-arbre: insertions et suppressions - \textit{3 points})}\newline
+Pour chaque question, utiliser le principe "à la descente" (principe de précaution) vu en td (hors bonus).
+\begin{enumerate}
+  \item Dessiner l'arbre après insertions successives des valeurs 21, 42 et 8 dans l'arbre de la figure 4.\newline
+  Insérer figure 4
+  \item Dessiner l'arbre après suppression de la valeur 80 dans l'arbre de la figure 5.\newline
+  Insérer figure 5
+\end{enumerate}
+
+\newpage
+\noindent\textbf{Annexes}
+\begin{itemize}
+  \item Arbres généraux
+  \begin{itemize}
+    \item Implémentation classique
+    \begin{itemize}
+      \item T : classe Tree
+      \item T.key
+      \item T.children: listes des fils ([] pour les feuilles)
+      \item T.nbchildren = len(T.children)
+    \end{itemize}
+    \item Implémentation premier fils-frère droit
+    \begin{itemize}
+      \item B : classe TreeAsBin
+      \item B.key
+      \item B.child: le premier fils
+      \item B.sibling: le frère droit
+    \end{itemize}
+  \end{itemize}
+  \item Listes : comme d'habitude : len, range, min, max, abs, append
+  \item Les files (les méthodes de la classe Queue, que l'on supposse importée)
+  \begin{itemize}
+    \item Queue(): retourne une nouvele file
+    \item q.enqueue(x): enfile l'élément x dans q
+    \item q.dequeue(): supprime et renvoie le premier élément de q
+    \item q.isempty(): teste si q est vide
+  \end{itemize}
+\end{itemize}
+
+\textbf{Vos fonctions}\newline
+\indent Vous pouvez également écrire vos propres fonctions à condition qu'elles soient documentées: donnez leurs des spécifiacations (on doit savoir ce qu'elles font).\newline
+\indent Dans tous les cas, la dernière fonction doit être celle qui répond à la question.
+
+\end{document}

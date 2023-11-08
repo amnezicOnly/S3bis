@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{verbatim}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+\author{}
+\date{}
+\title{Midterms S3 2027}
+
+\begin{document}
+\maketitle
+\noindent\textbf{\underline{Exercice 1} (5 points)}\newline
+Remplir le taleau présent sur le \underline{document réponse}. Donnez le nouveau contenu des registres (sauf le \textbf{PC}) et/ou de la mémoire modifiés par les instructions. \textbf{\underline{Vous utiliserez la représentation hexadécimale.}}\newline\textbf{\underline{La mémoire et les registres sont réinitialisés à chaque instruction.}}.\newline
+Valeurs initiales :\newline\newline
+\begin{tabular}{c c}
+    D0 = \verb|$FFFF0005| & A0 = \verb|$00005000| \\
+    D1 = \verb|$00000008| & A1 = \verb|$00005008| \\
+    D2 = \verb|$0000FFFA| & A2 = \verb|$00005010| \\
+    PC = \verb|$00006000|
+\end{tabular}\newline
+\begin{center}
+\begin{tabular}{c}
+    \verb|$005000 54 AF 18 B9 E7 21 48 C0| \\
+    \verb|$005008 C9 10 11 C8 D4 36 1F 88|  \\
+    \verb|$005010 13 79 01 80 42 1A 2D 49|
+\end{tabular}
+\end{center}
+
+\noindent\textbf{\underline{Exercice 2} (4 points)}\newline
+Remplissez le contenu du tableau présent sur le \underline{document réponse}. Donnez le réusltats des additions ainsi que le contenu des bits \textbf{N, Z, V et C} du registre d'état.\newline
+
+\noindent\textbf{\underline{Exercide 3} (3 points)}\newline
+Réalisez le sous-programme \textbf{AlphCount} qui renvoie le nombre de caractères alphanumériques dans une chaine de caractères. une chaine de caractères se termine par un caractère nul (la valeur 0). À l'exception des registres de sortie, aucun registre de données ou d'adresse ne devra être modifié en sortie de ce sous programme.\newline
+\underline{Entrée}: \textbf{A0.L} pointe sur le premier caractère d'une chaine de caractères\newline
+\underline{Sortie}: \textbf{D0.L} renvoie le nombre de caractères alphanumériques de la chaine.\newline\newline
+
+\textbf{Indications:}
+\begin{itemize}
+    \item Un caractère alphanumérique est une lettre (minuscule ou majuscule) ou un chiffre (0-9).
+    \item On considère que les trois sous-programmes ci-dessous sont déjà écrits et que vous pouvez les appeler (ils ne modifient que \textbf{D0}):
+    \begin{itemize}
+        \item \textbf{LowerCount} renvoie dans \textbf{D0} le nombre de minuscules dans la chaine pointée par \textbf{A0}.
+        \item \textbf{upperCount} renvoie dans \textbf{D0} le nombre de majuscules dans la chaine pointée par \textbf{A0}.
+        \item \textbf{DigitCount} renvoie dans \textbf{D0} le nombre de chiffres dans la chaine pointée par \textbf{A0}.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Attention ! Le sous-programme AlphaCount est limité à 10 lignes d'instructions}\newline\newline
+
+\textbf{\underline{Exercice 4} (2 points)}
+Répondez aux questions sur le \underline{document réponse}.\newline\newline
+
+\textbf{\underline{Exercice 5} (6 points)}\newline
+Soit le programme ci-dessous. Complétez le tableau présent sur le \underline{document réponse}.
+
+\end{document}
