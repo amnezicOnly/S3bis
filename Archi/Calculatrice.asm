@@ -3,12 +3,9 @@ Vector_000		dc.l		$ffb500
 Vector_001		dc.l		Main
 				org			$500
 			
-Main			;lea			String2,a0
-				;move.b		#24,d1
-				;move.b		#20,d2
-				;jsr			Print
+Main			movea.l		#String1,a0
 				jsr			RemoveSpace	;fonctionne
-				jsr			Convert		;fonctionne
+				jsr			GetNum
 				
 				illegal
 			
@@ -43,10 +40,10 @@ StrLen			movem.l		a0/d1,-(a7)
 				
 				
 				
-IsCharError		movem.l		a0/d0,-(a7)
+IsCharError		movem.l		a1/d0,-(a7)
 				clr.l		d0
 				
-\loop			move.b		(a0)+,d0
+\loop			move.b		(a1)+,d0
 				tst.b		d0
 				beq			\False
 				cmpi.b		#'0',d0
@@ -62,7 +59,7 @@ IsCharError		movem.l		a0/d0,-(a7)
 \True			ori.b   	#%00000100,ccr  ; Positionne le flag Z à 1 (true)
 				bra			\Quit
 
-\Quit			movem.l		(a7)+,d0/a0
+\Quit			movem.l		(a7)+,d0/a1
 				rts	
 				
 
@@ -70,7 +67,7 @@ IsCharError		movem.l		a0/d0,-(a7)
 				
 				
 				
-IsMaxError		movem.l		a0/d0,-(a7)
+IsMaxError		movem.l		a1/d0,-(a7)
 				clr.l		d0
 				jsr			StrLen
 				cmpi.l		#5,d0
@@ -79,17 +76,17 @@ IsMaxError		movem.l		a0/d0,-(a7)
 				bhi			\True
 				bra			\max
 				
-\max			cmpi.b		#'3',(a0)+
+\max			cmpi.b		#'3',(a1)+
 				bhi			\True
-				cmpi.b		#'2',(a0)+
+				cmpi.b		#'2',(a1)+
 				bhi			\True
-				cmpi.b		#'7',(a0)+
+				cmpi.b		#'7',(a1)+
 				bhi			\True
-				cmpi.b		#'6',(a0)+
+				cmpi.b		#'6',(a1)+
 				bhi			\True
-				cmpi.b		#'7',(a0)+
+				cmpi.b		#'7',(a1)+
 				bhi			\True
-				tst.b		(a0)
+				tst.b		(a1)
 				bne			\True
 				bra			\False
 				
@@ -99,10 +96,10 @@ IsMaxError		movem.l		a0/d0,-(a7)
 				
 \True			ori.b   	#%00000100,ccr  ; Positionne le flag Z à 1 (true)
 
-\quit			movem.l		(a7)+,d0/a0
+\quit			movem.l		(a7)+,d0/a1
 				rts
 
-Convert			tst.b		(a0)
+Convert			tst.b		(a1)
 				beq			\error
 				jsr			IsCharError
 				beq			\error
@@ -118,10 +115,10 @@ Convert			tst.b		(a0)
 
 \quit			rts
 		
-Atoui			movem.l	a0/d1,-(a7)
+Atoui			movem.l	a1/d1,-(a7)
 				clr.l	d1
 				
-\loop			move.b	(a0)+,d1
+\loop			move.b	(a1)+,d1
 				tst.b	d1
 				beq		\quit
 				subi.w	#'0',d1
@@ -129,7 +126,7 @@ Atoui			movem.l	a0/d1,-(a7)
 				add.w	d1,d0
 				bra		\loop
 							
-\quit			movem.l	(a7)+,d1/a0
+\quit			movem.l	(a7)+,d1/a1
 				rts
 				
 				
@@ -166,8 +163,26 @@ NextOp			tst.b	(a0)
 
 \quit			rts
 
+GetNum			movem.l		a1/a2,-(a7)
+				move.l		a0,a1
+				move.l		a0,a2
+				jsr			NextOp			; a0 pointe sur la première opérande
+				move.b		(a0),d1			; on conserve l'opérande
+				move.b		0,(a0)			; on le remplace par Null
+				jsr			Convert			; ??? et conserve le premier nombre dans d0
+				bne			\false			; s'il y a un pb
+				bra			\quit			; sinon
+				
+\false			andi.b  	#%11111011,ccr  ; Positionne le flag Z à 0 (false)
+				move.b		d1,(a0)
+				move.l		a1,a0
+				bra			\quit
+				
+\quit			movem.l		(a7)+,a2/a1
+				move.b		d1,(a0)
+				rts
+				
+
 	
 
-String1			dc.b	"1  2+3 5",0
-String2			dc.b	"Hello World",0
-String3			dc.b	" 3 2",0
+String1			dc.b	"1 2 +  35",0
