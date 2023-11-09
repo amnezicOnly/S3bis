@@ -59,9 +59,27 @@ def dot_better(G):
         s+="graph{\n"
     for i in range(G.order):
         for elt in G.adjlists[i]:
-            if i>elt:
+            if G.directed or i<=elt:
                 s+="    "+str(i)+link+str(elt)+"\n"
     s += "}"
+    return s
+
+def dot_mat(Gmat):
+    link = " -"
+    s=""
+    if Gmat.directed:
+        link+="> "
+        s+="digraph{\n"
+    else:
+        link+="- "
+        s+="graph{\n"
+    k = Gmat.order
+    for i in range(Gmat.order):
+        if not Gmat.directed:
+            k = i+1
+        for j in range(k):
+            s+= ("  "+str(i)+link+str(j)+"\n") * Gmat.adj[i][j]
+    s+="}"
     return s
     
 
@@ -78,12 +96,7 @@ def dot_bonus(G):
         if len(G.adjlists[i])!=0:
             s+="    "+str(i)+'[label = "'+str(G.labels[i])+'"]\n'
         for elt in G.adjlists[i]:
-            s+="    "+str(i)+link+str(elt)+"\n"
+            if i<elt:
+                s+="    "+str(i)+link+str(elt)+"\n"
     s += "}"
     return s
-
-#print(dot(ex_graphs.G1))
-#print(degrees(ex_graphs.G2mat))
-#print(in_out_degrees(ex_graphs.G1))
-print(dot_better(ex_graphs.G2))
-#print(dot_bonus(ex_graphs.G3))
