@@ -12,6 +12,10 @@ Graph :
 
 from algo_py import graphmat,graph,queue,ex_graphs
 
+def importGra(filename):
+    return graph.load("/home/amnezic/Desktop/S3bis/Algo/3-graphs/files/"+filename)
+
+
 def degrees(Gmat):
     res = [0]*Gmat.order
     for i in range(Gmat.order):
