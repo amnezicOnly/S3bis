@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{varwidth}
+\usepackage{amsfonts}
+\usepackage[T1]{fontenc}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\author{}
+\date{}
+\title{Correction TD1 Physique quantique}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Exercice de cours : Catastrophe ultraviolette}\newline
+\indent Le corps noir est l'objet théorique suivant : il absorbe parfaitement la totalité de l'énergie électromagnétique qu'il reçoit et, atteignant l'équilibre thermique à une température T, la restitue entièrement sous forme d'un rayonnement thermique constitué d'un spectre de longueurs d'onde $\lambda$, rayonnées chacune à une intensité, donnée par la fonction u($\lambda$, T), appelée densité spectrale d'énergie.\newline
+\indent La thermodynamique classique a proposé de décrire le rayonnement du corps noir en considérant les molécules comme de petits oscillateurs, rayonnant chacun une énergie E avec une certaine probabilité. La physique classique propose que l'énergie rayonnée E prend ses valeurs dans $[0;+\infty]$ ; des valeurs donc continues. On note $\langle$E$\rangle$ l'énergie moyenne d'un oscillateur.\newline\newline
+\noindent\textbf{Partie 1 : Descritpion par la loi de Rayleigh-Jeans (Énergie continue)}\newline
+Dans le cadre de la thermodynamique classique, la loi de Rayleigh-Jeans aboutit à l'expression suivante pour la densité spectrale d'énergie:
+\[
+    u(\lambda,T) = \frac{8\pi}{c\lambda^{2}} \langle E \rangle
+\quad
+\begin{varwidth}{\displaywidth}
+    \begin{itemize}[nosep]
+        \item u: densité spectrale (W$\cdot$m$^{3}$)
+        \item c: célérité de la lumière dans le vide (3$\times$10$^{8}$m$\cdot$s${-1}$)
+    \end{itemize}
+\end{varwidth}
+\]
+
+\noindent
+L'énergie moyenne $\langle$E$\rangle$ d'un oscillateur se calcule de la manière suivante:
+\[
+    \langle E \rangle  = \frac{\int_{0}^{+\infty} Ee^{-\frac{E}{k_{B}T}}dE}{\int_{0}^{+\infty} e^{-\frac{E}{k_{B}T}}dE}
+\quad
+\begin{varwidth}{\displaywidth}
+    \begin{itemize}[nosep]
+        \item $k_{B}$: constante thermodynamique
+        \item T : température du rayonnement
+    \end{itemize}
+\end{varwidth}
+\]
+
+\noindent
+Le numérateur représente l'intégrale de la densité de probabilité de l'énergie E, et le dénominateur permet de normaliser le résultat.\newpage
+\begin{enumerate}
+    \item Montrer que le terme $\langle$E$\rangle$ a pour valeur $k_{B}T$, en utilisant une intégration par parties. \newline \newline\newline
+    Posons Nm et D tel que $\langle$E$\rangle$ = $\frac{Nm}{D}$\newline\newline
+    D = $\int_{0}^{\infty} e^{-\frac{E}{k_{B}T}} dE$ = $[-k_{B}T\times e^{-\frac{E}{k_{B}T}}]_{0}^{\infty}$ = -$k_{B}$T(0-1) = $k_{B}$T \newline \newline
+    Nm = $\int_{0}^{\infty} E\times e^{-\frac{E}{k_{B}T}}dE$, par intégration par parties, on obtient :\newline\newline
+    Nm = $[-k_{B}T\times E\times e^{-\frac{E}{k_{B}T}}]_{0}^{\infty}$ - ($\int_{0}^{\infty} -k_{B}T\times e^{-\frac{E}{k_{B}T}}dE$)\newline\newline = $k_{B}T [-Ee^{-\frac{E}{k_{B}T}}]_{0}^{\infty} + k_{B}T[-k_{B}Te^{-\frac{E}{k_{B}T}}]_{0}^{\infty}$ \newline\newline= $k_{B}T[0-0] - (k_{B}T)^{2} [e^{-\frac{E}{k_{B}T}}]_{0}^{\infty}$\newline\newline = $-(k_{B}T)^{2} [e^{\alpha} - e^{0}] = -(k_{B}T)^{2} (0-1)$ = $(k_{B}T)^{2}$ \newline\newline
+
+    Donc $\langle$E$\rangle$ = $\frac{Nm}{D}$ = $\frac{(k_{B}T)^{2}}{k_{B}T}$ = $k_{B}$T\newline\newline
+
+    L'énergie totale du rayonnement émis par le corps noir est donnée par l'intégration de la densité d'énergie sur toutes les longueurs d'ondes:
+    \[ U(\lambda,T) = \int_{0}^{+\infty} u(\lambda,T)d\lambda\]
+
+    U($\lambda$,T) est l'intensité rayonnée par le corps noir (en W$\cdot$m$^{2}$)
+    \item Expliquer à partir de cette intégrale pourquoi la loi de Rayleigh-Jeans a marqué un tournant nommé "Catastrophe ultraviolette".\newline\newline\newline
+    $\int_{0}^{+\infty} u(\lambda,T)$ = $\int_{0}^{\alpha} \frac{8\pi}{c\lambda^{2}}\times k_{B}T d\lambda$\newline\newline
+    = $\frac{8\pi}{c}\times k_{B}T \times \int_{0}^{\alpha} \frac{1}{\lambda^{2}}d\lambda$ = $\frac{8\pi}{c}\times k_{B}T \times [\frac{-1}{\lambda}]_{0}^{\alpha}$\newline\newline
+    $\Longrightarrow$ $\lambda \rightarrow 0 \Longrightarrow$ U($\lambda$,T) diverge.
+\end{enumerate}
+
+\newpage
+\textbf{Partie 2: Description par la loi de Planck(Énergie discontinue)}\newline
+Nous allons maintenant nous intéresser à la loi de Planck, qui a proposé de corriger la loi de Rayleigh-Jeans en introduisant la quantification de l'énergie du système corps noir : le terme $\langle$E$\rangle$ est alors calculé en supposant que l'énergie E d'un oscillateur ne peut prendre qu'un nombre discret de valeurs, multiples d'une énergie $E_{0}$.
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item Réécrire la relation donnant $\langle$E$\rangle$ dans ces conditions.\newline
+    E ne peut prendre qu'un nombre discret de valeurs, multiples d'une énergie E$_{0}$, càd : E = n$\times$E$_{0}$, n$\in \mathbb{N}$.
+    \[ \langle E \rangle = \frac{\Sigma_{n=0}^{+\infty} nE_{0}e^{-\frac{nE_{0}}{k_{B}T}}}{\Sigma_{n=0}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}}} \]
+    \item Calculer ce terme, en utilisant un résultat sur les suites géométriques au numérateur, puis en remarquant un lien de dérivation entre le dénominateur et le numérateur.\newline\newline
+    Posons Nm le numérateur et D le dénominateur.\newline
+    $e^{-\frac{nE_{0}}{k_{B}T}} = {(e^{-\frac{E_{0}}{k_{B}T}})}^{n}$; on pose q = $e^{-\frac{E_{0}}{k_{B}T}}$ et on obtient Nm = E$_{0} \Sigma_{n=0}^{+\infty} nq^{n}$\newline\newline
+    $\Longrightarrow$ Nm = E$_{0} \times \frac{1}{1-q} = E_{0} \times \frac{1}{1-e^{-\frac{E_{0}}{k_{B}T}}}$\newline\newline
+    Or (D)' = Nm $\times -k_{B}T$ (pas réussi la question)
+
+    \item On obtient donc la densité spectrale d'énergie suivante :
+\[ u(\lambda,T) = \frac{8\pi}{c\lambda^{2}} \langle E \rangle = \frac{8\pi}{c\lambda^{2}} \times \frac{E_{0}}{e^{\frac{E_{0}}{k_{B}T}}-1} \] avec $E_{0}$ un quanta (plus petite quantité indivisible d'énergie)\newline
+Pour corriger la loi de R-J, il faut corriger la divergence u($\lambda$,T) pour les petites longueurs d'ondes.\newline
+Justifier la proposition de Planck: $E_{0} = \frac{hc}{\lambda}$ avec h la constante de Planck.\newline
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.7]{catastrophe_ultraviolette.png}
+    \caption{Spectre du rayonnement du corps noir (intensité du rayonnement en fonction de la longueur d'onde) pour des températures données (couleurs : modèle de Planck ; noir : modèle de Rayleigh-Jeans)}
+\end{figure}
+
+\indent\textit{Remarques:}\textit{Avec la loi de Planck, l'on trouve une énergie totale rayonnée U(T)$\alpha$T$^{4}$ , ce qui est en accord avec les observations, et revient à la loi de Stefan-Boltzman, antérieure à la catastrophe ultraviolette.}
+\end{enumerate}
+
+
+\end{document}

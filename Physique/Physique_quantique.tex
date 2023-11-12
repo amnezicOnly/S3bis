@@ -8,6 +8,10 @@
 \usepackage{enumitem}
 \usepackage{varwidth}
 \usepackage[T1]{fontenc}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
 
 \author{}
 \date{}
@@ -16,7 +20,7 @@
 \begin{document}
 \maketitle
 
-La mécanique quantique, est un domaine de la physique apparu au XXe siècle, qui explique le comportement au niveau atomique et subatomique de la matière associée avec l'énergie, que la physique dite classique ne peut expliquer.\newline
+La mécanique quantique est un domaine de la physique apparu au XXe siècle, qui explique le comportement au niveau atomique et subatomique de la matière associée avec l'énergie que la physique dite classique ne peut expliquer.\newline
 \indent En 1905, Einstein utilise les résultats de Planck et explique que la lumière est composé de photons, impliquant une quantification de l'échange d'énergie \textbf{et} de l'énergie elle-même. C'est cette quantification qui rentre en contradiction avec la physique traditionnelle.
 
 \section{Différence entre mécanique traditionnelle et quantique:}
@@ -53,8 +57,11 @@ La mécanique quantique, est un domaine de la physique apparu au XXe siècle, qu
             \end{itemize}
         \end{itemize}
 \end{itemize}
+
+
+
 \section{Corps noir}
-Un corps noir est un objet physique théorique absorbant la totalité de l'énergie électro-magnétiques qu'il reçoit et la restitue entièrement sous forme d'un rayonnement thermique. En physique traditionnelle (loi de Rayleigh-Jeans), l'intensité des rayons renvoyés peut être donnée par la fonction suivante :
+Un corps noir est un objet physique théorique absorbant la totalité de l'énergie électro-magnétique qu'il reçoit et la restitue entièrement sous forme d'un rayonnement thermique. En physique traditionnelle (loi de Rayleigh-Jeans), l'intensité des rayons renvoyés peut être donnée par la fonction suivante :
 \[
     u(\lambda,T) = \frac{8\pi}{c\lambda^{2}}\langle E \rangle
 \quad
@@ -62,7 +69,7 @@ Un corps noir est un objet physique théorique absorbant la totalité de l'éner
     \begin{itemize}[nosep]
         \item u: densité spectrale (W$\cdot$m$^{3}$)
         \item T: température de rayonnement (K)
-        \item c: célérité de la lumière dans le vide (3$\times$10$^{8}$m$\cdot$s${-1}$)
+        \item c: célérité de la lumière dans le vide (3$\times$10$^{8}$m$\cdot$s$^{-1}$)
         \item $\lambda$: longueur d'ondes (nm)
         \item $\langle$E$\rangle$: énergie moyenne d'un oscillateur
     \end{itemize}
@@ -71,7 +78,7 @@ Un corps noir est un objet physique théorique absorbant la totalité de l'éner
 
 On peut calculer $\langle$E$\rangle$ via la formule suivante:
 \[
-    <E> = \frac{\int_{0}^{+\infty} Ee^{-\frac{E}{k_{B}T}}dE}{\int_{0}^{+\infty} e^{-\frac{E}{k_{B}T}}dE}
+    \langle E \rangle = \frac{\int_{0}^{+\infty} Ee^{-\frac{E}{k_{B}T}}dE}{\int_{0}^{+\infty} e^{-\frac{E}{k_{B}T}}dE}
 \quad
 \begin{varwidth}{\displaywidth}
     \begin{itemize}[nosep]
@@ -88,7 +95,7 @@ Le problème de la loi de Rayleigh-Jeans est qu'on arrive à la conclusion que l
 Le point important de la proposition de Max Planck est que l'énergie ne peut prendre que certaines valeurs discrètes, càd que l'énergie est discontinue.
 \begin{itemize}
     \item Énergie discrète (E = n$E_{0}$) et non continue
-    \item <E> = $\frac{\Sigma_{n=1}^{+\infty} E \times e^{-\frac{E}{k_{B}T}}}{\Sigma_{n=1}^{+\infty} e^{-\frac{E}{k_{B}T}}}$
+    \item $\langle$E$\rangle$ = $\frac{\Sigma_{n=1}^{+\infty} E \times e^{-\frac{E}{k_{B}T}}}{\Sigma_{n=1}^{+\infty} e^{-\frac{E}{k_{B}T}}}$
     \item E = n$E_{0}$ = $\frac{\Sigma_{n=1}^{+\infty} E_{0} \times e^{-\frac{E_{0}}{k_{B}T}}}{\Sigma_{n=1}^{+\infty} e^{-\frac{E_{0}}{k_{B}T}}}$
 \end{itemize}
 Conclusion : le modèle de Max Planck corrige la divergence de la densité spectrale u($\lambda$,T) pour l'UV (faible $\lambda$) (catastrophe ultraviolette).
