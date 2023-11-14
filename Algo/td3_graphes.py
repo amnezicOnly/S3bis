@@ -131,6 +131,7 @@ def BFS_mat(G):
 def _BFS_list(G,L,i):
     q = queue.Queue()
     q.enqueue(i)
+    L[i]=-1
     while not q.isempty():
         node = q.dequeue()
         for elt in G.adjlists[node]:
@@ -142,7 +143,6 @@ def BFS_list(G):
     visited = [None]*G.order
     for i in range(G.order):
         if visited[i]==None:
-            visited[i]=-1
             _BFS_list(G,visited,i)
     return visited
 
