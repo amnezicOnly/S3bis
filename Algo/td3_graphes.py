@@ -104,3 +104,108 @@ def dot_bonus(G):
                 s+="    "+str(i)+link+str(elt)+"\n"
     s += "}"
     return s
+
+def _BFS_mat(G,L,i):
+    temp = ""
+    q = queue.Queue()
+    q.enqueue(i)
+    L[i] = True
+    while not q.isempty():
+        node = q.dequeue()
+        temp+=str(node)+" "
+        for j in range(G.order):
+            if G.adj[node][j]!=0 and L[j]==False:
+                L[j] = True
+                q.enqueue(j)
+    return temp
+
+def BFS_mat(G):
+    visited = [False]*G.order
+    s = ""
+    for i in range(G.order):
+        if visited[i]==False:
+            s+=_BFS_mat(G,visited,i)+"\n"
+            
+    return s
+
+def _BFS_list(G,L,i):
+    temp = ""
+    q = queue.Queue()
+    q.enqueue(i)
+    L[i] = True
+    while not q.isempty():
+        node = q.dequeue()
+        temp+=str(node)+" "
+        for elt in G.adjlists[node]:
+            if L[elt]==False:
+                L[elt]=True
+                q.enqueue(elt)
+    return temp
+
+def BFS_list(G):
+    visited = [False]*G.order
+    s = ""
+    for i in range(G.order):
+        if visited[i]==False:
+            s+=_BFS_list(G,visited,i)+"\n"
+    return s
+
+def _DFS_mat(G,L,i):
+    temp =""
+    temp += str(i)+" "
+    L[i] = True
+    for j in range(G.order):
+        if G.adj[i][j]!=0 and L[j]==False:
+            L[j] = True
+            temp+=_DFS_mat(G,L,j)
+    return temp
+
+def DFS_mat(G):
+    visited = [False]*G.order
+    s = ""
+    for i in range(G.order):
+        if visited[i]==False:
+            s+=_DFS_mat(G,visited,i)+"\n"
+    return s
+
+
+def _DFS_list(G,L,i):
+    temp = ""
+    temp+=str(i)+" "
+    L[i] = True
+    for elt in G.adjlists[i]:
+        if L[elt]==False:
+            L[elt]=True
+            temp+=_DFS_list(G,L,elt)
+    return temp
+
+def DFS_list(G):
+    visited = [False]*G.order
+    s = ""
+    for i in range(G.order):
+        if visited[i]==False:
+            s+=_DFS_list(G,visited,i)+"\n"
+    return s
+
+def _comp(G,count,i,L):
+    L[i] = count
+    for elt in G.adjlists[i]:
+        if L[elt]==0:
+            _comp(G,count,elt,L)
+
+def components(G):
+    count = 0
+    visited = [0]*G.order
+    for i in range(G.order):
+        if visited[i]==0:
+            count+=1
+            _comp(G,count,i,visited)
+    return (count,visited)
+
+G_mat1 = ex_graphs.G1mat
+G1 = ex_graphs.G1
+
+
+#print(DFS_mat(G_mat1))
+#print(DFS_list(G1))
+
