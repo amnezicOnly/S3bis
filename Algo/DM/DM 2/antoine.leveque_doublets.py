@@ -17,12 +17,11 @@ from algo_py import graph, queue
 # Do not add any import
 
 ###############################################################################
-#   AUXILIAIRIES FUNCTIONS
+#   Fonctions auxiliaires
 def _differ(word1,word2):
     """
-    compares the number of differents letter between word1 and word2
-    return False if they differ from 0 or 1 letter, True otherwise
-    word1 and word2 : strings with the same length
+    word1 et word2 : deux strings
+    Renvoie le booléen indiquant si word1 et word2 diffèrent de + de 1 lettre
     """
     diff = 0
     l = len(word1)
@@ -32,20 +31,6 @@ def _differ(word1,word2):
         if diff==2:
             return True
     return False
-
-def _remplissage(G,word,L):
-    """
-    G : a graph
-    word : int (a little bit confusing)
-    L : list with all words that are a doublet of the word start in alldoublets function
-    Add word in L if word isn't in L then for all his words in the adjacence list of word
-        reuse the function with these words
-    No return
-    """
-    if not word in L:
-        L.append(word)
-        for elt in G.adjlists[word]:
-            _remplissage(G,elt,L)
 
 def _paths_bfs_one(G,src,dst,P):
     """
@@ -77,27 +62,28 @@ def _path_bfs(G,src,dst):
         path.reverse()
     return path
 
+
+###############################################################################
 #   LEVEL 0
         
 def buildgraph(filename, k):
     """Build and return a graph with words of length k from the lexicon in filename
 
     """
-    f = open(filename)
-    temp = f.readlines()   # prend tous les mots du fichier
-    f.close()
+    # on commence par ajouter tous les mots de taille k
     L = []
-    for elt in temp:
-        word = elt.strip()
-        if len(word)==k:
-            L.append(word)
+    with open(filename, 'r') as f:
+        word = (f.readline()).strip()
+        while word:
+            if len(word)==k:
+                L.append(word)
+            word = (f.readline()).strip()
+    
     res = graph.Graph(len(L),False,L)   # création du graphe non-orienté avec tous les mots de la liste
     for i in range(res.order):
-        for j in range(i,res.order):
-            # si ce n'est pas le même mot, qu'il ne diffère pas de plus d'une lettre et que word n'est pas déjà dans la liste d'adjacence de elt
-            # if res.labels[i]!=res.labels[j] and not _differ(res.labels[j],res.labels[i]) and not (res.labels[j] in res.adjlists[i]):
-            if  i !=j and not _differ(res.labels[j],res.labels[i]):
-                res.addedge(i,j)
+        for j in range(i+1,res.order):  # les cas où i<=j ont déjà été traités
+            if not _differ(res.labels[i],res.labels[j]):    # si les mots diffèrent de + d'une lettre
+                res.addedge(i,j)    # on les relie
     return res
 
 ###############################################################################
@@ -122,17 +108,11 @@ def ischain(G, L):
     """ Test if L (word list) is a valid elementary *chain* in the graph G
 
     """
-    number = len(L)
-    i = 0
-    state = True
-    already = []
-    while (i<number-1 and state):
-        index1 = G.labels.index(L[i+1])
-        index = G.labels.index(L[i])
-        already.append(index)
-        state = (index1 in G.adjlists[index]) and not(index in already)
-        i+=1
-    return i==number-1
+    count = len(L)
+    for i in range(count-1):
+        if not (L[i+1] in G.adjlists[L[i]]):
+            return False
+    return True
 
 ###############################################################################
 #   LEVEL 2
@@ -141,17 +121,18 @@ def alldoublets(G, start):
     """ Return the list of all words that can form a *doublet* with the word start in the lexicon in G
 
     """
-    temp = []  # on crée une liste vide
-    wordAdj = G.adjlists[G.labels.index(start)] # on stocke les mots à une distance de 1 de start
-    for word in wordAdj:
-        _remplissage(G,word,temp)
-    res = []
-    for num in temp:
-        res.append(G.labels[num])
-    res.pop(res.index(start))
-    res.sort()
-    return res
-    
+    L = []
+    q = queue.Queue()
+    q.enqueue(start)
+    L[start] = True
+    while not q.isempty():
+        node = q.dequeue()
+        L.append(node)
+        for elt in G.adjlists[node]:
+            if L[elt]==False:
+                L[elt]=True
+                q.enqueue(elt)
+    return L    
 
 def nosolution(G):
     """ Return a *doublet* without solution in G, (None, None) if none
@@ -159,13 +140,14 @@ def nosolution(G):
     """
     for i in range(G.order):
         solutions = alldoublets(G,G.labels[i])
-        for j in range(i,G.order):
-            if i!=j and not G.labels[j] in solutions:
+        for j in range(i+1,G.order):    # tous les cas où i<=j ont déjà été traités
+            if not (G.labels[j] in solutions):
                 return (G.labels[i],G.labels[j])
     return (None,None)
 
 ###############################################################################
 #   LEVEL 3
+# Toute la partie est à refaire
 
 def ladder(G, start, end):
     """ Return a *ladder* to the *doublet* (start, end) in G

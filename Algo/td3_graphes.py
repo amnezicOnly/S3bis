@@ -119,36 +119,32 @@ def _BFS_mat(G,L,i):
                 q.enqueue(j)
     return temp
 
+
 def BFS_mat(G):
     visited = [False]*G.order
     s = ""
     for i in range(G.order):
         if visited[i]==False:
             s+=_BFS_mat(G,visited,i)+"\n"
-            
-    return s
+    return s.strip()
 
 def _BFS_list(G,L,i):
-    temp = ""
     q = queue.Queue()
     q.enqueue(i)
-    L[i] = True
     while not q.isempty():
         node = q.dequeue()
-        temp+=str(node)+" "
         for elt in G.adjlists[node]:
-            if L[elt]==False:
-                L[elt]=True
+            if L[elt]==None:
+                L[elt]=node
                 q.enqueue(elt)
-    return temp
 
 def BFS_list(G):
-    visited = [False]*G.order
-    s = ""
+    visited = [None]*G.order
     for i in range(G.order):
-        if visited[i]==False:
-            s+=_BFS_list(G,visited,i)+"\n"
-    return s
+        if visited[i]==None:
+            visited[i]=-1
+            _BFS_list(G,visited,i)
+    return visited
 
 def _DFS_mat(G,L,i):
     temp =""
@@ -187,6 +183,22 @@ def DFS_list(G):
             s+=_DFS_list(G,visited,i)+"\n"
     return s
 
+
+def BFS_from_index(G,i):
+    L = [False]*G.order
+    temp = ""
+    q = queue.Queue()
+    q.enqueue(i)
+    L[i] = True
+    while not q.isempty():
+        node = q.dequeue()
+        temp+=str(node)+" "
+        for elt in G.adjlists[node]:
+            if L[elt]==False:
+                L[elt]=True
+                q.enqueue(elt)
+    return temp
+
 def _comp(G,count,i,L):
     L[i] = count
     for elt in G.adjlists[i]:
@@ -202,10 +214,8 @@ def components(G):
             _comp(G,count,i,visited)
     return (count,visited)
 
-G_mat1 = ex_graphs.G1mat
+G1_mat = ex_graphs.G1mat
 G1 = ex_graphs.G1
 
-
-#print(DFS_mat(G_mat1))
-#print(DFS_list(G1))
-
+#print(BFS_mat(G1_mat))
+print(BFS_list(G1))
