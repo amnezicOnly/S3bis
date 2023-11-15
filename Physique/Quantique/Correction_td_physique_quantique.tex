@@ -67,12 +67,28 @@ Le numérateur représente l'intégrale de la densité de probabilité de l'éne
 \end{enumerate}
 
 \newpage
-\textbf{Partie 2: Descritpion par la loi de Planck(Énergie discontinue)}\newline
+\noindent\textbf{Partie 2: Descritpion par la loi de Planck (Énergie discontinue)}\newline
 Nous allons maintenant nous intéresser à la loi de Planck, qui a proposé de corriger la loi de Rayleigh-Jeans en introduisant la quantification de l’énergie du système corps noir : le terme <E> est alors calculé en supposant que l’énergie E d’un oscillateur ne peut prendre qu’un nombre discret de valeurs, multiples d’une énergie $E_{0}$.
 \begin{enumerate}
     \setcounter{enumi}{2}
-    \item Réécrire la relation donnant <E> dans ces conditions.
-    \item Calculer ce terme, en utilisant un résultat sur les suites géométriques au numérateur, puis en remarquant un lien de dérivation entre le dénominateur et le numérateur.
+    \item Réécrire la relation donnant <E> dans ces conditions.\newline
+    Proposition de Max-Planck: E = n$E_{0}$ (quantificateur de l'énergie) qui corrige la divergence de la densité spectrale u($\lambda$,T) pour les faibles longueurs d'ondes (UV).
+    \item Calculer ce terme, en utilisant un résultat sur les suites géométriques au numérateur, puis en remarquant un lien de dérivation entre le dénominateur et le numérateur.\newline
+    \underline{Calcul de $\langle$E$\rangle$:} \[ \langle E \rangle = \frac{\Sigma_{n=0}^{+\infty} E_{0} \times e^{-\frac{E_{0}}{k_{B}T}}}{\Sigma_{n=0}^{+\infty} e^{-\frac{E_{0}}{k_{B}T}}}\]\newline
+    Soit D = $\Sigma_{n=0}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}}$\newline
+    \indent = $\Sigma_{n=0}^{+\infty} (e^{-\frac{E_{0}}{k_{B}T}})^{n}$ = $\lim_{N\to\infty} \Sigma_{n=0}^{N}(e^{-\frac{E}{k_{B}T}})^{n}$ = $\lim_{N\to\infty} \Sigma_{n=0}^{N} q^{n}$\newline
+    \indent = $\lim_{N\to\infty} q_{0}(=1) \frac{1-q^{n}}{1-q}$ = $\frac{1}{1 - e^{-\frac{E_{0}{k_{B}T}}}}$\newline\newline
+
+    Soit Nm = $\Sigma_{n=0}^{+\infty} nE_{0}e^{-\frac{nE_{0}}{k_{B}T}}$\newline
+    ($e^{\alpha x}$)' = $\alpha e^{\alpha x}$\newline
+    $\Longrightarrow$ Nm = $E_{0} \Sigma_{n=0}^{+\infty} (-\frac{1}{k_{B}T}n) \times -k_{B}T \times e^{-\frac{ne_{0}}{k_{B}T}}$\newline
+    = $(-k_{B}T)E_{0} \Sigma_{n=0}^{+\infty} (-\frac{n}{k_{B}T}) e^{-\fac{nE_{0}{k_{B}T}}}$\newline
+    = $(-k_{B}T)E_{0} \frac{d}{dE_{0}}(\Sigma_{n=0}^{+\infty} e^{-\fac{nE_{0}{k_{B}T}}})$\newline
+    = $(-k_{B}T)E_{0} \frac{d}{dE_{0}}D$\newline
+    = $\frac{E_{0}e^{-\frac{E_{0}{k_{B}T}}}}{(1-e^{-\frac{E_{0}}{k_{B}T}})^{2}}$\newline\newline
+
+    On a donc $E = \frac{Nm}{D}$ = $\frac{\frac{E_{0}e^{-\frac{E_{0}{k_{B}T}}}}{(1-e^{-\frac{E_{0}}{k_{B}T}})^{2}}}{\frac{1}{1 - e^{-\frac{E_{0}{k_{B}T}}}}}$
+
     \item On obtient donc la densité spectrale d'énergie suivante :
 \[ u(\lambda,T) = \frac{8\pi}{c\lambda^{2}}<E> = \frac{8\pi}{c\lambda^{2}} \times \frac{E_{0}}{e^{\frac{E_{0}}{k_{B}T}}-1} \] avec $E_{0}$ un quanta (plus petite quantité indivisible d'énergie)\newline
 Pour corriger la loi de R-J, il faut corriger la divergence u($\lambda$,T) pour les petites longueurs d'ondes.\newline

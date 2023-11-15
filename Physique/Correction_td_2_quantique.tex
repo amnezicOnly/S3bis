@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{extarrows}
+\usepackage{soul}
+\usepackage{enumitem}
+\usepackage{varwidth}
+\usepackage[T1]{fontenc}
+
+\author{}
+\date{}
+\title{TD2: Concepts de la physique quantique}
+
+\begin{document}
+\maketitle
+\textit{Dans ce TD, nous illustrons le concept de quantification de l’énergie d’un système, avec le modèle de Bohr (1913). Ce modèle -dépassé depuis 1925- permet de se familiariser avec la quantification de l’énergie, et d’expliquer simplement des phénomènes tels que les radiations lumineuses « quantifiées », c’est-à-dire selon des longueurs d’ondes fixées : à l’inverse de la lumière blanche, d’on le spectre est continu, celui d’une lampe halogène (composée d’un seul corps chimique) émet seulement selon des longueurs d’ondes bien précises, ce qui explique sa couleur, rouge pour le Néon, bleu/ultraviolet pour le Mercure, orange pour les lampes à Sodium...}\newline
+\textit{Nous abordons aussi la relation de De Broglie, qui associe une longueur d’onde à chaque particule ayant une masse, et nous illustrons le principe d’incertitude d’Heisenberg.}\newline\newline
+
+\textbf{Ex1: Modèle de Bohr(1913)}\newline
+\indent L’atome d’hydrogène est constitué d’un proton de charge +q (noyau) et d’un électron de masse m et de charge -q. Le modèle de Bohr est formulé une dizaine d’années après l’idée du « quanta » émise par Planck, mais emprunte encore à la Physique classique.\newline\newline
+Le modèle repose sur trois postulats :
+\begin{itemize}
+    \item Considérés comme ayant un mouvement circulaire uniforme de rayon r à une vitesse v, les électrons sont supposés présents sur des orbites stables, des « couches » successives correspondant chacune à un niveau d’énergie de l’électron. Ne rayonnant donc aucune énergie, l’électron ne s’«effondre» pas sur le noyau.
+    \item L’électron présent sur une couche n peut passer à une couche n’ en absorbant ou en émettant un photon, d’énergie fixée, quantifiée $h_{c}$, où h est la constante de Planck, c la célérité de la lumière dans le vide, et $\lambda$ la longueur d’onde du photon (Ex.2).\newline
+    \item Le moment cinétique de l’électron est quantifié, ce qui se traduit par la relation suivante:
+    \[
+        mrv = n\frac{h}{2\pi}
+        \quad
+        \begin{varwidth}{\displaywidth}
+            \begin{itemize}[nosep]
+                \item m: masse de l'élement
+                \item r:
+                \item v:
+                \item n: numéro de la couche atomique
+                \item h:
+            \end{itemize}
+        \end{varwidth}
+    \]
+\end{itemize}
+
+(Insérer figure 1)
+
+Le modèle de Bohr aboutit au résultat suivant : l’énergie $E_{n}$ d’un électron lié au noyau dépend de l’inverse du carré du nombre quantique n, numéro de la couche électronique où peut se trouver l’électron. C’est ce que l’on appelle la quantification des états de l’électron.
+\[
+    E_{n} = \frac{cste}{n^{2}}
+    \quad
+    \begin{varwidth}{\displaywidth}
+        \begin{itemize}[nosep]
+            \item n:
+        \end{itemize}
+    \end{varwidth}
+\]
+L’objectif de cet exercice est de retrouver ce résultat à partir des hypothèses de Bohr.
+\begin{enumerate}
+    \item En utilisant la 3e hypothèse du modèle, exprimer le produit mv en fonction de n, h et du rayon de l’orbite numéro n.\newline
+    mrv correspond au mouvement cinétique : $||\overrightarrow{L}|| = ||\overrightarrow{OM}\bigwedge\overrightarrow{mv}|| = m|||| $ (abandon)\newline
+    $mv = \frac{nh}{2r\pi}$
+    \item Rappeler l’expression de la norme de la force de Coulomb entre un électron et un proton.
+    Par souci de simplification, on posera $e^{2}=kq^{2}$, où k est la constante de Coulomb.\newline
+    $||\overrightarrow{F_{e}}|| = \frac{k|q_{p}||q_{E}|}{r^{2}} = \frac{ke^{2}}{r^{2}}$\newline
+    À partir de maintenant, on note $w^{2}$ = $ke^{2}$.\newline
+    \item Utiliser la 1ère hypothèse et le principe fondamental de la dynamique appliqué à l’électron pour exprimer le produit $mv^{2}$ en fonction de la charge élémentaire e, et du rayon r de la couche électronique.\newline
+    $\Sigma \overrightarrow{F_{ext}} = m\overrightarrow{a} \Longrightarrow ||\overrightarrow{F_{e}}|| = m\frac{v^{2}}{r^{2}} = \frac{w^{2}}{r^{2}}$\newline
+    $\frac{1}{m}(mv)^{2} = \frac{w^{2}}{r} \Longleftrightarrow \frac{1}{m}(\frac{nh}{2r_{n}\pi})^{2} = \frac{w^{2}}{r_{n}}$\newline
+    $\Longleftrightarrow \frac{n^{2}h^{2}}{m4\pi (r_{n})^{2}} = \frac{w^{2}}{r_{n}}$\newline
+    $\Longrightarrow \frac{r_{n}^{2}w^{2}}{r_{n}} = n^{2}\frac{h^{2}}{m4\pi^{2}}$\newline
+    $\Longrightarrow r_{n} = n^{2}\times\frac{h^{2}}{4\pi^{2}mw^{2}} = n^{2}\times\frac{h^{2}}{4\pi^{2}mke^{2}}$
+    \item Utiliser ces résultats pour exprimer les rayons $r_{n}$ des orbites successives accessibles à l’électron en fonction de leur nombre quantique n, c’est-à-dire le numéro de la couche électronique. Montrer qu’ils s’écrivent : $r_{n} = a_{0}n^{2}$ avec $n\in\mathbb{N}$. On appelle la constante $a_{0}$ le rayon de Bohr, qui correspond au plus petit rayon accessible.\newline
+    On note $a_{0} = \frac{h^{2}}{4\pi^{2}mke^{2}}$
+    \item Etablir, en fonction de e et du rayon $r_{n}$ d’une orbite, l’expression de l’énergie totale de l’électron $E = E_{c} + E_{pe}$ (somme de l’énergie cinétique et de l’énergie potentielle électrique $E_{pe} = \frac{k\times q_{proton}\times q_{electron}}{r}$).\newline
+    $E_{tot} = E_{c}+E{pe} = \frac{1}{2}mv^{2} + q_{e^{-}}\times V_{proton}$\newline
+    = $\frac{1}{2}mv{2} + (-e)(\frac{kq_{p}}{r}) = \frac{1}{2}mv^{2} - \frac{ke^{2}}{r}$\newline\newline
+    Or $F_{e} = \frac{mv^{2}}{r} = \frac{1}{2}(\frac{ke^{2}}{r} - \frac{ke^{2}}{r}) = -\frac{1}{2}\frac{ke^{2}}{r}$\newline
+    $\Longleftrightarrow \frac{ke^{2}}{r^{2}} = \frac{mv^{2}}{r} \Longleftrightarrow mv^{2} = \frac{ke^{2}}{r}$
+    \item En déduire $E_{n}$ l’expression de l’énergie de l’électron sur l’orbite n, en fonction de e, $a_{0}$ et n. L’on pourra regrouper les constantes sous le terme $E_{1}$, énergie de la plus « basse » orbite. Quel est le nom de la constante $E_{1}$?\newline
+    $E_{n} = -\frac{ke^{2}}{2n^{2}a_{0}} = -\frac{ke^{2}}{2a_{0}}\frac{1}{n^{2}} = -\frac{1}{2}\frac{ke^{2}}{r_{n}}$
+\end{enumerate}
+
+\textbf{Ex2: Transitions électroniques}\newline
+\indent D’après le modèle de Bohr, l’on peut calculer le diagramme d’énergie de l’électron dans l’atome d’hydrogène (voir schéma), c’est-à-dire donner les différents niveaux d’énergie de l’électron dans les différentes couches n$\in\mathbb{N}$ Remarquons que ces énergies (en électronvolts ev) sont négatives, comme vu en Ex1.\newline
+(Insérer figure 2)
+
+\begin{enumerate}
+    \item Sur le diagramme, où se trouve le niveau d’énergie fondamental ? A quoi correspond l’état d’énergie nulle ?
+    \item Calculer la longueur d’onde du photon émis lors de la désexcitation de l’état n = 3 vers l’état n = 2. Donner le résultat en nm. La lumière émise fait-elle partie du domaine visible ? A quelle(s) série(s) appartiennent ces transitions ?
+    \item Quelle énergie (en électronvolts puis en joules) faut-il apporter pour opérér une transition électronique de l’état fondamental vers l’état n = 3 ? Quelle est la longueur d’onde du photon permettant d’opérer cette transition ? (insérer figure 3)
+    \item Comment peut-on ioniser l’atome d’hydrogène depuis son état fondamental, c’est-à-dire arracher complètement l’électron à l’atome depuis l’état n = 1 ?
+    \item La Fig. 3 montre les spectres d’émission et d’absorption de l’atome d’hydrogène, mesurés en laboratoire. Calculer les longueurs d’onde des transitions du tableau ci-dessous et interpréter les spectres observés.
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            Transition & 3$\rightarrow$2 & 4$\rightarrow$2 & 5$\rightarrow$2 & 6$\rightarrow$2 \\
+            \hline
+            Longueur d'onde & & & & \\
+            \hline
+            Couleur & & & & \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{enumerate}
+\end{document}
