@@ -92,6 +92,15 @@ Le numérateur représente l'intégrale de la densité de probabilité de l'éne
 Les rayonnements coulissent des UV(faibles longueurs d'ondes) aux IR(grandes longueurs d'ondes).\newline\newline
 Le problème de la loi de Rayleigh-Jeans est qu'on arrive à la conclusion que l'intensité spectrale U (définie par U($\lambda$,T) = $\int_{0}^{+\infty} u(\lambda,T)$) tend vers +$\infty$ quand les longueurs tendent vers 0. C'est ce qu'on appelle la "catastrophe ultraviolette" car le résultat est absurde. On voit donc ici les limites de la physique traditionnelle.
 
+\subsection{Notes de soutien}
+\begin{itemize}
+    \item $\lambda_{max}$T = cste $\Longrightarrow$ T diminue $\rightarrow \lambda_{max}$ augmente
+    \item La densité spectrale dépend de la longueur d'onde $\lambda$ \textbf{et} de la température T. Le graphe montre la densité spectrale en fonction de $\lambda$ et possède différentes courbes, correspondant chacune à une température
+\end{itemize}
+
+
+
+
 \section{Proposition de Max Planck}
 Le point important de la proposition de Max Planck est que l'énergie ne peut prendre que certaines valeurs discrètes, càd que l'énergie est discontinue.
 \begin{itemize}
@@ -112,7 +121,8 @@ Le concept de quantum d'énergie $E_{0} = h\nu = \frac{hc}{\lambda}$ s'avère ut
 \end{figure}
 \newline
 En 1905, Einstein propose que l'énergie $h\nu$ envoyé à l'atome se convertit en deux énergie différentes: $E_{i}$ l'énergie d'ionisation qui arrache l'électron à la l'atome et $E_{c}$ l'énergie cinétique transmis au photoélectron. On a ainsi : \[ h\nu = E_{i}+E_{c} \geqslant 0 \]
-C'est cette énergie $E_{i}$ qui justifie la présence de seuils pour permettre l'effet photoélectrique : si l'énergie $h\nu$ du photon incident (envoyé) est inférieur au seuil $E_{i}$, l'ionisation ne peut pas avoir lieu. Il faut donc augmenter la fréquence, c'est-à-dire diminuer la longueur d'onde du rayonnement électromagnétique.
+C'est cette énergie $E_{i}$ qui justifie la présence de seuils pour permettre l'effet photoélectrique : si l'énergie $h\nu$ du photon incident (envoyé) est inférieur au seuil $E_{i}$, l'ionisation ne peut pas avoir lieu. Il faut donc augmenter la fréquence, c'est-à-dire diminuer la longueur d'onde du rayonnement électromagnétique.\newline
+En conclusion: L'effet photoélectrique c'est arracher les électrons d'un métal après lui avoir envoyer de la lumière (irradiation) à condition que l'énergie de la lumière dépasse un certain seuil
 \newpage
 \subsection{Modèle de Bohr}
 Le modèle de Bohr ne s'applique qu'aux atomes d'hydrogène et aux hydrogénoïdes (ions de l'atome d'hydrogène), à cause de la présence de plusieurs électrons (l'atome d'hydrogène est le seul atome possèdant un seul électron). Le modèle de Bohr se base sur trois hypothèses faisant appel à des concepts de physique classique:
@@ -135,6 +145,8 @@ Le modèle de Bohr ne s'applique qu'aux atomes d'hydrogène et aux hydrogénoïd
     \]
 \end{enumerate}
 POURQUOI ON UTILISE LE MODELE DE BOHR AVEC PLUSIEURS COUCHES SI ON NE L'UTILISE QUE SUR L'ATOME D'HYDROGENE QUI N'EN POSSEDE QU'UNE ?\newline
+L'état fondamental est lorsque n=1.\newline
+Pour passer de l'état 1 à l'état 2
 
 On a aussi ces deux relations:
 \begin{itemize}
@@ -152,7 +164,7 @@ On remarque que les énergies des orbitales sont négatives, le niveau d'énergi
 \begin{itemize}
     \item L'énergie d'ionisation $E_{i}$ correspond en fait à la différence entre les énergies de l'état ionisé et de l'état fondamental $E_{i} = E_{final} - E_{initial} = 0 - E_{1} = -E_{1}$
     \item Un électron passe d'une couche n à m en absorbant(excitation)/cédant(désexcitation) de l'énergie (un quanta + précisément). L'échange d'énergie se calcule via la formule suivante :
-    \[ \Delta E_{n\to m} = E_{final}-E_{initial} = h\nu = \frac{hc}{\lambda} \]
+    \[ \Delta E_{n\to m} = |E_{final(m)}-E_{initial(n)}| = h_{m,n}\nu = \frac{hc}{\lambda_{m,n}}  \Longrightarrow \Delta E augmente \rightarrow \lambda diminue \]
 \end{itemize}
 
 \subsection{Relation de De Broglie}
@@ -176,5 +188,57 @@ L'hypothèse de De Broglie va mener à la notion de "fonction d'onde" d'une part
 $\Longrightarrow \Delta p = \Delta (mv) = m\Delta v \Longrightarrow m\Delta x\Delta v \geqslant \frac{\hbar}{2}$
 \section{Résumé des formules à connaitre}
 \subsection{Corps noir}
+\begin{itemize}
+    \item densité spectrale u($\lambda$,T):
+    \[
+        u(\lambda,T) = \frac{8\pi}{c\lambda^{2}}\langle E \rangle
+        \quad
+        \begin{varwidth}{\displaywidth}
+            \begin{itemize}[nosep]
+                \item u: densité spectrale (W$\cdot$m$^{3}$)
+                \item T: température de rayonnement (K)
+                \item c: célérité de la lumière dans le vide (3$\times$10$^{8}$m$\cdot$s$^{-1}$)
+                \item $\lambda$: longueur d'ondes (nm)
+                \item $\langle$E$\rangle$: énergie moyenne d'un oscillateur
+            \end{itemize}
+        \end{varwidth}
+    \]
+    \item
+    \[
+        \langle E \rangle = \frac{\int_{0}^{+\infty} Ee^{-\frac{E}{k_{B}T}}dE}{\int_{0}^{+\infty} e^{-\frac{E}{k_{B}T}}dE}
+        \quad
+        \begin{varwidth}{\displaywidth}
+            \begin{itemize}[nosep]
+                \item $k_{B}$: constante thermodynamique
+                \item T : température du rayonnement
+            \end{itemize}
+        \end{varwidth}
+    \]
+    Cette formule a pour conséquence la catastrophe ultraviolette.
+    \item Énergie moyenne $\langle$E$\rangle$ d'un oscillateur (avec correction de Max Planck):
+    \[
+        \langle E \rangle = \frac{\Sigma_{n=1}^{+\infty} nE_{0}e^{-\frac{nE_{0}}{k_{B}T}}dE}{\Sigma_{n=1}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}}dE} = \frac{8\pi}{c\lambda^{2}}\times\frac{E_{0}}{e^{\frac{E_{0}}{k_{B}T}}-1}
+        \quad
+        \begin{varwidth}{\displaywidth}
+            \begin{itemize}[nosep]
+                \item $k_{B}$: constante thermodynamique
+                \item T : température du rayonnement
+                \item $E_{0}$ : énergie indivisible ($E_{0}=\frac{hc}{\lambda}$)
+            \end{itemize}
+        \end{varwidth}
+    \]
+\end{itemize}
 \subsection{Modèle de Bohr}
+\begin{itemize}
+    \item $r_{n} = n^{2}a_{0}$
+    \item $E_{n} = \frac{E_{1}}{n^{2}}$ avec $E_{1}$= -13,6eV
+    \item $\Delta E_{n\to m} = |E_{m}-E_{n}|$ 
+    \item
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.5]{abs_emi.png}
+        \caption{Absorption et émission d'un électron}
+    \end{figure}
+    \item désexcitation : émission d'un photon
+\end{itemize}
 \end{document}
