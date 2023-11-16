@@ -223,7 +223,17 @@ def DFS_backedges(G):
         if M[s]==None:
             _dfs_backedges2(G,s,M)
 
-######################################################   
+######################################################
+
+"""
+Arc couvrant: arc avant mais x directment père de y
+Arc avant: prefix[x]<prefix[y]<suffix[y]<suffix[x]
+Arc croisé:
+Arc retour:
+
+"""
+
+
 
 def _comp_BFS(G,count,i,L):
     L[i] = count
