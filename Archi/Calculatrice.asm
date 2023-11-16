@@ -4,7 +4,7 @@ Vector_001		dc.l		Main
 			
 Main			movea.l		#String1,a0
 				jsr			RemoveSpace	;fonctionne
-				jsr			GetExpr
+				jsr			GetExpr	;fonctionne
 				
 				illegal
 			
@@ -39,10 +39,10 @@ StrLen			movem.l		a0/d1,-(a7)
 				
 				
 				
-IsCharError		movem.l		a1/d0,-(a7)
+IsCharError		movem.l		a0/d0,-(a7)
 				clr.l		d0
 				
-\loop			move.b		(a1)+,d0
+\loop			move.b		(a0)+,d0
 				tst.b		d0
 				beq			\False
 				cmpi.b		#'0',d0
@@ -58,15 +58,12 @@ IsCharError		movem.l		a1/d0,-(a7)
 \True			ori.b   	#%00000100,ccr  ; Positionne le flag Z à 1 (true)
 				bra			\Quit
 
-\Quit			movem.l		(a7)+,d0/a1
-				rts	
-				
-
+\Quit			movem.l		(a7)+,d0/a0
+				rts
 				
 				
 				
-				
-IsMaxError		movem.l		a1/d0,-(a7)
+IsMaxError		movem.l		a0/d0,-(a7)
 				clr.l		d0
 				jsr			StrLen
 				cmpi.l		#5,d0
@@ -75,17 +72,17 @@ IsMaxError		movem.l		a1/d0,-(a7)
 				bhi			\True
 				bra			\max
 				
-\max			cmpi.b		#'3',(a1)+
+\max			cmpi.b		#'3',(a0)+
 				bhi			\True
-				cmpi.b		#'2',(a1)+
+				cmpi.b		#'2',(a0)+
 				bhi			\True
-				cmpi.b		#'7',(a1)+
+				cmpi.b		#'7',(a0)+
 				bhi			\True
-				cmpi.b		#'6',(a1)+
+				cmpi.b		#'6',(a0)+
 				bhi			\True
-				cmpi.b		#'7',(a1)+
+				cmpi.b		#'7',(a0)+
 				bhi			\True
-				tst.b		(a1)
+				tst.b		(a0)
 				bne			\True
 				bra			\False
 				
@@ -95,10 +92,10 @@ IsMaxError		movem.l		a1/d0,-(a7)
 				
 \True			ori.b   	#%00000100,ccr  ; Positionne le flag Z à 1 (true)
 
-\quit			movem.l		(a7)+,d0/a1
+\quit			movem.l		(a7)+,d0/a0
 				rts
 
-Convert			tst.b		(a1)
+Convert			tst.b		(a0)
 				beq			\error
 				jsr			IsCharError
 				beq			\error
@@ -110,22 +107,22 @@ Convert			tst.b		(a1)
 \error			andi.b  	#%11111011,ccr  ; Positionne le flag Z à 0 (false)
 				jsr			\quit
 
-\true			ori.b		   	#%00000100,ccr  ; Positionne le flag Z à 1 (true)
+\true			ori.b		#%00000100,ccr  ; Positionne le flag Z à 1 (true)
 
 \quit			rts
 		
-Atoui			movem.l	a1/d1,-(a7)
+Atoui			movem.l	a0/d1,-(a7)
+				clr.l	d0
 				clr.l	d1
 				
-\loop			move.b	(a1)+,d1
-				tst.b	d1
+\loop			move.b	(a0)+,d1
 				beq		\quit
 				subi.w	#'0',d1
 				mulu.w	#10,d0
 				add.w	d1,d0
 				bra		\loop
 							
-\quit			movem.l	(a7)+,d1/a1
+\quit			movem.l	(a7)+,d1/a0
 				rts
 				
 				
@@ -162,43 +159,38 @@ NextOp			tst.b	(a0)
 
 \quit			rts
 
-GetNum			movem.l		a1/a2,-(a7)
-				move.l		a0,a1
-				move.l		a0,a2
-				jsr			NextOp			; a0 pointe sur la première opérande
-				move.b		(a0),d1			; on conserve l'opérande
-				move.b		0,(a0)			; on le remplace par Null
-				jsr			Convert			; ??? et conserve le premier nombre dans d0
-				bne			\false			; s'il y a un pb
-				bra			\quit			; sinon
+
+GetNum 			movem.l 	d1/a1-a2,-(a7)
+				movea.l 	a0,a1
+				jsr 		NextOp
+				movea.l 	a0,a2
+				move.b 		(a2),d1
+				clr.b 		(a2)
+				movea.l 	a1,a0
+				jsr 		Convert
+				beq 		\true
 				
-\false			andi.b  	#%11111011,ccr  ; Positionne le flag Z à 0 (false)
-				move.b		d1,(a0)
-				move.l		a1,a0
-				bra			\quit
+\false 			move.b 		d1,(a2)
+				andi.b 		#%11111011,ccr
+				bra 		\quit
 				
-\quit			movem.l		(a7)+,a2/a1
-				move.b		d1,(a0)
+\true 			move.b 		d1,(a2)
+				movea.l 	a2,a0
+				ori.b 		#%00000100,ccr
+				
+\quit 			movem.l 	(a7)+,d1/a1-a2
 				rts
 				
-GetExpr 		; Sauvegarde les registres.
-				movem.l 	d1-d2/a0,-(a7)
-				; Conversion du premier nombre de l'expression (dans D0).
-				; Si erreur, on renvoie false.
+				
+GetExpr 		movem.l 	d1-d2/a0,-(a7)
 				jsr 		GetNum
 				bne 		\false
-				; Le premier nombre est chargé dans D1.
-				; (D1 contiendra le résultat des opérations successives.)
 				move.l 		d0,d1
-\loop 			; L'opérateur ou le caractère nul est copié dans D2.
-				; S'il s'agit du caractère nul, on renvoie true (pas d'erreur).
-				move.b 		(a0)+,d2
+				
+\loop 			move.b 		(a0)+,d2
 				beq 		\true
-				; Conversion du prochain nombre (dans D0).
-				; Si erreur, on renvoie false.
 				jsr 		GetNum
 				bne 		\false
-				; Détermine le type de l'opération (+, -, *, /).
 				cmp.b 		#'+',d2
 				beq 		\addition
 				cmp.b 		#'-',d2
@@ -206,30 +198,24 @@ GetExpr 		; Sauvegarde les registres.
 				cmp.b 		#'*',d2
 				beq 		\multiply
 				bra 		\divide
-				; Effectue l'opération puis passe au nombre suivant.
+				
+				
 \addition		add.l 		d0,d1
 				bra 		\loop
 \subtract 		sub.l 		d0,d1
 				bra 		\loop
 \multiply 		muls.w 		d0,d1
 				bra 		\loop
-\divide 		; Renvoie une erreur si une division par zéro est détectée.
-				tst.w 		d0
+\divide 		tst.w 		d0
 				beq 		\false
-				; Le résultat entier de la division est sur 16 bits. Il faut
-				; réaliser une extension de signe pour l'avoir sur 32 bits.
 				divs.w		d0,d1
 				ext.l 		d1
 				bra 		\loop
-\false 			; Sortie avec erreur (Z = 0).
-				andi.b 		#%11111011,ccr
+\false 			andi.b 		#%11111011,ccr
 				bra 		\quit
-\true 			; Sortie sans erreur (Z = 1).
-				; (Avec la copie du résultat dans D0.)
-				move.l 		d1,d0
+\true 			move.l 		d1,d0
 				ori.b 		#%00000100,ccr
-\quit 			; Restaure les registres puis sortie.
-				movem.l 	(a7)+,d1-d2/a0
+\quit 			movem.l 	(a7)+,d1-d2/a0
 				rts
 				
 Uitoa 			; Sauvegarde les registres.
@@ -268,8 +254,6 @@ Uitoa 			; Sauvegarde les registres.
 				; Restaure les registres puis sortie.
 				movem.l 	(a7)+,d0/a0
 				rts
-				
 
-	
 
-String1			dc.b	"1 2 +  35",0
+String1			dc.b	"1 2+ 35 ",0

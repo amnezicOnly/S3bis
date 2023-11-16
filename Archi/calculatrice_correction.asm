@@ -4,7 +4,7 @@ Vector_001		dc.l		Main
 				
 Main			movea.l		#String1,a0
 				jsr			RemoveSpace	;fonctionne
-				jsr			GetNum
+				jsr			GetExpr
 				illegal
 
 
