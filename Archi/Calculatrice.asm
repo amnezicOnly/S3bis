@@ -1,11 +1,10 @@
-				org			$0
-Vector_000		dc.l		$ffb500
+				org			$4
 Vector_001		dc.l		Main
 				org			$500
 			
 Main			movea.l		#String1,a0
 				jsr			RemoveSpace	;fonctionne
-				jsr			GetNum
+				jsr			GetExpr
 				
 				illegal
 			
@@ -180,6 +179,94 @@ GetNum			movem.l		a1/a2,-(a7)
 				
 \quit			movem.l		(a7)+,a2/a1
 				move.b		d1,(a0)
+				rts
+				
+GetExpr 		; Sauvegarde les registres.
+				movem.l 	d1-d2/a0,-(a7)
+				; Conversion du premier nombre de l'expression (dans D0).
+				; Si erreur, on renvoie false.
+				jsr 		GetNum
+				bne 		\false
+				; Le premier nombre est chargé dans D1.
+				; (D1 contiendra le résultat des opérations successives.)
+				move.l 		d0,d1
+\loop 			; L'opérateur ou le caractère nul est copié dans D2.
+				; S'il s'agit du caractère nul, on renvoie true (pas d'erreur).
+				move.b 		(a0)+,d2
+				beq 		\true
+				; Conversion du prochain nombre (dans D0).
+				; Si erreur, on renvoie false.
+				jsr 		GetNum
+				bne 		\false
+				; Détermine le type de l'opération (+, -, *, /).
+				cmp.b 		#'+',d2
+				beq 		\addition
+				cmp.b 		#'-',d2
+				beq 		\subtract
+				cmp.b 		#'*',d2
+				beq 		\multiply
+				bra 		\divide
+				; Effectue l'opération puis passe au nombre suivant.
+\addition		add.l 		d0,d1
+				bra 		\loop
+\subtract 		sub.l 		d0,d1
+				bra 		\loop
+\multiply 		muls.w 		d0,d1
+				bra 		\loop
+\divide 		; Renvoie une erreur si une division par zéro est détectée.
+				tst.w 		d0
+				beq 		\false
+				; Le résultat entier de la division est sur 16 bits. Il faut
+				; réaliser une extension de signe pour l'avoir sur 32 bits.
+				divs.w		d0,d1
+				ext.l 		d1
+				bra 		\loop
+\false 			; Sortie avec erreur (Z = 0).
+				andi.b 		#%11111011,ccr
+				bra 		\quit
+\true 			; Sortie sans erreur (Z = 1).
+				; (Avec la copie du résultat dans D0.)
+				move.l 		d1,d0
+				ori.b 		#%00000100,ccr
+\quit 			; Restaure les registres puis sortie.
+				movem.l 	(a7)+,d1-d2/a0
+				rts
+				
+Uitoa 			; Sauvegarde les registres.
+				movem.l 	d0/a0,-(a7)
+				; Empile le caractère nul de fin de chaîne.
+				clr.w 		-(a7)
+\loop 			; Limite D0 à 16 bits pour la division (seuls les 16 bits de
+				; poids faible contiennent le nombre à diviser).
+				andi.l 		#$ffff,d0
+				; Divise D0 par 10 afin de récupérer le reste.
+				; Le quotient est placé dans les 16 bits de poids faible.
+				; Le reste est placé dans les 16 bits de poids fort.
+				divu.w 		#10,d0
+				; Fait passer le reste dans les 16 bits de poids faible.
+				; (Le quotient passe dans les 16 bits de poids fort.)
+				swap 		d0
+				; Convertit le reste en caractère ASCII (sur 8 bits).
+				addi.b 		#'0',d0
+				; Empile le caractère ASCII (sur 16 bits).
+				move.w 		d0,-(a7)
+				; Fait repasser le quotient dans les 16 bits de poids faible.
+				swap 		d0
+				; Si le quotient n'est pas nul,
+				; il reste des chiffres à convertir.
+				; On passe donc au chiffre suivant.
+				tst.w 		d0
+				bne 		\loop
+				; Sinon tous les chiffres ont été traités,
+				; il ne reste plus qu'à les écrire dans la chaîne.
+\writeChar 		; Dépile le caractère (sur 16 bits).
+				move.w 		(a7)+,d0
+				; Puis l'écrit dans la chaîne (sur 8 bits).
+				move.b 		d0,(a0)+
+				; Continue tant que le caractère n'est pas nul.
+				bne 		\writeChar
+				; Restaure les registres puis sortie.
+				movem.l 	(a7)+,d0/a0
 				rts
 				
 
