@@ -147,42 +147,33 @@ def BFS_list(G):
     return visited
 
 def _DFS_mat(G,L,i):
-    temp =""
-    temp += str(i)+" "
-    L[i] = True
     for j in range(G.order):
-        if G.adj[i][j]!=0 and L[j]==False:
-            L[j] = True
-            temp+=_DFS_mat(G,L,j)
-    return temp
+        if G.adj[i][j]!=0 and L[j]==None:
+            L[j] = i
+            _DFS_mat(G,L,j)
 
 def DFS_mat(G):
-    visited = [False]*G.order
-    s = ""
+    visited = [None]*G.order
     for i in range(G.order):
-        if visited[i]==False:
-            s+=_DFS_mat(G,visited,i)+"\n"
-    return s
+        if visited[i]==None:
+            visited[i]=-1
+            _DFS_mat(G,visited,i)
+    return visited
 
 
 def _DFS_list(G,L,i):
-    temp = ""
-    temp+=str(i)+" "
-    L[i] = True
     for elt in G.adjlists[i]:
-        if L[elt]==False:
-            L[elt]=True
-            temp+=_DFS_list(G,L,elt)
-    return temp
+        if L[elt]==None:
+            L[elt]=i
+            _DFS_list(G,L,elt)
 
 def DFS_list(G):
-    visited = [False]*G.order
-    s = ""
+    visited = [None]*G.order
     for i in range(G.order):
-        if visited[i]==False:
-            s+=_DFS_list(G,visited,i)+"\n"
-    return s
-
+        if visited[i]==None:
+            visited[i]=-1
+            _DFS_list(G,visited,i)
+    return visited
 
 def BFS_from_index(G,i):
     L = [False]*G.order
@@ -199,23 +190,80 @@ def BFS_from_index(G,i):
                 q.enqueue(elt)
     return temp
 
-def _comp(G,count,i,L):
-    L[i] = count
-    for elt in G.adjlists[i]:
-        if L[elt]==0:
-            _comp(G,count,elt,L)
 
-def components(G):
+#############################################
+# Pour les graphes non-orientés
+def _dfs_backedges(G,x,p,M):
+    M[x] = True
+    for y in G.adjlists[x]:
+        if not M[y]:
+            _dfs_backedges(G,y,x,M)
+        else:
+            if y!=p:    
+                print(x,"->",y)
+
+def DFS_backedges2(G):
+    M = [False]*G.order
+    for s in range(G.order):
+        if not M[s]:
+            _dfs_backedges(G,s,-1,M)
+
+def _dfs_backedges2(G,x,depth):
+    for y in G.adjlists[x]:
+        if depth[y]==None:
+            depth[y] = depth[x]+1
+            _dfs_backedges2(G,y,depth)
+        else:
+            if depth[y]<depth[x]-1:
+                print(x,"->",y)
+
+def DFS_backedges(G):
+    M = [None]*G.order
+    for s in range(G.order):
+        if M[s]==None:
+            _dfs_backedges2(G,s,M)
+
+######################################################   
+
+def _comp_BFS(G,count,i,L):
+    L[i] = count
+    q = queue.Queue()
+    q.enqueue(i)
+    while not q.isempty():
+        node = q.dequeue()
+        for elt in G.adjlists[node]:
+            if L[elt]==0:
+                L[elt] = count
+                q.enqueue(elt)
+
+def components_BFS(G):
     count = 0
     visited = [0]*G.order
     for i in range(G.order):
         if visited[i]==0:
             count+=1
-            _comp(G,count,i,visited)
+            _comp_BFS(G,count,i,visited)
+    return (count,visited)
+
+
+def _comp_DFS(G,count,i,L):
+    L[i] = count
+    for elt in G.adjlists[i]:
+        if L[elt]==0:
+            _comp_DFS(G,count,elt,L)
+
+def components_DFS(G):
+    count = 0
+    visited = [0]*G.order
+    for i in range(G.order):
+        if visited[i]==0:
+            count+=1
+            _comp_DFS(G,count,i,visited)
     return (count,visited)
 
 G1_mat = ex_graphs.G1mat
 G1 = ex_graphs.G1
+G2 = ex_graphs.G2
 
-#print(BFS_mat(G1_mat))
-print(BFS_list(G1))
+print(components_BFS(G2))
+print(components_DFS(G2))
