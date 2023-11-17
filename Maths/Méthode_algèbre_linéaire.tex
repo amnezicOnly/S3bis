@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}  
+%\usepackage{graphicx} % pour insérer des images
+
+% pour utiliser des notations scientifiques
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\usepackage{extarrows} % pour afficher les flèches de logiques (implique, équivalent à ,etc...)
+%\usepackage{soul} % utilité à troiver
+\let\oldemptyset\emptyset
+\usepackage[T1]{fontenc}
+
+\author{}
+\date{}
+\title{Méthode Algèbre linéaire}
+
+\begin{document}
+\maketitle
+\section{Base ou non?}
+Soit F=\{$e_{1},...,e_{n}$\} une famille d'un K-EV E. Pour déterminier si F est une base de E:
+\begin{enumerate}
+    \item Si Dim(F)$\neq$Dim(E), alors F n'est pas une base de E
+    \item Si Dim(F)=Dim(E) il faut vérifier si la famille F et libre ou génératrice.
+\end{enumerate}
+\section{Transformer une famille pour la rendre base}
+Soit F=\{$E_{1},...,e_{p}$\} une famille d'un K-EV E de dimension n (n$\neq$p). Dim(F)$\neq$Dim(E) donc F n'est pas une base de E. On doit donc supprimer ou ajouter des vecteurs à la famille pour la transformer en base.\newline
+\subsection{Suppression de vecteurs (p>n)}
+On pose l'ensemble ($a_{1},...,a_{p}$)$\in \mathbb{R^{p}}$ tel que $a_{1}e_{1}+...+a_{p}e_{p} = O_{\mathbb{R^{p}}}$. Le but de la résolution de ce système permet de savoir quel vecteur \textbf{ne pas} enlever
+\subsection{Ajout de vecteurs}
+
+\section{Matrice de passage}
+Exemple de matrice
+$$\left(
+    \begin{array}{cc}
+    a & b \\
+    c & d 
+    \end{array} 
+  \right)$$
+\section{Déterminer la matrice d'une application linéaire}
+\section{Trouver le noyau et l'image d'une matrice d'une application linéaire}
+\section{Calculer le déterminant d'une matrice}
+\section{Les projecteurs}
+\end{document}
