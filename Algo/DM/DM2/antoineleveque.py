@@ -27,8 +27,8 @@ def _couldBeLinked(word1,word2):
         if word1[i]!=word2[i]:
             diff+=1
         if diff==2:
-            return True
-    return False
+            return False
+    return True
 
 def _fromIndexToString(G,L):
     """
@@ -41,16 +41,7 @@ def _fromIndexToString(G,L):
         res.append(G.labels[elt])
     return res
 
-def _isValid(G,L):
-    """
-    G : un graphe
-    L : une liste de string
-    renvoie le booléen indiquant si tous les mots de L sont présents dans G.labels
-    """
-    for elt in L:
-        if not elt in G.labels:
-            return False
-    return True
+
 
 ###############################################################################
 #   LEVEL 0
@@ -71,7 +62,7 @@ def buildgraph(filename, k):
     res = graph.Graph(len(L),False,L)   # création du graphe non-orienté avec tous les mots de la liste
     for i in range(res.order):
         for j in range(i+1,res.order):  # les cas où i<=j ont déjà été traités
-            if not _couldBeLinked(L[i],L[j]):    # si les mots diffèrent de 1 ou 0 lettres
+            if _couldBeLinked(L[i],L[j]):    # si les mots diffèrent de 1 ou 0 lettres
                 res.addedge(i,j)    # on les relie
     return res
 
@@ -91,15 +82,16 @@ def mostconnected(G):
             L.append(i)
     return _fromIndexToString(G,L)
 
-def ischain(G, L):
+
+def ischain(G,L):
     """ Test if L (word list) is a valid elementary *chain* in the graph G
 
     """
-    if _isValid(G,L)==False:
+    if not L[0] in G.labels:
         return False
-    count = len(L)
-    for i in range(count-1):
-        if not (G.labels.index(L[i+1]) in G.adjlists[G.labels.index(L[i])]):
+    l = len(L)
+    for i in range(l-1):
+        if (not L[i+1] in G.labels) or (not G.labels.index(L[i+1]) in G.adjlists[i]):
             return False
     return True
 
@@ -160,6 +152,17 @@ def isomorphic(G1, G2):
     """BONUS: test if G1 and G2 (graphs of same length words) are isomorphic
 
     """
-    #FIXME
-    pass
-    
+    # on vérifie que tous les mots de G1 sont dans G2 et inversement
+    if sorted(G1.labels)!=sorted(G2.labels):
+        return False
+    L_tuple = []
+    for i in range(G1.order):
+        """
+        On va créer une liste de tuple de type (int,int)
+        On utilise le tuple comme : on prend un mot w de G1.labels:
+        --> il sera à l'index i dans G1.labels
+        --> on cherche l'index j tel que G1.labels[i]==G2.labels[j]
+        """
+        L_tuple.append((i,G2.labels.index(G1.labels[i])))
+        # ici j = index(G1.labels[i])
+        pass

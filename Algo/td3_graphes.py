@@ -228,10 +228,37 @@ def DFS_backedges(G):
 """
 Arc couvrant: arc avant mais x directment père de y
 Arc avant: prefix[x]<prefix[y]<suffix[y]<suffix[x]
-Arc croisé:
-Arc retour:
+Arc croisé: prefix[y]<prefix[x]<suffix[x]<suffix[y]
+Arc retour: prefix[y]<suffix[y]<prefix[x]<suffix[x]
 
 """
+def _dfs_digraph(G,x,s,pref,suff,cpt):
+    cpt+=1
+    pref[x] = cpt
+    for y in G.adjlists[x]:
+        if pref[y]==None:
+            cpt = _dfs_digraph(G,y,s,pref,suff,cpt+1)
+        else:
+            if pref[x]<pref[y]:
+                print(x," -- arc avant -> ",y)
+            elif suff[y]==None:
+                print(x," -- arc retour -> ",y)
+            else:
+                print(x," -- arc croisé -> ",y)
+    cpt+=1
+    suff[x] = cpt
+    return cpt 
+
+
+def arbre_profondeur(G):
+    s = ""
+    pref = [None]*G.order
+    suff = [None]*G.order
+    cpt = 0
+    for i in range(G.order):
+        if pref[i]==None:
+            cpt = _dfs_digraph(G,i,s,pref,suff,cpt)
+    return (pref,suff)
 
 
 
