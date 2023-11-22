@@ -145,7 +145,7 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
 \end{enumerate}
 \newpage
 \textbf{Ex2: Transitions électroniques}\newline
-\indent D'après le modèle de Bohr, l'on peut calculer le diagramme d'énergie de l'électron dans l'atome d'hydrogène (voir schéma), c'est-à-dire donner les différents niveaux d'énergie de l'électron dans les différentes couches n$\in\mathbb{N}$ Remarquons que ces énergies (en électronvolts ev) sont négatives, comme vu en Ex1.\newline
+\indent D'après le modèle de Bohr, l'on peut calculer le diagramme d'énergie de l'électron dans l'atome d'hydrogène (voir schéma), c'est-à-dire donner les différents niveaux d'énergie de l'électron dans les différentes couches n$\in\mathbb{N^{*}}$. Remarquons que ces énergies (en électronvolts ev) sont négatives, comme vu en Ex1.\newline
 (cf Figure 3 à la fin du document)
 
 \begin{enumerate}
@@ -154,11 +154,12 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
     \item Calculer la longueur d'onde du photon émis lors de la désexcitation de l'état n = 3 vers l'état n = 2. Donner le résultat en nm. La lumière émise fait-elle partie du domaine visible ? A quelle(s) série(s) appartiennent ces transitions ?\newline\newline
     Calcul de $\lambda$ du photon émis lors de la désexcitation de n=3$\to$n=2:\newline
     E3 = -1,5eV et E2 = -3,4eV donc $\frac{hc}{\lambda_{3,2}} = |\Delta E_{3,2}| = |E_{3}-E_{2}|$\newline
-    $\Longrightarrow\lambda_{3,2} = \frac{hc}{|E_{2}-E_{3}|} = \frac{6,62\times 10^{-34}\times 3\times 10^{8}}{|-3,4+1,51|\times 1,6\times 10^{-19}} = 6,55\times 10^{-7}m = 655nm$ (dans le spectre du visible)
+    $\Longrightarrow\lambda_{3,2} = \frac{hc}{|E_{2}-E_{3}|} = \frac{6,62\times 10^{-34}\times 3\times 10^{8}}{|-3,4+1,51|\times 1,6\times 10^{-19}} = 6,55\times 10^{-7}m = 655nm$ (dans le spectre du visible)\newline
+    Ces transistions appartiennent au spectre de Balmer.
     \item Quelle énergie (en électronvolts puis en joules) faut-il apporter pour opérér une transition électronique de l'état fondamental vers l'état n = 3 ? Quelle est la longueur d'onde du photon permettant d'opérer cette transition ? (insérer figure 3)\newline
-    $\Delta E_{1,3}=|E_{3}-E_{1}|=|-1,5+13,6|= 12,1 eV = (\text{on multiplie par} 1,6\times 10^{-19}) 1,94\times 10^{-18}J$\newline
+    $\Delta E_{1,3}=|E_{3}-E_{1}|=|-1,5+13,6|= 12,1 eV =(\text{on multiplie par } 1,6\times 10^{-19}) 1,94\times 10^{-18}J$\newline
     $\lambda_{3,1} = \frac{hc}{\Delta E_{3,1}} = \frac{6,62\times 10^{-34}\times 3\times 10^{8}}{1,94\times 10^{-18}} = 1,02\times 10^{-7}m = 102nm$ 
-    \item Comment peut-on ioniser l'atome d'hydrogène depuis son état fondamental, c'est-à-dire arracher complètement l'électron à l'atome depuis l'état n = 1 ?
+    \item Comment peut-on ioniser l'atome d'hydrogène depuis son état fondamental, c'est-à-dire arracher complètement l'électron à l'atome depuis l'état n = 1 ?\newline
     Lors de l'ionisation, on doit passer de n=1 à n=+$\infty$, d'après la formule: $\Delta E_{1,\infty} = E_{\infty}-E_{1}=0-(-13,6)= 13,6$eV
     \[ \lambda_{ionisation}=\frac{hc}{|E_{\infty}-E_{1}|} = \frac{hc}{|E_{1}|} = \frac{6,62\times 10^{-34}\times 3\times 10^{8}}{13,6\times 1,6\times 10^{-19}} = 91nm \]
     Pour ioniser l'atome d'hydrogène, on doit lui envoyer 13,6eV, correspondant à une longueur d'onde de 91nm.
@@ -186,9 +187,19 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
 \noindent\textbf{Ex3: Incertitude d'une balle de tennis : relation de De Broglie (1924) et principe d'incertitude d'Heisenberg (1927)}\newline
 \indent Un électron et une balle de tennis se déplacent tous deux à une vitesse de 95 m$\cdot$s$^{-1}$, avec une incertitude sur la vitesse de 0,085\%.
 \begin{enumerate}
-    \item Donner la longueur d'onde de De Broglie de chacun des deux objets, considérés tous deux comme des particules.
+    \item Donner la longueur d'onde de De Broglie de chacun des deux objets, considérés tous deux comme des particules.\newline
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        XXXXX & m(kg) & $\Delta v = v\times 0,085\%$ & $\Delta x$ & $\Delta x \geqslant \frac{\hbar}{2m\Delta v}$\\
+        \hline
+        $e^{-}$ & 9,1$\times 10^{-31}$ & 0,08m$\cdot s^{-1}$ & $\Delta x_{e^{-}}\geqslant$0,76mm\\
+        \hline
+        balle & 50$\times 10^{-3}$ & 0,08m$\cdot s^{-1}$ $\Delta x_{e^{-}}\geqslant 1,3\times 10^{-32}$m\\
+        \hline
+    \end{tabular}
     \item Quantifier l'incertitude sur la position de l'électron et sur celle de la balle de tennis.
     \item Commentaires.\newline
+    Le principe 'n'a pas de sens à l'échelle macroscopique. Ce principe précise que si on connnait avec précision la position de la particule, alors la mesure de la vitesse de la précise (autrement, c'est toujours un compromis entre la précision de la vitesse et la précision de la position)\newline\newline
     \textbf{Données:}
     \begin{itemize}
         \item Masse d'un électron: $m_{e}=9,1\times 10^{-31}$kg
@@ -196,6 +207,8 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
         \item Constante de Planck h: 6,62$\times 10^{-34} J\codt s$
     \end{itemize}
 \end{enumerate}
+
+Rappel : $mv = \frac{h}{c} = p$ pour une particule à l'échelle nanoscopique et $\lambda_{B}$: longueur d'onde de De Broglie.
 \newpage
 \noindent\textbf{Annexes:}\newline
 (J'ai pas trouvé la figure 3)

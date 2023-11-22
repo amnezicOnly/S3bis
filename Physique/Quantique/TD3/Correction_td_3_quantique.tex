@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{extarrows}
+\usepackage{soul}
+\usepackage{enumitem}
+\usepackage{varwidth}
+\usepackage[T1]{fontenc}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\author{}
+\date{}
+\title{Quantique TD3}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Ex1: Équation de Schrodinguer}\newline
+L'équation de Schrodinguer est équivalente au PFD.
+\[
+    H\psi = E\psi
+    \quad
+    \begin{varwidth}{\displaywidth}
+        \begin{itemize}[nosep]
+            \item H = $-\frac{\hbar^{2}}{2m}\Delta + V$: opérateur Hamiltonien
+            \item E: opérateur 
+        \end{itemize}
+    \end{varwidth}
+\]
+
+Pour rappel : $\Delta$ est l'opérateur Laplacien qui correspond à la somme des dérivés secondes partielles de chaque variables.\newline
+
+$-\frac{\hbar^{2}}{2m}\Delta\psi + V\psi = E\psi$ qui donne $\psi$(x,y,z,t) = fonction d'onde qui caractérise l'état de la particule donc donne:\newline
+$\left\{
+    \begin{array}{l}
+        \text{la probabilité de présence} \\
+        \text{l'énergie de la particule}
+    \end{array}    
+$\newline\newline
+$\left\{
+    \begin{array}{l}
+        \text{état stationnaire} \Longrightarrow \psi(x,y,z) \\
+        \text{système à une dimension} \Longrightarrow \psi(x)
+    \end{array}    
+$
+\newline
+On en conclut donc que l'équation de Schrodinguer à l'état stationnaire et à une dimension :
+\[
+    -\frac{\hbar^{2}}{2m}\frac{d^{2}}{dx^{2}}\psi(x) + V\psi(x) = E\psi(x)    
+\]
+On note que c'est une dérivé totale car dérivé partielle mais il n'y a qu'une variable.\newline
+
+La densité de probabilité de présence dP se calcule ainsi : dP = $|\psi (x)|^{2}$dx qui correspond au carré du module de la fonction d'onde $\psi(x)$.\newline
+
+La répartition de la probabilité de présence dans une intervalle donné P se calcule ainsi : $\int_{a}^{b}|\psi(x)|^{2}dx$.\newline
+
+La condition de la normalisation (probabilité de trouver la particule dans l'espace ]-$\infty$;+$\infty$[):\newline P = 1 = $\int_{-\infty}^{+\infty}|\psi(x)|^{2}dx$
+\end{document}

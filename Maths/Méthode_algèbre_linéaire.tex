@@ -27,7 +27,7 @@ Soit F=\{$e_{1},...,e_{n}$\} une famille d'un K-EV E. Pour déterminier si F est
 \section{Transformer une famille pour la rendre base}
 Soit F=\{$E_{1},...,e_{p}$\} une famille d'un K-EV E de dimension n (n$\neq$p). Dim(F)$\neq$Dim(E) donc F n'est pas une base de E. On doit donc supprimer ou ajouter des vecteurs à la famille pour la transformer en base.\newline
 \subsection{Suppression de vecteurs (p>n)}
-On pose l'ensemble ($a_{1},...,a_{p}$)$\in \mathbb{R^{p}}$ tel que $a_{1}e_{1}+...+a_{p}e_{p} = O_{\mathbb{R^{p}}}$. Le but de la résolution de ce système permet de savoir quel vecteur \textbf{ne pas} enlever
+On pose l'ensemble ($a_{1},...,a_{p}$)$\in \mathbb{R^{p}}$ tel que $a_{1}e_{1}+...+a_{p}e_{p} = 0_{\mathbb{R^{p}}}$. Le but de la résolution de ce système permet de savoir quel vecteur \textbf{ne pas} enlever.
 \subsection{Ajout de vecteurs}
 
 \section{Matrice de passage}
@@ -40,6 +40,78 @@ $$\left(
   \right)$$
 \section{Déterminer la matrice d'une application linéaire}
 \section{Trouver le noyau et l'image d'une matrice d'une application linéaire}
-\section{Calculer le déterminant d'une matrice}
+\section{Calculer le déterminant d'une matrice carré}
+Soit une A une matrice carrée de taille n $\mathcal{M_{n}}$, avec n$\in\mathbb{N\{0,1\}}$. Il y a deux situations possibles :
+\begin{itemize}
+  \item n = 2 : on a dans ce A = $\left(
+  \begin{array}{c c}
+    a & b \\
+    c & d
+  \end{array}
+  \right)
+  $, det(A) = ad-bc
+
+  \item n>2 : on a donc la matrice suivante :
+  \[
+    A = \left(
+      \begin{array}{c c c c}
+        a_{1,1} & a_{1,2} & ... & a_{1,n} \\
+        \vdots & \ddots & \ddots & \vdots \\
+        a_{n,1} & a_{n,2} & ... & a_{n,n}
+      \end{array}
+    \right)  
+  \]
+
+  On va procéder par étape successives. Pour calculer le déterminant de A, on va développer par rapport à une ligne ou une colonne. On notera $\Delta_{ij}$ la matrice A sans la ligne i ni la colonne j. Si on développe selon la i-ième ligne ou colonne, on aura :
+  \[ det(A) = \Sigma_{j=0}^{n} (-1)^{i+j} a_{i,j} det(\Delta_{i,j}) \]
+  Pour calculer det($\Delta_{i,j}$), il suffira de réitérer l'étape précédente en posant $\Delta_{i,j}$ = A' par exemple.
+\end{itemize}
+\noindent Pour calculer un déterminant, on pourra se servir des propriétés suivantes : (on pose A,B$\in\mathcal{M_{n}}(\mathbb{K})$ et $\lambda\in\mathbb{K}$)
+\begin{itemize}
+  \item det($\lambda$A) = $\lambda^{n}$det(A)
+  \item det(AB) = det(A)det(B)
+  \item det()
+  \item Si une ligne/colonne est une combinaison linéaire d'autres lignes/colonnes de la matrice, alors son déterminant est nul
+  \item Si une ligne/colonne est composée uniquement de 0, son déterminant est nul
+  \item Si on permute 2 lignes/colonnes, le déterminant est multiplié par -1
+  \item Si on multiplie une ligne/colonne par un scalaire $\lambda$, alors son déterminant est aussi multiplié par $\lambda$
+\end{itemize}
+\section{Trouver les valeurs et vecteurs propres d'une matrice}
+Tout d'abord, soient A une matrice carré de taille n, un vecteur colonne v de taille n et un scalaire $\lambda$, on dit que v/$\lambda$ est un vecteur/valeur propre de A ssi :
+\[ Av = \lambda v \]
+
+\subsection{Déterminer les vecteurs propres à partir d'une valeur propre $\lambda$:}
+L'ensemble des vecteurs propres de A par la valeur propre $\lambda$ est :
+\[ E_{\lambda}=\{v\in\mathbb{K^{n}} \| Av = \lambda v\} = Ker(A-\lambda I_{n})\]
+On cherche donc l'ensemble des vecteurs v tel que :
+\[\left(
+  \begin{array}{c c c}
+    a_{1,1}-\lambda & ... & a_{1,n} \\
+    \vdots & a_{i,j}- \lambda & \vdots \\
+    a_{n,1} & ... & a_{n,n} - \lambda
+  \end{array}\right)\times
+\left(
+  \begin{array}{c}
+    x_{1} \\
+    \vdots \\
+    x_{n}
+  \end{array}
+\right) = \left(
+  \begin{array}{c}
+    0 \\
+    \vdots \\
+    0
+  \end{array}
+\right)
+\]
+Ce qui va nous amener à résoudre le système suivant :
+\[\left\{
+  \begin{array}{l}
+    a_{1,1}x_{1} + ... + a_{1,n}x_{n} = 0 \\
+    \vdots \\
+    a_{n,1}x_{1} + ... + a_{n,n}x_{n} = 0
+  \end{array}
+
+\]
 \section{Les projecteurs}
 \end{document}

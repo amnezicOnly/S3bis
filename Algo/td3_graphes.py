@@ -302,5 +302,8 @@ G1_mat = ex_graphs.G1mat
 G1 = ex_graphs.G1
 G2 = ex_graphs.G2
 
+
+
+
 print(components_BFS(G2))
 print(components_DFS(G2))

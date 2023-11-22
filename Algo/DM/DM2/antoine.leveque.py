@@ -27,8 +27,8 @@ def _couldBeLinked(word1,word2):
         if word1[i]!=word2[i]:
             diff+=1
         if diff==2:
-            return True
-    return False
+            return False
+    return True
 
 def _fromIndexToString(G,L):
     """
@@ -41,16 +41,6 @@ def _fromIndexToString(G,L):
         res.append(G.labels[elt])
     return res
 
-def _isValid(G,L):
-    """
-    G : un graphe
-    L : une liste de string
-    renvoie le booléen indiquant si tous les mots de L sont présents dans G.labels
-    """
-    for elt in L:
-        if not elt in G.labels:
-            return False
-    return True
 
 ###############################################################################
 #   LEVEL 0
@@ -95,11 +85,11 @@ def ischain(G, L):
     """ Test if L (word list) is a valid elementary *chain* in the graph G
 
     """
-    if _isValid(G,L)==False:
+    if not L[0] in G.labels:
         return False
     count = len(L)
     for i in range(count-1):
-        if not (G.labels.index(L[i+1]) in G.adjlists[G.labels.index(L[i])]):
+        if  (not L[i+1] in G.labels) or (not (G.labels.index(L[i+1]) in G.adjlists[G.labels.index(L[i])])):
             return False
     return True
 
