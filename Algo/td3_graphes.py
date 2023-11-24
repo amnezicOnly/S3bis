@@ -303,7 +303,31 @@ G1 = ex_graphs.G1
 G2 = ex_graphs.G2
 
 
+def find_the_way(G,start,end):
+    L = [None]*G.order
+    L[start] = -1
+    q = queue.Queue()
+    q.enqueue(start)
+    while not q.isempty() and L[end]==None:
+        node = q.dequeue()
+        l = len(G.adjlists[node])
+        i = 0
+        while i<l and L[end]==None:
+            elt = G.adjlists[node][i]
+            if L[elt]==None:
+                L[elt] = node
+                q.enqueue(elt)
+            i+=1
+    res = []
+    res.append(end)
+    while L[res[-1]]!=-1:
+        res.append(L[res[-1]])
+    res.reverse()
+    return res
 
+graph_center = importGra("graph_center.gra")
 
-print(components_BFS(G2))
-print(components_DFS(G2))
+#print(components_BFS(G2))
+#print(components_DFS(G2))
+
+print(find_the_way(graph_center,0,1))

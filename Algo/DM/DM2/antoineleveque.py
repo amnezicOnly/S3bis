@@ -17,12 +17,11 @@ from algo_py import graph, queue
 # Do not add any import
 # Fonctions auxiliaires
 # Fonctions auxiliaires
-def _couldBeLinked(word1,word2):
+def _couldBeLinked(word1,word2,l):
     """
     indique si deux mots word1 et word2 (de même taille) ont 2 lettres ou + de différent
     """
     diff = 0
-    l = len(word1)
     for i in range(l):
         if word1[i]!=word2[i]:
             diff+=1
@@ -40,8 +39,6 @@ def _fromIndexToString(G,L):
     for elt in L:
         res.append(G.labels[elt])
     return res
-
-
 
 ###############################################################################
 #   LEVEL 0
@@ -62,7 +59,7 @@ def buildgraph(filename, k):
     res = graph.Graph(len(L),False,L)   # création du graphe non-orienté avec tous les mots de la liste
     for i in range(res.order):
         for j in range(i+1,res.order):  # les cas où i<=j ont déjà été traités
-            if _couldBeLinked(L[i],L[j]):    # si les mots diffèrent de 1 ou 0 lettres
+            if _couldBeLinked(L[i],L[j],k):    # si les mots diffèrent de 1 ou 0 lettres
                 res.addedge(i,j)    # on les relie
     return res
 
@@ -73,6 +70,8 @@ def mostconnected(G):
     """ Return the list of words that are directly linked to the most other words in G
 
     """
+    if G.labels==[]:
+        return []
     L = [0]
     for i in range(1,G.order):
         if len(G.adjlists[i])==len(G.adjlists[L[0]]):
@@ -131,11 +130,35 @@ def nosolution(G):
 #   LEVEL 3
 
 def ladder(G, start, end):
-    """ Return a *ladder* to the *doublet* (start, end) in G
+    if not (start in G.labels and end in G.labels):
+        return []
+    L = [None]*G.order
+    startIndex = G.labels.index(start)
+    endIndex = G.labels.index(end)
+    L[startIndex] = -1
+    q = queue.Queue()
+    q.enqueue(startIndex)
+    while not q.isempty() and L[endIndex]==None:
+        node = q.dequeue()
+        l = len(G.adjlists[node])
+        i = 0
+        while i<l and L[endIndex]==None:
+            elt = G.adjlists[node][i]
+            if L[elt]==None:
+                L[elt] = node
+                q.enqueue(elt)
+            i+=1
+    res = []
+    if L[endIndex]==None:
+        return res
+    res.append(endIndex)
+    while L[res[-1]]!=-1:
+        res.append(L[res[-1]])
+    res.reverse()
+    return _fromIndexToString(G,res)
 
-    """
-    #FIXME
-    pass
+
+    
 
 def mostdifficult(G):
     """ Find in G one of the most difficult *doublets* (that has the longest *ladder*)
