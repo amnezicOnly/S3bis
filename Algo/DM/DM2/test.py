@@ -4,7 +4,7 @@ import time
 
 """G3 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_some.txt",3)
 print("Ok G3")"""
-G4 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_some.txt",4)
+G4 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_all.txt",4)
 print("Ok G4")
 """G8_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",8)
 print("Ok G8_100k")
