@@ -19,7 +19,7 @@ from algo_py import graph, queue
 # Fonctions auxiliaires
 def _couldBeLinked(word1,word2,l):
     """
-    indique si deux mots word1 et word2 (de même taille) ont 2 lettres ou + de différent
+    indique si deux mots word1 et word2 (de même taille) ont 1 lettre ou moins de différence
     """
     diff = 0
     for i in range(l):
@@ -39,6 +39,38 @@ def _fromIndexToString(G,L):
     for elt in L:
         res.append(G.labels[elt])
     return res
+
+def _comp_BFS(G,count,i,L):
+    """
+    parcours largeur du graphe G à partir du sommet i
+    G : un graphe
+    count : un int indiquant le numéro de la composante connexe actuelle
+    i : le noeud de départ
+    L : une liste de int, indiquant à quelle composante connexe appartient chaque noeud
+    ne retourne rien, modifie juste la liste L
+    """
+    L[i] = count
+    q = queue.Queue()
+    q.enqueue(i)
+    while not q.isempty():
+        node = q.dequeue()
+        for elt in G.adjlists[node]:
+            if L[elt]==0:
+                L[elt] = count
+                q.enqueue(elt)
+
+def _components_BFS(G):
+    """
+    G : un graphe
+    fonction d'appel qui retourne une liste de int, indiquant à quelle composante connexe appartient chaque noeud
+    """
+    count = 0
+    visited = [0]*G.order
+    for i in range(G.order):
+        if visited[i]==0:
+            count+=1
+            _comp_BFS(G,count,i,visited)
+    return visited
 
 ###############################################################################
 #   LEVEL 0
@@ -164,8 +196,24 @@ def mostdifficult(G):
     """ Find in G one of the most difficult *doublets* (that has the longest *ladder*)
 
     """
-    #FIXME
-    pass
+    cmp = _components_BFS(G)
+    
+    # à ce moment-là, on a construit la liste qui indique quelle noeud appartient à quelle composante connexe
+
+    res = (G.labels[0],G.labels[0],0)
+    for i in range (G.order):
+        # on ne compte pas les cas où i==j ni
+        # les cas où j<i car ils ont déjà été traités avant car c'est un
+        # graphe non-orienté
+        for j in range (i+1,G.order):
+            # deux mots ne peuvent être reliés que s'ils sont dans la même composante connexe
+            if cmp[i]==cmp[j]:
+                temp = ladder(G,G.labels[i],G.labels[j])
+                l = len(temp)
+                if l>res[2]:
+                    res = (G.labels[i],G.labels[j],l)
+    
+    return res
 
 
 ###############################################################################
