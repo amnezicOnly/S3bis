@@ -1,9 +1,12 @@
 from algo_py import graph, queue
-import antoineleveque as dm
+import antoineleveque_doublets as dm
 import time
 
 """G3 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_some.txt",3)
 print("Ok G3")"""
+G3_ex = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_ex.txt",3)
+
+
 G4 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_all.txt",4)
 print("Ok G4")
 """G8_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",8)
@@ -184,5 +187,5 @@ print("k = 9:")
 print("lex_all.txt: "+ str((l9/5477)*100) + "%")
 print("lexicon_100K: "+ str(l9_bis/1000)+"%")"""
 
-res = dm.mostdifficult(G4)
-print(res)
+s = graph.dot(G3_ex)
+print(s)

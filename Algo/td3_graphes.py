@@ -325,6 +325,48 @@ def find_the_way(G,start,end):
     res.reverse()
     return res
 
+
+
+def _eccentricity(G,src,eccMax):
+    dist = [None]*G.order
+    q = queue.Queue()
+    q.enqueue(src)
+    dist[src] = 0
+    x = None
+    while not q.isempty():
+        x = q.dequeue()
+        for y in G.adjlists[x]:
+            if dist[y] == None:
+                dist[y] = dist[x]+1
+                q.enqueue(y)
+    return dist[x]
+
+def _eccentricity2(G,src,eccMax):
+    dist = [None]*G.order
+    q = queue.Queue()
+    q.enqueue(src)
+    dist[src] = 0
+    x = None
+    while not q.isempty():
+        x = q.dequeue()
+        for y in G.adjlists[x]:
+            if dist[y] == None:
+                dist[y] = dist[x]+1
+                if dist[y]>eccMax:
+                    return eccMax+1
+                q.enqueue(y)
+    return dist[x]
+
+
+def influencers(G):
+    for s in range(G.order):
+        ecc = _eccentricity(G,s,0)
+
+
+def colors(G):
+    pass
+    
+
 graph_center = importGra("graph_center.gra")
 
 #print(components_BFS(G2))
