@@ -75,28 +75,31 @@ On veut connaitre les états d'énergie accessibles à la particule, ainsi que l
 
 \begin{enumerate}
     \item Pour x $\in$ [0;L], donner l'équation de Schr$\ddot{o}$dinguer vérifiée par la fonction d'onde $\psi$ de la particule dans le puits de potentiel infini, en fonction de la constante de Planck réduite à $\hbar$ ($\hbar = \frac{h}{2\pi}$), de m et de l'énergie E de la particule.\newline
-    Équation de Schrodinguer (entre 0 et L, V=0): $\mathcal{F}\psi = E\psi \Longrightarrow$\newline
+    Équation de Schrodinguer (entre 0 et L, V=0): $\mathcal{H}\psi = E\psi \Longrightarrow$\newline
     \begin{flalign*}
-        E\psi(x) & = -\frac{\hbar^{2}}{2m}\frac{d^{2}}{dx^{2}}\psi(x) + V\psi(x) &\\
+        E\psi(x) & = -\frac{\hbar^{2}}{2m}\Delta\psi(x) + V\psi(x) &\\
                  & = -\frac{\hbar^{2}}{2m}\frac{d^{2}}{dx^{2}}\psi(x) + V\psi(x) &\\
-                 & = \left(\frac{-\hbar^{2}}{2m}\Delta + V\right)\psi(x) &\\
-                 & \left\{
+                 & = \left(\frac{-\hbar^{2}}{2m}\Delta + V\right)\psi(x) \text{ or } \left\{
                     \begin{array}{l}
                         V = 0\\
                         \Delta = \frac{\delta^2}{\delta x^{2}}
-                    \end{array} &\\
+                    \end{array} \text{ donc} &\\
                  & = -\frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}}
     \end{flalign*}
-    Or $E = E_{c}+E_{p} = \frac{1}{2}mv^2 + 0$ et p = mv\newline
+    \item Donner la forme générale des solutions $\psi$(x) de l'équation de Schr$\ddot{o}$dinger sur ce domaine.\newline
+    D'après la question précédente, on a $E\psi(x) = -\frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}}$\newline
+    Or $E = E_{c}+E_{p} = \frac{1}{2}mv^2 + 0$ et p = mv
     \begin{flalign*}
-        E & = \frac{p^{2}}{2m} = \frac{\hbar^{2}k^{2}}{2m} \text{ car (dualité onde-corpuscule) } &\\
-          & p = \frac{h}{\lambda} = \frac{h}{2\pi}\frac{2\pi}{\lambda} = \hbar k &\\
+        E & = \frac{p^{2}}{2m} \text{ or, par la propriété onde-corpuscule: } p = \frac{h}{\lambda} = \frac{h}{2\pi}\frac{2\pi}{\lambda} &\\
+          & = \frac{\hbar^{2}k^{2}}{2m}
     \end{flalign*}
-    $-\frac{\hbar^{2}}{2m}\frac{d^{2}}{dx^{2}} = \frac{\hbar^{2}k^{2}}{2m}\psi(x)$\newline
-    $\frac{d^{2}\psi(x)}{dx^{2}} + \psi(x) = 0$\newline
-    $\psi(x)''+k^{2}\psi(x) = 0 \Longrightarrow \psi(x) = A\sin(kx)+B\cos(kx)$
-
-    \item Donner la forme générale des solutions $\psi$(x) de l'équation de Schr$\ddot{o}$dinger sur ce domaine.
+    Avec les derniers résultats obtenu, on a:
+    \begin{flalign*}
+        \frac{\hbar^{2}k^{2}}{2m}\psi(x) = -\frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}} & \Longleftrightarrow \frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}} + \frac{\hbar^{2}k^{2}}{2m}\psi(x) = 0 &\\
+                                                                                                      & \Longleftrightarrow \frac{d^{2}\psi(x)}{dx^{2}} + \psi(x) = 0 &\\
+                                                                                                      & \Longleftrightarrow \psi(x)''+k^{2}\psi(x) = 0
+    \end{flalign*}
+    La forme générale des solutions $\psi(x)$ est donc : $\psi(x) = A\sin(kx)+B\cos(kx)$
     \item Quelles sont les conditions aux limites $\psi$(0) et $\psi$(L)? Utiliser ces conditions pour déterminer certaines des constantes de la solution générale $\psi$(x).\newline
     $\left\{
         \begin{array}{l}
@@ -104,7 +107,7 @@ On veut connaitre les états d'énergie accessibles à la particule, ainsi que l
             \psi(x=L) = 0 (2)
         \end{array}
     $\newline
-    D'après (2), $\psi(x=L) = A\sin(kL) = 0 \Longrightarrow kL = n\pi \Longrightarrow k = \frac{n\pi}{L}$, sin est pi périodique et $\forall n\in\mathbb{N}^{*}$
+    D'après (2), $\psi(x=L) = A\sin(kL) = 0 \Longrightarrow kL = n\pi \Longrightarrow k = \frac{n\pi}{L}$, sin est $\pi$-périodique et $\forall n\in\mathbb{N}^{*}$
     \[ \psi(x) = A\sin\left(\frac{n\pi}{L}x\right) \]
     \item Quel vaut $\int_{0}^{L} |\psi(x)|^{2}dx$ ? Utiliser ce résultat pour déterminer complètement l'expression de $\psi$(x).\newline
     Pour calculer A, on utilise la condition de normalisation (entre 0 et L): $\int_{0}^{L} |\psi(x)|^{2}dx = 1$ donc \newline
@@ -140,8 +143,7 @@ On veut connaitre les états d'énergie accessibles à la particule, ainsi que l
         \begin{array}{l}
             n = 1 : E_{1} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} = E_{f}\\
             n = 2 : E_{2} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} \times 2^{2} = 4E_{f}\\
-            n = 3 : E_{3} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} \times 3^{2} = 9E_{f}\\
-            n = \
+            \forall n\in\mathbb{N}^{*} : E_{n} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} \times n^{2} = n^{2}E_{f}
 
         \end{array}
     $
