@@ -74,12 +74,77 @@ On veut connaitre les états d'énergie accessibles à la particule, ainsi que l
 \end{figure}
 
 \begin{enumerate}
-    \item Pour x $\in$ [0;L], donner l'équation de Schr$\ddot{o}$dinguer vérifiée par la fonction d'onde $\psi$ de la particule dans le puits de potentiel infini, en fonction de la constante de Planck réduite à $\hbar$ ($\hbar = \frac{h}{2\pi}$), de m et de l'énergie E de la particule.
+    \item Pour x $\in$ [0;L], donner l'équation de Schr$\ddot{o}$dinguer vérifiée par la fonction d'onde $\psi$ de la particule dans le puits de potentiel infini, en fonction de la constante de Planck réduite à $\hbar$ ($\hbar = \frac{h}{2\pi}$), de m et de l'énergie E de la particule.\newline
+    Équation de Schrodinguer (entre 0 et L, V=0): $\mathcal{F}\psi = E\psi \Longrightarrow$\newline
+    \begin{flalign*}
+        E\psi(x) & = -\frac{\hbar^{2}}{2m}\frac{d^{2}}{dx^{2}}\psi(x) + V\psi(x) &\\
+                 & = -\frac{\hbar^{2}}{2m}\frac{d^{2}}{dx^{2}}\psi(x) + V\psi(x) &\\
+                 & = \left(\frac{-\hbar^{2}}{2m}\Delta + V\right)\psi(x) &\\
+                 & \left\{
+                    \begin{array}{l}
+                        V = 0\\
+                        \Delta = \frac{\delta^2}{\delta x^{2}}
+                    \end{array} &\\
+                 & = -\frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}}
+    \end{flalign*}
+    Or $E = E_{c}+E_{p} = \frac{1}{2}mv^2 + 0$ et p = mv\newline
+    \begin{flalign*}
+        E & = \frac{p^{2}}{2m} = \frac{\hbar^{2}k^{2}}{2m} \text{ car (dualité onde-corpuscule) } &\\
+          & p = \frac{h}{\lambda} = \frac{h}{2\pi}\frac{2\pi}{\lambda} = \hbar k &\\
+    \end{flalign*}
+    $-\frac{\hbar^{2}}{2m}\frac{d^{2}}{dx^{2}} = \frac{\hbar^{2}k^{2}}{2m}\psi(x)$\newline
+    $\frac{d^{2}\psi(x)}{dx^{2}} + \psi(x) = 0$\newline
+    $\psi(x)''+k^{2}\psi(x) = 0 \Longrightarrow \psi(x) = A\sin(kx)+B\cos(kx)$
+
     \item Donner la forme générale des solutions $\psi$(x) de l'équation de Schr$\ddot{o}$dinger sur ce domaine.
-    \item Quelles sont les conditions aux limites $\psi$(0) et $\psi$(L)? Utiliser ces conditions pour déterminer certaines des constantes de la solution générale $\psi$(x).
-    \item Quel vaut $\int_{0}^{L} |\psi(x)|^{2}dx$ ? Utiliser ce résultat pour déterminer complètement l'expression de $\psi$(x).
+    \item Quelles sont les conditions aux limites $\psi$(0) et $\psi$(L)? Utiliser ces conditions pour déterminer certaines des constantes de la solution générale $\psi$(x).\newline
+    $\left\{
+        \begin{array}{l}
+            \psi(x=0) = 0 (1)\Longrightarrow B = 0 \\
+            \psi(x=L) = 0 (2)
+        \end{array}
+    $\newline
+    D'après (2), $\psi(x=L) = A\sin(kL) = 0 \Longrightarrow kL = n\pi \Longrightarrow k = \frac{n\pi}{L}$, sin est pi périodique et $\forall n\in\mathbb{N}^{*}$
+    \[ \psi(x) = A\sin\left(\frac{n\pi}{L}x\right) \]
+    \item Quel vaut $\int_{0}^{L} |\psi(x)|^{2}dx$ ? Utiliser ce résultat pour déterminer complètement l'expression de $\psi$(x).\newline
+    Pour calculer A, on utilise la condition de normalisation (entre 0 et L): $\int_{0}^{L} |\psi(x)|^{2}dx = 1$ donc \newline
+    \begin{flalign*}
+        \int_{0}^{L} A\sin\left(\frac{n\pi}{L}x\right) = 1 & \Longleftrightarrow \int_{0}^{L} \frac{A^{2}}{2} \left(1-\cos\left(\frac{2n\pi x}{L}\right)\right)dx = 1 &\\
+                                                           & \Longleftrightarrow \frac{A^{2}}{2} \left[\int_{0}^{L}dx - \int_{0}^{L} \cos\left(\frac{2n\pi x}{L}\right)dx \right]&\\
+                                                           & \Longleftrightarrow P_{[0,L]} = \frac{A^{2}}{2}L = 1 &\\
+                                                           & \Longleftrightarrow A = \sqrt{\frac{2}{L}}\sin\left(\frac{n\pi}{L}x\right)
+    \end{flalign*}
     \item Reporter ce résultat dans l’équation de Schr$\ddot{o}$dinger pour déterminer les valeurs d’énergie accessibles à la particule. Comment interprétez-vous ce résultat ? Quel facteur de l’expression peut être qualifié de "nombre quantique" associé au niveau d’énergie ?
-    \item Schématiser le diagramme d’énergie en traçant sur chaque niveau l’allure de la fonction de probabilité de présence $|\psi(x)|^{2}$ pour x $\in$ [0;L].
+    On rappelle que $\left\{
+        \begin{array}{l}
+            -\frac{\hbar^{2}}{2m}\frac{d^{2}\psi(x)}{dx^{2}}\\
+            \psi(x) = \sqrt{\frac{2}{L}}\sin\left(\frac{n\pi}{L}x\right)
+        \end{array}$\newline
+        \begin{flalign*}
+            \frac{d^{2}\psi(x)}{dx^{2}} & = \frac{d}{dx}\left(\frac{d\psi(x)}{dx}\right) &\\
+                                        & = \frac{d}{dx} \left(\sqrt{\frac{2}{L}}\times\frac{n\pi}{L}\cos\left(\frac{n\pi}{L}\right)\right) &\\
+                                        & = \sqrt{\frac{2}{L}}\left(\frac{n\pi}{L}\right)\left(-\frac{n\pi}{L}\sin\left(\frac{n\pi}{L}x\right)\right) &\\
+                                        & = -\sqrt{\frac{2}{L}}\left(\frac{n^{2}\pi^{2}}{L^{2}}\right)\sin\left(\frac{n\pi}{L}x\right) &\\
+                                        & = -\frac{n^2\pi^{2}}{L^{2}} \times \psi(x)
+        \end{flalign*}
+        On revient à l'équation de Schrodinguer : \newline
+        $-\frac{\hbar^{2}}{2m}\left(-\frac{n^{2}\pi^{2}}{L^{2}}\right) \psi(x) = E\psi(x) \Longrightarrow E_{n} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}}\times n^{2}$
+    \item Schématiser le diagramme d’énergie en traçant sur chaque niveau l’allure de la fonction de probabilité de présence $|\psi(x)|^{2}$ pour x $\in$ [0;L].\newline
+    $\left\{
+        \begin{array}{l}
+            \psi(x) = \sqrt{\frac{2}{L}}\sin\left(\frac{n\pi x}{L}\right)\\
+            E_{n} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}}\times n^{2}\\
+            |\psi(x)|^{2} = \frac{2}{L}\sin^{2}\left(\frac{n\pi x}{L}\right)
+        \end{array}
+        \Longrightarrow
+        \begin{array}{l}
+            n = 1 : E_{1} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} = E_{f}\\
+            n = 2 : E_{2} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} \times 2^{2} = 4E_{f}\\
+            n = 3 : E_{3} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} \times 3^{2} = 9E_{f}\\
+            n = \
+
+        \end{array}
+    $
 \end{enumerate}
 
 \noindent\textbf{Ex3: Boîte quantique}\newline
@@ -164,5 +229,6 @@ La densité de probabilité de présence dP se calcule ainsi : dP = $|\psi (x)|^
 
 La répartition de la probabilité de présence dans une intervalle donné P se calcule ainsi : $\int_{a}^{b}|\psi(x)|^{2}dx$.\newline
 
-La condition de la normalisation (probabilité de trouver la particule dans l'espace (]-$\infty$;+$\infty$[):\newline P = 1 = $\int_{-\infty}^{+\infty}|\psi(x)|^{2}dx$
+La condition de la normalisation (probabilité de trouver la particule dans l'espace (]-$\infty$;+$\infty$[):\newline P = 1 = $\int_{-\infty}^{+\infty}|\psi(x)|^{2}dx$ \newline
+cos(2a) = 2sin(a)cos(a) et sin(2a) = 1-sin2(a) et sin2(a) = (1-cos(2a))/2
 \end{document}

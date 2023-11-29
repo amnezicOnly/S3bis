@@ -62,7 +62,8 @@ def _comp_BFS(G,count,i,L):
 def _components_BFS(G):
     """
     G : un graphe
-    fonction d'appel qui retourne une liste de int, indiquant à quelle composante connexe appartient chaque noeud
+    fonction d'appel 
+    retourne la liste indiquant à quelle composante connexe appartient chaque vertex
     """
     count = 0
     visited = [0]*G.order
@@ -71,6 +72,44 @@ def _components_BFS(G):
             count+=1
             _comp_BFS(G,count,i,visited)
     return visited
+
+def _reverse_ladder(G,end,start):
+    """
+    G : un graphe
+    start et end : deux string (appartenant à G.labels)
+    retourne le chemin de end vers start
+    """
+    # cherche le chemin le plus court entre la source et la destination
+    L = [None]*G.order
+    startIndex = G.labels.index(start)
+    endIndex = G.labels.index(end)
+    L[startIndex] = -1
+    q = queue.Queue()
+    q.enqueue(startIndex)
+    while not q.isempty() and L[endIndex]==None:
+        node = q.dequeue()
+        l = len(G.adjlists[node])
+        i = 0
+        while i<l and L[endIndex]==None:
+            elt = G.adjlists[node][i]
+            if L[elt]==None:
+                L[elt] = node
+                q.enqueue(elt)
+            i+=1
+    # à ce niveau là, on a une liste contenant la liste des pères des différents noeuds rencontrés
+
+    # on va suivre le chemin de la destination jusqu'à la source
+    res = []
+    if L[endIndex]==None:
+        return res
+    res.append(endIndex)
+    while L[res[-1]]!=-1:
+        res.append(L[res[-1]])
+
+    # on remplace les int par leur string respectifs dans G.labels
+    return _fromIndexToString(G,res)
+
+    
 
 ###############################################################################
 #   LEVEL 0
@@ -121,10 +160,11 @@ def ischain(G,L):
     if not L[0] in G.labels:
         return False
     l = len(L)
-    temp = [L[0]]
-    for i in range(l-1):
-        if (not L[i+1] in G.labels) or (not G.labels.index(L[i+1]) in G.adjlists[i]) or (L[i+1] in temp):
+    temp = []
+    for i in range (l-1):
+        if (not (L[i+1] in G.labels)) or (not (G.labels.index(L[i+1]) in G.adjlists[G.labels.index(L[i])])) or (L[i+1] in temp):
             return False
+        temp.append(L[i+1])
     return True
 
 ###############################################################################
@@ -163,32 +203,11 @@ def nosolution(G):
 #   LEVEL 3
 
 def ladder(G, start, end):
+    # si un des deux mots n'est pas dans le graphe
     if not (start in G.labels and end in G.labels):
         return []
-    L = [None]*G.order
-    startIndex = G.labels.index(start)
-    endIndex = G.labels.index(end)
-    L[startIndex] = -1
-    q = queue.Queue()
-    q.enqueue(startIndex)
-    while not q.isempty() and L[endIndex]==None:
-        node = q.dequeue()
-        l = len(G.adjlists[node])
-        i = 0
-        while i<l and L[endIndex]==None:
-            elt = G.adjlists[node][i]
-            if L[elt]==None:
-                L[elt] = node
-                q.enqueue(elt)
-            i+=1
-    res = []
-    if L[endIndex]==None:
-        return res
-    res.append(endIndex)
-    while L[res[-1]]!=-1:
-        res.append(L[res[-1]])
-    res.reverse()
-    return _fromIndexToString(G,res)
+    # c'est un graphe non-orienté donc start --> end est la liste inverse de end --> start
+    return _reverse_ladder(G,start,end)
 
 
     
@@ -201,7 +220,7 @@ def mostdifficult(G):
     
     # à ce moment-là, on a construit la liste qui indique quelle noeud appartient à quelle composante connexe
 
-    res = (G.labels[0],G.labels[0],0)
+    res = (G.labels[0],G.labels[1],len(ladder(G,G.labels[0],G.labels[1])))
     for i in range (G.order):
         # on ne compte pas les cas où i==j ni
         # les cas où j<i car ils ont déjà été traités avant car c'est un
@@ -224,17 +243,5 @@ def isomorphic(G1, G2):
     """BONUS: test if G1 and G2 (graphs of same length words) are isomorphic
 
     """
-    # on vérifie que tous les mots de G1 sont dans G2 et inversement
-    if sorted(G1.labels)!=sorted(G2.labels):
-        return False
-    L_tuple = []
-    for i in range(G1.order):
-        """
-        On va créer une liste de tuple de type (int,int)
-        On utilise le tuple comme : on prend un mot w de G1.labels:
-        --> il sera à l'index i dans G1.labels
-        --> on cherche l'index j tel que G1.labels[i]==G2.labels[j]
-        """
-        L_tuple.append((i,G2.labels.index(G1.labels[i])))
-        # ici j = index(G1.labels[i])
-        pass
+    # FIXME
+    pass
