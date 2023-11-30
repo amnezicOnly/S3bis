@@ -28,13 +28,6 @@ Pour avoir une aide en cas de problème : :help <sujet>.
 
 
 
-
-
-
-
-
-
-
 \section{Actions classiques}
 On prendra n le nombre d'éléments que l'on utilisera. On notera que dans la plupart des cas, si n=1, alors on a pas besoin de le mettre (on peut faire la commande sans le n). "." répète la dernière action réalisé sauf "u","ctr-r" et les commandes commençant par ":".
 
@@ -123,9 +116,30 @@ On posera \textit{x} un caractère unique
 
 \subsection{Action sur le fichier}
 \begin{itemize}
+    \item gg : aller au début du fichier 
+    \item G : aller en bas du fichier
     \item :w : sauvegarde le fichier
     \item :q! : quitte le fichier sans sauvegarder\newline
     $\Longrightarrow$ ZZ est éqivalent à :wq
+    \item pour ouvrir plusieurs fichiers en même temps:
+    \begin{itemize}
+    	\item les fichiers "les uns derrière les autres":
+    	\begin{enumerate}
+    		\item vim file1 file2 ... fileN
+		\item :first : pour aller au premier fichier
+		\item :next : pour aller au fichier suivant
+		\item :previous : pour aller au fichier précédent
+		\item :last : pour aller au dernier fichier
+    	\end{enumerate}
+	\item les fichiers côte à côte:
+	\begin{enumerate}
+		\item vim -o(horizontal) ou -O(vertical) file1 ... fileN
+		\item Ctrl-W [direction] : se déplace dans la fenêtre indiquée par la direction
+		\item 
+	\end{enumerate}
+    \item zo/zc : ouvre/ferme une scoop
+    \item 
+    \end{itemize}
 
 \end{itemize}
-\end{document}
+\end

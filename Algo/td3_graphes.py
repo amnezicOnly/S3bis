@@ -362,14 +362,62 @@ def influencers(G):
     for s in range(G.order):
         ecc = _eccentricity(G,s,0)
 
+def _colors_dfs(G,s,L):
+	color = L[s]
+	for elt in G.adjlists[s]:
+		if L[s]==L[elt]:
+			return False
+		if L[elt]==None:
+			col[elt] = -col[s]
+			if not _colors_dfs(G,elt,L):
+				return False
+	return True
 
-def colors(G):
-    pass
-    
+def colors_dfs(G):
+	colors = [None]*G.order
+	for s in range(G.order):
+		if colors[s]==None:
+			colors[s] = 1
+			if not  _colors_dfs(G,s,colors):
+				return temp
+	return True
 
-graph_center = importGra("graph_center.gra")
+def _colors_bfs(G,s,colors):
+	q = queue.Queue()
+	q.enqueue(s)
+	while not q.isempty():
+		elt = q.dequeue()
+		for y in G.adjlists[elt]:
+			if colors[y]==colors[elt]:
+				return False
+			if colors[y]==None:
+				col[y] = -col[elt]
+				q.enqueue(y)
+	return True
 
-#print(components_BFS(G2))
-#print(components_DFS(G2))
+def colors_bfs(G):
+	colors = [None]*G.order
+	for s in range(G.order):
+		if colors[s]==None:
+			colors[s] = 1
+			if not _colors_bfs(G,s,colors):
+				return False
+	return True
 
-print(find_the_way(graph_center,0,1))
+def _dfsTree(G,L,s):
+	L[s] = True
+	nb = 1
+	for elt in G.adjlists[s]:
+		if not L[elt]:
+			(ok,n) = _dfsTree(G,L,elt)
+			if not ok:
+				return (False,666)
+			nb+=n
+		else:
+			return (False,42)
+	return True
+
+def isTree(G,r):
+	L = [False]*G.order
+	(ok,nb) = _dsTree(G,L,r)
+	return ok and nb==G.order
