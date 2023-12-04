@@ -192,12 +192,13 @@ def nosolution(G):
     """ Return a *doublet* without solution in G, (None, None) if none
     
     """
-    for i in range(G.order):    # pour chaque mot
-        solutions = alldoublets(G,G.labels[i])  # on regarde les doublets possibles
-        for j in range(i+1,G.order):    # tous les cas où i<=j ont déjà été traités
-            if not (G.labels[j] in solutions):  # si deux mots ne sont pas connectés
-                return (G.labels[i],G.labels[j])    # on renvoie le couple
-    return (None,None)  # sinon, cela veut dire que le graphe est connexe
+    L = [0]*G.order
+    _comp_BFS(G,1,0,L)
+    for elt in L:
+    	if L[0]!=L[elt]
+    		return (G.labels[0],G.labels[elt])
+    return (None,None)
+    
 
 ###############################################################################
 #   LEVEL 3

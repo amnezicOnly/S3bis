@@ -16,7 +16,7 @@ from algo_py import graph, queue
 # Do not change anything above this line, except your login!
 # Do not add any import
 # Fonctions auxiliaires
-# Fonctions auxiliaires
+
 def _couldBeLinked(word1,word2,l):
     """
     indique si deux mots word1 et word2 (de même taille) ont 1 lettre ou moins de différence
@@ -73,51 +73,47 @@ def _components_BFS(G):
             _comp_BFS(G,count,i,visited)
     return visited
 
-def _reverse_ladder(G,end,start):
+def _paths_bfs_one(G,src,dst,P):
     """
-    G : un graphe
-    start et end : deux string (appartenant à G.labels)
-    retourne le chemin de end vers start
+    vertices marked with their parent in P
+    return True if dst is reached
+
+    Comme dans la fonction de construction de vecteurs de pères mais qui s'arrête quand dst est rencontré
     """
-    # cherche le chemin le plus court entre la source et la destination
-    L = [None]*G.order
-    startIndex = G.labels.index(start)
-    endIndex = G.labels.index(end)
-    L[startIndex] = -1
     q = queue.Queue()
-    q.enqueue(startIndex)
-    while not q.isempty() and L[endIndex]==None:
-        node = q.dequeue()
-        l = len(G.adjlists[node])
-        i = 0
-        while i<l and L[endIndex]==None:
-            elt = G.adjlists[node][i]
-            if L[elt]==None:
-                L[elt] = node
-                q.enqueue(elt)
-            i+=1
-    # à ce niveau là, on a une liste contenant la liste des pères des différents noeuds rencontrés
+    q.enqueue(src)
+    P[src]=-1
+    while not q.isempty() and P[dst]==None:
+        x = q.dequeue()
+        for y in G.adjlists[x]:
+            if P[y]==None:
+                P[y]=x
+                if y==dst:
+                    return True
+                q.enqueue(y)
+    return False
 
-    # on va suivre le chemin de la destination jusqu'à la source
-    res = []
-    if L[endIndex]==None:
-        return res
-    res.append(endIndex)
-    while L[res[-1]]!=-1:
-        res.append(L[res[-1]])
-
-    # on remplace les int par leur string respectifs dans G.labels
-    return _fromIndexToString(G,res)
-
-    
+def _path_bfs(G,src,dst):
+    # retourne une liste contentant le plus court chemin de src vers dst dans le graphe G
+    P = [None] * G.order
+    path = []
+    if _paths_bfs_one(G,src,dst,P):
+        while dst!=-1:
+            path.append(dst)
+            dst = P[dst]
+        path.reverse()
+    return path
 
 ###############################################################################
+
+
 #   LEVEL 0
         
 def buildgraph(filename, k):
     """Build and return a graph with words of length k from the lexicon in filename
 
     """
+
     # on commence par ajouter tous les mots de taille k dans une liste
     L = []
     with open(filename, 'r') as f:
@@ -153,7 +149,7 @@ def mostconnected(G):
     return _fromIndexToString(G,L)
 
 
-def ischain(G,L):
+def ischain(G, L):
     """ Test if L (word list) is a valid elementary *chain* in the graph G
 
     """
@@ -188,14 +184,16 @@ def alldoublets(G, start):
         visited.pop(0)
     return _fromIndexToString(G,visited)
     
+
 def nosolution(G):
     """ Return a *doublet* without solution in G, (None, None) if none
     
     """
-    visited = [0]*G.order
-    _comp_BFS(G,1,0,visited)
-    for i in range(1,G.order):
-        if visited[0]!=visited[i]:
+    L = [0]*G.order
+    _comp_BFS(G,1,0,L)
+    l = len(L)
+    for i in range(1,l):
+        if L[i]!=L[0]:
             return (G.labels[0],G.labels[i])
     return (None,None)
 
@@ -203,13 +201,14 @@ def nosolution(G):
 #   LEVEL 3
 
 def ladder(G, start, end):
-    # si un des deux mots n'est pas dans le graphe
-    if not (start in G.labels and end in G.labels):
-        return []
-    # c'est un graphe non-orienté donc start --> end est la liste inverse de end --> start
-    return _reverse_ladder(G,start,end)
+    """ Return a *ladder* to the *doublet* (start, end) in G
 
-
+    """
+    L = _path_bfs(G,G.labels.index(start),G.labels.index(end))
+    res = []
+    for elt in L:
+        res.append(G.labels[elt])
+    return res
     
 
 def mostdifficult(G):
@@ -227,7 +226,8 @@ def mostdifficult(G):
         # graphe non-orienté
         for j in range (i+1,G.order):
             # deux mots ne peuvent être reliés que s'ils sont dans la même composante connexe
-            if cmp[i]==cmp[j]:
+            # c'est le plus long ladder donc un mot ne doit pas être dans la liste d'adjacence de l'autre
+            if cmp[i]==cmp[j] and not (j in G.adjlists[i]):
                 temp = ladder(G,G.labels[i],G.labels[j])
                 l = len(temp)
                 if l>res[2]:
@@ -243,5 +243,6 @@ def isomorphic(G1, G2):
     """BONUS: test if G1 and G2 (graphs of same length words) are isomorphic
 
     """
-    # FIXME
+    #FIXME
     pass
+    
