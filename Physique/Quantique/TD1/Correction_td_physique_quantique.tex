@@ -22,7 +22,7 @@
 \noindent\textbf{Partie 1 : Descritpion par la loi de Rayleigh-Jeans (Énergie continue)}\newline
 Dans le cadre de la thermodynamique classique, la loi de Rayleigh-Jeans aboutit à l'expression suivante pour la densité spectrale d'énergie:
 \[
-    u(\lambda,T) = \frac{8\pi}{c\lambda^{2}}
+    u(\lambda,T) = \frac{8\pi}{c\lambda^{2}} \langle E \rangle
 \quad
 \begin{varwidth}{\displaywidth}
     \begin{itemize}[nosep]
@@ -52,13 +52,13 @@ Le numérateur représente l'intégrale de la densité de probabilité de l'éne
     Posons Nm et D tel que $\langle E \rangle = \frac{Nm}{D}$\newline
     \[ D = \int_{0}^{\infty} e^{-\frac{E}{k_{B}T}} dE = [-k_{B}T\times e^{-\frac{E}{k_{B}T}}]_{0}^{\infty} = -k_{B}T(0-1) = k_{B}T \]
     \begin{flalign*}
-        Nm & = $\int_{0}^{\infty} E\times e^{-\frac{E}{k_{B}T}}dE$, par intégration par parties, on obtient &\\
-           & = $[-k_{B}T\times E\times e^{-\frac{E}{k_{B}T}}]_{0}^{\infty}$ - ($\int_{0}^{\infty} -k_{B}T\times e^{-\frac{E}{k_{B}T}}dE$) &\\
-           & = $k_{B}T [-Ee^{-\frac{E}{k_{B}T}}]_{0}^{\infty} + k_{B}T[-k_{B}Te^{-\frac{E}{k_{B}T}}]_{0}^{\infty}$ &\\
-           & = $k_{B}T[0-0] - (k_{B}T)^{2} [e^{-\frac{E}{k_{B}T}}]_{0}^{\infty}$ &\\
-           & = $-(k_{B}T)^{2} [e^{\alpha} - e^{0}]$ &\\
-           & = $-(k_{B}T)^{2} (0-1)$ &\\
-        Nm & = $(k_{B}T)^{2}$
+        Nm & = \int_{0}^{\infty} E\times e^{-\frac{E}{k_{B}T}}dE, \text{ par intégration par parties, on obtient} &\\
+           & = \left[-k_{B}T\times E\times e^{-\frac{E}{k_{B}T}}\right]_{0}^{\infty} - \left(\int_{0}^{\infty} -k_{B}T\times e^{-\frac{E}{k_{B}T}}dE\right) &\\
+           & = k_{B}T \left[-Ee^{-\frac{E}{k_{B}T}}\right]_{0}^{\infty} + k_{B}T\left[-k_{B}Te^{-\frac{E}{k_{B}T}}\right]_{0}^{\infty} &\\
+           & = k_{B}T[0-0] - (k_{B}T)^{2} \left[e^{-\frac{E}{k_{B}T}}\right]_{0}^{\infty} &\\
+           & = -(k_{B}T)^{2} [e^{-\infty} - e^{0}] &\\
+           & = -(k_{B}T)^{2} (0-1) &\\
+        Nm & = (k_{B}T)^{2}
     \end{flalign*}
     Donc $\langle E \rangle = \frac{Nm}{D}$ = $\frac{(k_{B}T)^{2}}{k_{B}T}$ = $k_{B}$T\newline\newline
 
@@ -68,9 +68,9 @@ Le numérateur représente l'intégrale de la densité de probabilité de l'éne
     U($\lambda$,T) est l'intensité rayonnée par le corps noir (en W$\cdot$m$^{2}$)
     \item Expliquer à partir de cette intégrale pourquoi la loi de Rayleigh-Jeans a marqué un tournant nommé "Catastrophe ultraviolette".\newline
     \begin{flalign*}
-        $\int_{0}^{+\infty} u(\lambda,T)$ & = $\int_{0}^{\alpha} \frac{8\pi}{c\lambda^{2}}\times k_{B}T d\lambda$ &\\
-                                          & = $\frac{8\pi}{c}\times k_{B}T \times \int_{0}^{\alpha} \frac{1}{\lambda^{2}}d\lambda$ &\\
-                                          & = $\frac{8\pi}{c}\times k_{B}T \times [\frac{-1}{\lambda}]_{0}^{\alpha}$ 
+        \int_{0}^{+\infty} u(\lambda,T)d\lambda & = \int_{0}^{\infty} \frac{8\pi}{c\lambda^{2}}\times k_{B}T d\lambda &\\
+                                        & = \frac{8\pi}{c}\times k_{B}T \times \int_{0}^{\infty} \frac{1}{\lambda^{2}}d\lambda &\\
+                                        & = \frac{8\pi}{c}\times k_{B}T \times \left[\frac{-1}{\lambda}\right]_{0}^{\infty}
     \end{flalign*}\newline
     $\Longrightarrow$ $\lambda \rightarrow 0 \Longrightarrow$ U($\lambda$,T) diverge.
 \end{enumerate}
@@ -82,27 +82,20 @@ Nous allons maintenant nous intéresser à la loi de Planck, qui a proposé de c
     \setcounter{enumi}{2}
     \item Réécrire la relation donnant $\langle E \rangle$ dans ces conditions.\newline
     Proposition de Max-Planck: E = n$E_{0}$ (quantificateur de l'énergie) qui corrige la divergence de la densité spectrale u($\lambda$,T) pour les faibles longueurs d'ondes (UV).
-    \[ \langle E \rangle = \frac{\Sigma_{n=0}^{+\infty} E_{0} \times e^{-\frac{E_{0}}{k_{B}T}}}{\Sigma_{n=0}^{+\infty} e^{-\frac{E_{0}}{k_{B}T}}}\]
-    \item Calculer ce terme, en utilisant un résultat sur les suites géométriques au numérateur, puis en remarquant un lien de dérivation entre le dénominateur et le numérateur.\newline
-    \underline{Calcul de $\langle$E$\rangle$:} \[ \langle E \rangle = \frac{\Sigma_{n=0}^{+\infty} E_{0} \times e^{-\frac{E_{0}}{k_{B}T}}}{\Sigma_{n=0}^{+\infty} e^{-\frac{E_{0}}{k_{B}T}}} = \frac{Nm}{D} \]
+    \[ \langle E \rangle = \frac{\Sigma_{n=1}^{+\infty} nE_{0} e^{-\frac{nE_{0}}{k_{B}T}}}{\Sigma_{n=1}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}}} \]
+    \item Calculer ce terme, en utilisant un résultat sur les suites géométriques au dénominateur, puis en remarquant un lien de dérivation entre le dénominateur et le numérateur.\newline
+    \underline{Calcul de $\langle$E$\rangle$:} \[ \langle E \rangle = \frac{\Sigma_{n=1}^{+\infty} nE_{0} e^{-\frac{nE_{0}}{k_{B}T}}}{\Sigma_{n=1}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}}} = \frac{Nm}{D} \]
     \begin{flalign*}
-        D & = $\Sigma_{n=0}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}}$ &\\
-          & = $\Sigma_{n=0}^{+\infty} (e^{-\frac{E_{0}}{k_{B}T}})^{n}$ &\\
-          & = $\lim_{N\to\infty} \Sigma_{n=0}^{N}(e^{-\frac{E}{k_{B}T}})^{n}$ &\\
-          & = $\lim_{N\to\infty} \Sigma_{n=0}^{N} q^{n}$ &\\
-          & = $\lim_{N\to\infty} q_{0}(=1) \frac{1-q^{n}}{1-q}$ &\\
-        D & = $\frac{1}{1 - e^{-\frac{E_{0}{k_{B}T}}}}$
-    \end{flalign*}
-    \begin{flalign*}
-        Nm & = $\Sigma_{n=0}^{+\infty} nE_{0}e^{-\frac{nE_{0}}{k_{B}T}}$\text{or $(e^{\alpha x})' = \alpha e^{\alpha x}$} &\\
-           & = $E_{0} \Sigma_{n=0}^{+\infty} (-\frac{1}{k_{B}T}n) \times -k_{B}T \times e^{-\frac{ne_{0}}{k_{B}T}}$ &\\
-           & = $(-k_{B}T)E_{0} \Sigma_{n=0}^{+\infty} (-\frac{n}{k_{B}T}) e^{-\fac{nE_{0}{k_{B}T}}}$ &\\
-           & = $(-k_{B}T)E_{0} \frac{d}{dE_{0}}(\Sigma_{n=0}^{+\infty} e^{-\fac{nE_{0}{k_{B}T}}})$ &\\
-           & = $(-k_{B}T)E_{0} \frac{d}{dE_{0}}D$ &\\
-        Nm & = $\frac{E_{0}e^{-\frac{E_{0}{k_{B}T}}}}{(1-e^{-\frac{E_{0}}{k_{B}T}})^{2}}$
-
+        D & = \Sigma_{n=1}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}} = \Sigma_{n=1}^{+\infty} \left(e^{-\frac{nE_{0}}{k_{B}T}}\right)^{n} &\\
+          & = \Sigma_{n=1}^{+\infty} q^{n} \text{ (avec } q = e^{-\frac{E_{0}}{k_{B}T}} \text{)} = \lim_{n\to +\infty} q^{n} &\\
+          & = \lim_{n\to +\infty} \frac{1-q^{n}}{1-q} &\\
+        D & = \frac{1}{1-q} = \frac{1}{1-e^{-\frac{E_{0}}{k_{B}T}}}
     \end{flalign*}\newline
-    On a donc $E = \frac{Nm}{D}$ = $\frac{\frac{E_{0}e^{-\frac{E_{0}{k_{B}T}}}}{(1-e^{-\frac{E_{0}}{k_{B}T}})^{2}}}{\frac{1}{1 - e^{-\frac{E_{0}{k_{B}T}}}}}$
+
+    \begin{flalign*}
+        Nm & = \Sigma_{n=1}^{+\infty} nE_{0} e^{-\frac{nE_{0}}{k_{B}T}} &\\
+           & = 
+    \end{flalign*}
 
     \item On obtient donc la densité spectrale d'énergie suivante :
     \[ u(\lambda,T) = \frac{8\pi}{c\lambda^{2}}<E> = \frac{8\pi}{c\lambda^{2}} \times \frac{E_{0}}{e^{\frac{E_{0}}{k_{B}T}}-1} \] avec $E_{0}$ un quanta (plus petite quantité indivisible d'énergie)\newline
@@ -110,7 +103,7 @@ Nous allons maintenant nous intéresser à la loi de Planck, qui a proposé de c
     Justifier la proposition de Planck: $E_{0} = \frac{hc}{\lambda}$ avec h la constante de Planck.\newline
     \begin{figure}[h]
         \centering
-        \includegraphics[scale=0.7]{catastrophe_ultraviolette.png}
+        \includegraphics[scale=0.3]{catastrophe_ultraviolette.png}
         \caption{Spectre du rayonnement du corps noir (intensité du rayonnement en fonction de la longueur d'onde) pour des températures données (couleurs : modèle de Planck ; noir : modèle de Rayleigh-Jeans)}
     \end{figure}
 
