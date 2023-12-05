@@ -20,7 +20,7 @@
 
 \begin{document}
 \maketitle
-Dans ce TD, nous illustrons le concept de quantification de l'énergie d'un système, avec le modèle de Bohr (1913). Ce modèle -dépassé depuis 1925- permet de se familiariser avec la quantification de l'énergie, et d'expliquer simplement des phénomènes tels que les radiations lumineuses « quantifiées », c'est-à-dire selon des longueurs d'ondes fixées : à l'inverse de la lumière blanche, d'on le spectre est continu, celui d'une lampe halogène (composée d'un seul corps chimique) émet seulement selon des longueurs d'ondes bien précises, ce qui explique sa couleur, rouge pour le Néon, bleu/ultraviolet pour le Mercure, orange pour les lampes à Sodium...\newline\newline
+Dans ce TD, nous illustrons le concept de quantification de l'énergie d'un système, avec le modèle de Bohr (1913). Ce modèle (dépassé depuis 1925) permet de se familiariser avec la quantification de l'énergie, et d'expliquer simplement des phénomènes tels que les radiations lumineuses « quantifiées », c'est-à-dire selon des longueurs d'ondes fixées : à l'inverse de la lumière blanche, d'on le spectre est continu, celui d'une lampe halogène (composée d'un seul corps chimique) émet seulement selon des longueurs d'ondes bien précises, ce qui explique sa couleur, rouge pour le Néon, bleu/ultraviolet pour le Mercure, orange pour les lampes à Sodium...\newline\newline
 \indent Nous abordons aussi la relation de De Broglie, qui associe une longueur d'onde à chaque particule ayant une masse, et nous illustrons le principe d'incertitude d'Heisenberg.\newline\newline
 
 \textbf{Ex1: Modèle de Bohr(1913)}\newline
@@ -45,7 +45,11 @@ Le modèle repose sur trois postulats :
     \]
 \end{itemize}
 
-(cf figure 3 à la fin du document)\newpage
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.3]{rayon_orbite.png}
+    \caption{Illustration de l'atome de Bohr}
+\end{figure}
 
 Le modèle de Bohr aboutit au résultat suivant : l'énergie $E_{n}$ d'un électron lié au noyau dépend de l'inverse du carré du nombre quantique n, numéro de la couche électronique où peut se trouver l'électron. C'est ce que l'on appelle la quantification des états de l'électron.
 \[
@@ -86,16 +90,16 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
     \]
     \item Utiliser ces résultats pour exprimer les rayons $r_{n}$ des orbites successives accessibles à l'électron en fonction de leur nombre quantique n, c'est-à-dire le numéro de la couche électronique. Montrer qu'ils s'écrivent : $r_{n} = a_{0}n^{2}$ avec $n\in\mathbb{N}$. On appelle la constante $a_{0}$ le rayon de Bohr, qui correspond au plus petit rayon accessible.\newline
     D'après les questions précédentes, on a:
-    \[\left\{
+    \begin{flalign*}
+        \left\{
         \begin{array}{l}
             mv = \frac{nh}{2\pi r}\\
             mv^{2} = \frac{ke^{2}}{r}    
-        \end{array}
-    \]
-    $\Longrightarrow \frac{1}{m}(mv)^{2} = \frac{ke^{2}}{r}$\newline
-    $\Longleftrightarrow \frac{1}{m}\left(\frac{nh}{2\pi r}\right)^{2} = \frac{ke^{2}}{r}$\newline
-    $\Longleftrightarrow \frac{1}{m}\frac{n^{2}h^{2}}{4\pi^{2}r_{n}^{2}} = \frac{ke^{2}}{r_{n}}$\newline
-    $\Longleftrightarrow r_{n} = \left(\frac{h^{2}}{4\pi^{2}mke^{2}}\right)n^{2}$ avec n$\in\mathbb{N^{*}}$\newline
+        \end{array} & \Longrightarrow \frac{1}{m}(mv)^{2} = \frac{ke^{2}}{r} &\\
+                    & \Longleftrightarrow \frac{1}{m}\left(\frac{nh}{2\pi r}\right)^{2} = \frac{ke^{2}}{r} &\\
+                    & \Longleftrightarrow \frac{1}{m}\frac{n^{2}h^{2}}{4\pi^{2}r_{n}^{2}} = \frac{ke^{2}}{r_{n}} &\\
+                    & \Longleftrightarrow r_{n} = \left(\frac{h^{2}}{4\pi^{2}mke^{2}}\right)n^{2}$ \text{ avec n}$\in\mathbb{N^{*}}
+    \end{flalign*}
     On obtient donc
     \[
         r_{n} = \left(\frac{h^{2}}{4\pi^{2}mke^{2}}\right)n^{2}
@@ -118,11 +122,15 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
         E_{c} = \frac{1}{2}mv^{2} \\
         E_{p_{e}} = q_{e^{-}}\times V_{\text{tension entre $e^{-}$ et $e^{+}$}}
     \end{array}
+    \Longrightarrow
+    \left\{ \begin{array}{l}
+        E_{p_{E}} = -\frac{ke^{2}}{r_{n}} \\
+        E_{c} = \frac{1}{2}mv^{2}
+    \end{array}
     \]
-    On a donc $E_{p_{e}} = -\frac{ke^{2}}{r}$ et\newline
-    $E_{c} = \frac{1}{2}mv^{2}$ or $||\overrightarrow{F_{e}}=\frac{mv^{2}}{r}=\frac{ke^{2}}{r^{2}}$ selon le PFD $\Longrightarrow mv^{2}=\frac{ke^{2}}{r}$\newline
-    $\Longrightarrow E_{c}=\frac{1}{2}mv^{2}=\frac{1}{2}\frac{ke^{2}}{r}$\newline
-    \underline{Conclusion:} $E_{tot}=-\frac{ke^{2}}{2r}$ d'où $E_{tot}=-\frac{ke^{2}}{2r_{n}}$ (l'énergie est quantifiée).
+    Or $||\overrightarrow{F_{e}}||=\frac{mv^{2}}{r_{n}}=\frac{ke^{2}}{r_{n}^{2}}$ selon le PFD $\Longrightarrow mv^{2}=\frac{ke^{2}}{r_{n}}$\newline
+    $\Longrightarrow E_{c}=\frac{1}{2}mv^{2}=\frac{1}{2}\frac{ke^{2}}{r_{n}}$\newline
+    \underline{Conclusion:} $E_{tot}=-\frac{ke^{2}}{2r_{n}}$ : l'énergie est quantifiée.
     \item En déduire $E_{n}$ l'expression de l'énergie de l'électron sur l'orbite n, en fonction de e, $a_{0}$ et n. L'on pourra regrouper les constantes sous le terme $E_{1}$, énergie de la plus "basse" orbite. Quel est le nom de la constante $E_{1}$?\newline
     D'après les questions précédentes, on a:
     \[\left\{
@@ -138,7 +146,7 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
             n=1 \rightarrow E_{1} = -13,6eV \\
             n=2 \rightarrow E_{2} = -3,4eV \\
             n=3 \rightarrow E_{3} = -1,51eV \\
-            \vodts \\
+            \vdots \\
             n\to\infty \rightarrow E_{n} = 0
         \end{array}
     \]
@@ -146,7 +154,7 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
 \newpage
 \textbf{Ex2: Transitions électroniques}\newline
 \indent D'après le modèle de Bohr, l'on peut calculer le diagramme d'énergie de l'électron dans l'atome d'hydrogène (voir schéma), c'est-à-dire donner les différents niveaux d'énergie de l'électron dans les différentes couches n$\in\mathbb{N^{*}}$. Remarquons que ces énergies (en électronvolts ev) sont négatives, comme vu en Ex1.\newline
-(cf Figure 3 à la fin du document)
+(Cf figure 3 à la fin du document)
 
 \begin{enumerate}
     \item Sur le diagramme, où se trouve le niveau d'énergie fondamental ? A quoi correspond l'état d'énergie nulle ?\newline
@@ -169,7 +177,7 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
         \includegraphics[scale=0.3]{figure3.png}
         \caption{Spectres d'absorption et d'émission de l'atome d'hydrogène}
     \end{figure}
-    \item La Figure 1 (juste au dessus) montre les spectres d'émission et d'absorption de l'atome d'hydrogène, mesurés en laboratoire. Calculer les longueurs d'onde des transitions du tableau ci-dessous et interpréter les spectres observés.
+    \item La Figure 2 (juste au dessus) montre les spectres d'émission et d'absorption de l'atome d'hydrogène, mesurés en laboratoire. Calculer les longueurs d'onde des transitions du tableau ci-dessous et interpréter les spectres observés.
     \begin{center}
         \begin{tabular}{|c|c|c|c|c|}
             \hline
@@ -212,7 +220,6 @@ L'objectif de cet exercice est de retrouver ce résultat à partir des hypothès
 Rappel : $mv = \frac{h}{c} = p$ pour une particule à l'échelle nanoscopique et $\lambda_{B}$: longueur d'onde de De Broglie.
 \newpage
 \noindent\textbf{Annexes:}\newline
-(J'ai pas trouvé la figure 3)
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{figure2.png}

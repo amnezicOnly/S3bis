@@ -87,21 +87,32 @@ Nous allons maintenant nous intéresser à la loi de Planck, qui a proposé de c
     \item Calculer ce terme, en utilisant un résultat sur les suites géométriques au dénominateur, puis en remarquant un lien de dérivation entre le dénominateur et le numérateur.\newline
     \underline{Calcul de $\langle$E$\rangle$:} \[ \langle E \rangle = \frac{\Sigma_{n=1}^{+\infty} nE_{0} e^{-\frac{nE_{0}}{k_{B}T}}}{\Sigma_{n=1}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}}} = \frac{Nm}{D} \]
     \begin{flalign*}
-        D & = \Sigma_{n=1}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}} = \Sigma_{n=1}^{+\infty} \left(e^{-\frac{nE_{0}}{k_{B}T}}\right)^{n} &\\
-          & = \Sigma_{n=1}^{+\infty} q^{n} \text{ (avec } q = e^{-\frac{E_{0}}{k_{B}T}} \text{)} = \lim_{n\to +\infty} q^{n} &\\
-          & = \lim_{n\to +\infty} \frac{1-q^{n}}{1-q} &\\
+        D & = \Sigma_{n=1}^{+\infty} e^{-\frac{nE_{0}}{k_{B}T}} = \Sigma_{n=1}^{+\infty} \left(e^{-\frac{E_{0}}{k_{B}T}}\right)^{n} &\\
+          & = \lim_{N\to +\infty}\Sigma_{n=1}^{N} q^{n} \text{ (avec } q = e^{-\frac{E_{0}}{k_{B}T}} \text{)} = \lim_{N\to +\infty} 1\times q^{n} &\\
+          & = \lim_{N\to +\infty} \frac{1-q^{n}}{1-q} &\\
         D & = \frac{1}{1-q} = \frac{1}{1-e^{-\frac{E_{0}}{k_{B}T}}}
     \end{flalign*}\newline
 
+    On va dériver le numérateur par rapport à $E_{0}$.
     \begin{flalign*}
         Nm & = \Sigma_{n=1}^{+\infty} nE_{0} e^{-\frac{nE_{0}}{k_{B}T}} &\\
-           & = 
+           & = E_{0}(k_{B}T) \left(\Sigma_{n=1}^{+\infty} \frac{1}{-k_{B}T}nE_{0}e^{-\frac{E_{0}}{k_{B}T}} \right) &\\
+           & = E_{0}(k_{B}T) \frac{d}{dE_{0}} \Sigma_{n=1}^{+\infty} nE_{0}e^{-\frac{E_{0}}{k_{B}T}} &\\
+           & = E_{0}(k_{B}T) \frac{d}{dE_{0}} \times D &\\
+           & = -E_{0}k_{B}T \frac{d}{dE_{0}}\left(\frac{1}{1-e^{-\frac{E_{0}}{k_{B}T}}}\right) &\\
+           & = -E_{0}k_{B}T \left(\frac{\frac{1}{k_{B}T}e^{-\frac{E_{0}}{k_{B}T}}}{\left(1-e^{-\frac{E_{0}}{k_{B}T}}\right)^{2}}\right) &\\
+        Nm & = \frac{-E_{0}e^{-\frac{E_{0}}{k_{B}T}}}{\left(1-e^{-\frac{E_{0}}{k_{B}T}}\right)^{2}}
+    \end{flalign*}
+    On a donc :
+    \begin{flalign*}
+        \langle E \rangle & = \frac{Nm}{D} = \frac{\left(\frac{-E_{0}e^{-\frac{E_{0}}{k_{B}T}}}{\left(1-e^{-\frac{E_{0}}{k_{B}T}}\right)^{2}}\right)}{\left(\frac{1}{1-e^{-\frac{E_{0}}{k_{B}T}}}\right)} = \frac{E_{0}}{e^{\frac{E_{0}}{k_{B}T}}-1}
     \end{flalign*}
 
     \item On obtient donc la densité spectrale d'énergie suivante :
     \[ u(\lambda,T) = \frac{8\pi}{c\lambda^{2}}<E> = \frac{8\pi}{c\lambda^{2}} \times \frac{E_{0}}{e^{\frac{E_{0}}{k_{B}T}}-1} \text{ avec $E_{0}$ un quanta (plus petite quantité indivisible d'énergie)} \] 
     Pour corriger la loi de R-J, il faut corriger la divergence u($\lambda$,T) pour les petites longueurs d'ondes.\newline
     Justifier la proposition de Planck: $E_{0} = \frac{hc}{\lambda}$ avec h la constante de Planck.\newline
+    (Pas compris)
     \begin{figure}[h]
         \centering
         \includegraphics[scale=0.3]{catastrophe_ultraviolette.png}
