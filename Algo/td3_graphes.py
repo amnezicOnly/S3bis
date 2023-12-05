@@ -352,7 +352,7 @@ def _eccentricity2(G,src,eccMax):
         for y in G.adjlists[x]:
             if dist[y] == None:
                 dist[y] = dist[x]+1
-                if dist[y]>eccMax:
+                if dist[y]<eccMax:
                     return eccMax+1
                 q.enqueue(y)
     return dist[x]
@@ -362,13 +362,14 @@ def influencers(G):
     for s in range(G.order):
         ecc = _eccentricity(G,s,0)
 
+"""
 def _colors_dfs(G,s,L):
 	color = L[s]
 	for elt in G.adjlists[s]:
 		if L[s]==L[elt]:
 			return False
 		if L[elt]==None:
-			col[elt] = -col[s]
+			L[elt] = -L[s]
 			if not _colors_dfs(G,elt,L):
 				return False
 	return True
@@ -381,8 +382,9 @@ def colors_dfs(G):
 			if not  _colors_dfs(G,s,colors):
 				return temp
 	return True
+"""
 
-def _colors_bfs(G,s,colors):
+"""def _colors_bfs(G,s,colors):
 	q = queue.Queue()
 	q.enqueue(s)
 	while not q.isempty():
@@ -403,7 +405,9 @@ def colors_bfs(G):
 			if not _colors_bfs(G,s,colors):
 				return False
 	return True
+"""
 
+"""
 def _dfsTree(G,L,s):
 	L[s] = True
 	nb = 1
@@ -421,3 +425,27 @@ def isTree(G,r):
 	L = [False]*G.order
 	(ok,nb) = _dsTree(G,L,r)
 	return ok and nb==G.order
+"""
+
+
+def _isTree(G,x,M):
+    M[x]=True
+    nb = 1
+    for y in G.adjlists[x]:
+        if not M[y]:
+            n = _isTree(G,y,M)
+            if n==-1:
+                return -1
+            else:
+                nb+=n
+        else:
+            return -1
+    return nb
+
+def rooted_in_r(G,r):
+    M = [False]*G.order
+    return _isTree(G,r,M)==G.order
+
+
+G = importGra("tuto_graph2.gra")
+print(_eccentricity2(G,0,0))

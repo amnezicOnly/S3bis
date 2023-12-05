@@ -109,6 +109,22 @@ def _reverse_ladder(G,end,start):
     # on remplace les int par leur string respectifs dans G.labels
     return _fromIndexToString(G,res)
 
+def _eccentricity2(G,src,eccMax):
+    dist = [None]*G.order
+    q = queue.Queue()
+    q.enqueue(src)
+    dist[src] = 0
+    x = None
+    while not q.isempty():
+        x = q.dequeue()
+        for y in G.adjlists[x]:
+            if dist[y] == None:
+                dist[y] = dist[x]+1
+            if dist[y]>eccMax:
+                return (G.labels[x],G.labels[y],eccMax+1)
+                q.enqueue(y)
+    return (G.labels[x],G.labels[y],dist[x])
+
     
 
 ###############################################################################
@@ -235,6 +251,20 @@ def mostdifficult(G):
     
     return res
 
+def mostdifficult2(G):
+    """
+    Étape 1 : on détermine les composantes connexes du graphe G
+    Étape 2 : on détermine l'excentricité maximale de chaque composante connexe
+    Étape 3 : on détermine la composante avec la plus grande excentricité maximale
+    Étape 4 : on détermine le plus long chemin 
+    
+    """
+    # Étape 1
+    cmp = _components_BFS(G)
+    nb_comp = max(cmp)
+
+    # Étape 2
+    return 1
 
 ###############################################################################
 #   BONUS (just for the fun...)

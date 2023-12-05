@@ -3,14 +3,14 @@ import antoineleveque_doublets as dm
 import time
 
 G3 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_some.txt",3)
-print("Ok G3")
-G3_ex = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_ex.txt",3)
+# print("Ok G3")
+# G3_ex = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_ex.txt",3)
 
 
-G4 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_all.txt",4)
-
-G_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",4)
+# G4 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_all.txt",4)
 print("Ok G4")
+# G_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",4)
+# print("Ok G4")
 """G8_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",8)
 print("Ok G8_100k")
 print(len(G8_100k.labels))"""
@@ -206,10 +206,14 @@ print("ladder(G3, 'ape', 'man') = " + str(dm.ladder(G3, "ape", "man")))
 print("ladder(G3, 'man', 'pig') = " + str(dm.ladder(G3, "man", "pig")))
 print("ladder(G4, 'work', 'food') = " + str(dm.ladder(G4, "work", "food")))"""
 
+print(G3.labels)
 init_time = time.time()
-var = dm.mostdifficult(G4)
+var = dm._eccentricity2(G3,0,0)
 end_time = time.time()
-var2 = dm.mostdifficult(G_100k)
+print(var)
+
+
+"""var2 = dm.mostdifficult2(G3)
 final_time = time.time()
-print("G4 : " + str(end_time-init_time))
-print("G_100k : " + str(final_time-end_time))
+print("1 : " + str(end_time-init_time))
+print("2 : " + str(final_time-end_time))"""
