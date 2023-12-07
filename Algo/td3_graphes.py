@@ -449,3 +449,75 @@ def rooted_in_r(G,r):
 
 G = importGra("tuto_graph2.gra")
 print(_eccentricity2(G,0,0))
+
+
+def _topo(G,x,L,res):
+    """
+    parcours profondeur de G à partir de x
+    va marquer 1 à la rencontre préfixe et 2 à la rencontre suffixe
+    """
+    L[x]=1
+    for y in G.adjlists[x]:
+        if L[y]==None:
+            if not _topo(G,y,L,res):
+                return False
+        else:
+            if L[y]==1:
+                return False
+    L[x]=2
+    res.append(x)
+    return True
+
+def topological(G):
+    L = [None]*G.order
+    res = []
+    for x in range(G.order):
+        if L[x]==None:
+            if not _topo(G,x,L,res):
+                return False
+    res.reverse()
+    return res
+
+
+"""
+Parcours ?
+    - profondeur : quand on s'intéresse aux liens entre les arcs
+        * si on s'intéresse à autre chose qu'aux arcs couvrants : il y a un else dans le for de la fonction récursive
+    - largeur : quand on s'intéresse à une notion de distance
+
+Vecteurs de marques : quelle(s) information(s) doit-on conserver ?
+
+Interruption au cours du proramme possible ?
+
+Parcours complet ?
+
+"""
+"""
+Arc couvrant: arc avant mais x directment père de y
+Arc avant: prefix[x]<prefix[y]<suffix[y]<suffix[x]
+Arc croisé: prefix[y]<prefix[x]<suffix[x]<suffix[y]
+Arc retour: prefix[y]<suffix[y]<prefix[x]<suffix[x]
+
+"""
+"""
+Pour donner les composantes connexes à partir de la matrice de l'algo de Warshall
+for i in range (G.order):
+    for j in range(i+1,G.order):
+        if M[i][j] == 1:
+            relier i et j
+
+            
+Trouver-réunir:
+    - utilise un simili vecteurs de pères
+    - étape :
+        * initialiser tout le vecteur à -1
+        * au fur et à mesure des liaisons, on construit l'arbre couvrant et on actualise le vecteur de pères
+        * si deux sommets déjà représentés sont reliés : on relie le plus grand représentant au plus petit représentant
+        * pas besoin de réunir deux sommets s'ils sont déjà le même représantant --> présence de cycle
+
+    - pour vérifier que les algo sont bons :
+        * version non-opti :
+            on construit la forêt couvrante et on voit si c'est bon
+        * version opti :
+        
+"""
