@@ -1,5 +1,5 @@
 from algo_py import graph, queue
-import antoineleveque_doublets as dm
+import antoineleveque as dm
 import time
 
 G3 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_some.txt",3)
@@ -8,7 +8,6 @@ G3 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_some.tx
 
 
 # G4 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_all.txt",4)
-print("Ok G4")
 # G_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",4)
 # print("Ok G4")
 """G8_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",8)
@@ -206,10 +205,10 @@ print("ladder(G3, 'ape', 'man') = " + str(dm.ladder(G3, "ape", "man")))
 print("ladder(G3, 'man', 'pig') = " + str(dm.ladder(G3, "man", "pig")))
 print("ladder(G4, 'work', 'food') = " + str(dm.ladder(G4, "work", "food")))"""
 
-print(G3.labels)
 init_time = time.time()
-var = dm._eccentricity2(G3,0,0)
+var = dm.ladder(G3,"ape","man")
 end_time = time.time()
+print(str(end_time-init_time))
 print(var)
 
 
