@@ -3,18 +3,7 @@ import antoineleveque as dm
 import time
 
 G3 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_some.txt",3)
-# print("Ok G3")
-# G3_ex = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_ex.txt",3)
 
-
-# G4 = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lex_all.txt",4)
-# G_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",4)
-# print("Ok G4")
-"""G8_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",8)
-print("Ok G8_100k")
-print(len(G8_100k.labels))"""
-"""G4_100k = dm.buildgraph("/home/amnezic/Desktop/S3bis/Algo/DM/DM2/lexicons/lexicon_100k.txt",4)
-print("Ok G4_100k")"""
 
 """print("Time for buildgraph :")
 print("filename -> lex_all.txt")
@@ -210,9 +199,3 @@ var = dm.ladder(G3,"ape","man")
 end_time = time.time()
 print(str(end_time-init_time))
 print(var)
-
-
-"""var2 = dm.mostdifficult2(G3)
-final_time = time.time()
-print("1 : " + str(end_time-init_time))
-print("2 : " + str(final_time-end_time))"""

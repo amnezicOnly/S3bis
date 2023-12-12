@@ -113,7 +113,7 @@ On veut connaitre les états d'énergie accessibles à la particule, ainsi que l
     \item Que vaut $\int_{0}^{L} |\psi(x)|^{2}dx$ ? Utiliser ce résultat pour déterminer complètement l'expression de $\psi$(x).\newline
     Pour calculer A, on utilise la condition de normalisation (entre 0 et L): $\int_{0}^{L} |\psi(x)|^{2}dx = 1$ donc \newline
     \begin{flalign*}
-        \int_{0}^{L} A\sin\left(\frac{n\pi}{L}x\right) dx = 1 & \Longleftrightarrow \int_{0}^{L} \frac{A^{2}}{2} \left(1-\cos\left(\frac{2n\pi x}{L}\right)\right)dx = 1 &\\
+        \int_{0}^{L} A^{2}\sin^{2}\left(\frac{n\pi}{L}x\right) dx = 1 & \Longleftrightarrow \int_{0}^{L} \frac{A^{2}}{2} \left(1-\cos\left(\frac{2n\pi x}{L}\right)\right)dx = 1 &\\
                                                            & \Longleftrightarrow \frac{A^{2}}{2} \left[\int_{0}^{L}dx - \int_{0}^{L} \cos\left(\frac{2n\pi x}{L}\right)dx \right] = 1&\\
                                                            & \Longleftrightarrow \frac{A^{2}}{2}L = 1 &\\
                                                            & \Longleftrightarrow A = \sqrt{\frac{2}{L}}
@@ -241,7 +241,7 @@ On s'intéresse maintenant au puits quantique 3D : la boîte quantique. La fonct
 \newpage
 \noindent\textbf{Notes de cours}\newline
 \begin{flalign*}
-    \left(A^{2}\sin\left(\frac{n\pi}{L}x\right)\right)^{2} & = A^{2}\sin{2}\left(\frac{n\pi}{L}x\right) \text{ or on sait que } \sin^{2}(x) = \frac{1-cos(2x)}{2} &\\
+    \left(A\sin\left(\frac{n\pi}{L}x\right)\right)^{2} & = A^{2}\sin^{2}\left(\frac{n\pi}{L}x\right) \text{ or on sait que } \sin^{2}(x) = \frac{1-cos(2x)}{2} &\\
                                                            & = A^{2} \frac{1-\cos\left(2\times\frac{n\pi}{L}x\right)}{2} &\\
                                                            & = \frac{A^{2}}{2} \left(1-\cos\left(\frac{2n\pi}{L}x\right)\right) &\\                                       
 \end{flalign*}
