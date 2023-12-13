@@ -520,4 +520,43 @@ Trouver-réunir:
             on construit la forêt couvrante et on voit si c'est bon
         * version opti :
         
+
+Trouver une boucle : (but : touver si un sommet peux posséder au moins 2 pères)
+Graphe non-orienté :
+	- depuis un sommet : construire le vecteur de père : (marquer le sommet à -1 dans la fonction d'appel
+	- construction de vecteur de père : arrêt dès que y!=parent[x] --> si y est déjà visité mais qu'on vient pas d'en sortir (symétrie de la matrice d'adjacence)
+	- si trouver --> reconstruire la boucle grâce au vecteur de père ou True
+	- sinon --> renvoyer une liste vide ou False
+
+Graphe orienté :
+	- depuis un sommet : construire le vecteur de père (vecteur de marques à None)
+	- construction du vecteur de père (racine à -1) : si on croise un noeud y dans la liste d'adjacence d'un noeud x et P[y] = -1 --> retourne x et y
+	- reconstruction de la boucle graĉe au vecteur de père
+	
+
+Vérifier si un graphe "est" un arbre (on vérifie en réalité si son parcours peut être un arbre):
+Graphe orienté :
+	- on construit la liste des demi-degrés entrants de G
+	- si un seul noeud avec demi-degré intérieur nul --> c'est la racine
+	- sinon (0 ou 2ou+ noeud avec demi-degré intérieur nul) --> renvoyer None
+	- si racine :
+		* on parcours l'arbre en calculant le nombre n d'arc/arête rencontrés
+		* si n!=G.order (un graphe orienté est connexe à partir de n arêtes) -> renvoyer False
+		* sinon renvoyer True
+		
+Graphe non-orienté :
+	- un graphe connexe sans cycle est un arbre
+	
+	
+
+Tri topologique :
+	- donner le tri topologique du graphe
+	- vérifier qu'une liste est un tri topologique :
+		* créer la liste des demi-degré intérieur de G (Din)
+		* pour chaque élément de la liste (for elt in L):
+			* si Din(elt)==0 : on décrémente de 1 le degré intérieur de tous les voisins du noeud actuel
+			* sinon : tri topologique incorrect --> renvoyer False
+		* si plus tous les éléments de la liste on été vus --> renvoyer true
+		
+Euler : cf images dans dossier Algo
 """
