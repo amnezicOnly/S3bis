@@ -1,0 +1,259 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{extarrows}
+\usepackage{soul}
+\usepackage{enumitem}
+\usepackage{varwidth}
+\usepackage[T1]{fontenc}
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\author{}
+\date{}
+\title{Quantique TD3 : Fonction d'onde - Équation de Schr$\ddot{o}$dinguer}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Ex1: Fonction d'onde - Probabilité de présence}\newline
+On étudie une particule dont la fonction d'onde, définie $\forall x \in [0;+\infty[$, vaut:
+\[ \psi(x) = \psi_{0}e^{-\frac{x}{x_{0}}}\] où $x_{0}$ est une constante fixée et $\psi_{0}$ est une constante à déterminer.
+\begin{enumerate}
+    \item Donner la fonction de répartition de probabilité de présence de la particule pour x$\in [0;+\infty[$ en fonction de $\psi_{0}$, $x_{0}$ et x.\newline
+    La fonction de répartiton de probabilité de présence de la particule pour x$\in$[0;$+\infty$[ est:\newline
+    P = $\int_{0}^{\infty} |\psi(x)|^{2}dx$ avec $|\psi(x)|^{2}$ la densité de probabilité de présence.
+    \begin{flalign*}
+        P & = \int_{0}^{\infty} \psi_{0}^{2} e^{-\frac{2x}{x_{0}}} dx&\\
+          & = \psi_{0}^{2} \left[-\frac{x_{0}}{2} e^{-\frac{2x}{x_{0}}}\right]_{0}^{+\infty}&\\
+          & = \psi_{0}^{2} \left(\frac{-x_{0}}{2}\right) \left(\lim_{x\to\infty} e^{-\frac{2x}{x_{0}}} - e^{0}\right)&\\
+          & = \psi_{0}^{2} \left(-\frac{x_{0}}{2}\right)(0-1)&\\
+        P & = \psi_{0}^{2} \frac{x_{0}}{2} 
+    \end{flalign*}
+    \item En utilisant la condition de normalisation de la fonction d'onde, déterminer la valeur de la constante $\psi_{0}$.\newline
+    Condition de normalisation : P = 1 (dans l'espace [0;+$\infty$[) donc :
+    \[ \psi_{0}^{2} \frac{x_{0}}{2} = 1 \Longleftrightarrow \psi_{0}^{2} = \frac{2}{x_{0}}  \Longleftrightarrow \psi_{0} = \sqrt{\frac{2}{x_{0}}}; x_{0}>0 \]
+    \item Quelle est la probabilité de trouver la particule dans l'intervalle [0;A]?
+    \begin{flalign*}
+        P_{[0;A]} & = \int_{0}^{A} |\psi(x)|^{2}dx&\\
+                  & = \int_{0}^{A} \psi_{0}^{2} e^{-\frac{2x}{x_{0}}}dx&\\
+                  & = \int_{0}^{A} \frac{2}{x_{0}} \times e^{-\frac{2x}{x_{0}}}dx&\\
+                  & = \frac{2}{x_{0}} \left[-\frac{x_{0}}{2} (e^{-\frac{2x}{x_{0}}})\right]_{0}^{A}&\\
+                  & = -1 \left[e^{-\frac{2A}{x_{0}}}-1\right]&\\
+                  & = 1 - e^{-\frac{2A}{x_{0}}}
+    \end{flalign*}
+    \item Que doit valoir A pour que cette probabilité soit au minimum de 95 $\%$ ? On donnera en fonction de $x_{0}$ un résultat approché en prenant \ln(0,05) $\approx$ -3.
+    \begin{flalign*}
+        P \geqslant 95\% & \Longleftrightarrow 1 - e^{-\frac{2A}{x_{0}}} \geqslant 0,95 &\\
+                         & \Longleftrightarrow  e^{-\frac{2A}{x_{0}}}-1 \leqslant -0,95 &\\
+                         & \Longleftrightarrow e^{-\frac{2A}{x_{0}}} \leqslant 0,05 &\\
+                         & \Longleftrightarrow \ln\left(e^{-\frac{2A}{x_{0}}}\right) \leqslant \ln(0,05) &\\
+                         & \Longleftrightarrow -\frac{2A}{x_{0}} \leqslant -3 &\\
+                         & \Longleftrightarrow A \approx \frac{3x_{0}}{2}
+    \end{flalign*}
+\end{enumerate}
+
+\noindent\textbf{Ex2: Particule dans un puits de potentiel infini}\newline
+On étudie une particule de masse m dans le puits de potentiel infini suivant:
+\[V(x) = \left\{
+    \begin{array}{c}
+        \text{0 si x } \in [0;L] \\
+        +\infty \text{ sinon}
+    \end{array}
+\]
+
+On veut connaitre les états d'énergie accessibles à la particule, ainsi que l'allure des fonctions d'onde associées à chaque niveau d'énergie.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{figure1.png}
+    \caption{Puits de potentiel infini de largeur L}
+\end{figure}
+
+\begin{enumerate}
+    \item Pour x $\in$ [0;L], donner l'équation de Schr$\ddot{o}$dinguer vérifiée par la fonction d'onde $\psi$ de la particule dans le puits de potentiel infini, en fonction de la constante de Planck réduite à $\hbar$ ($\hbar = \frac{h}{2\pi}$), de m et de l'énergie E de la particule.\newline
+    Équation de Schrodinguer (entre 0 et L, V=0): $\mathcal{H}\psi = E\psi \Longrightarrow$\newline
+    \begin{flalign*}
+        E\psi(x) & = -\frac{\hbar^{2}}{2m}\Delta\psi(x) + V\psi(x) &\\
+                 & = -\frac{\hbar^{2}}{2m}\frac{d^{2}}{dx^{2}}\psi(x) + V\psi(x) &\\
+                 & = \left(\frac{-\hbar^{2}}{2m}\Delta + V\right)\psi(x) \text{ or } \left\{
+                    \begin{array}{l}
+                        V = 0\\
+                        \Delta = \frac{\delta^2}{\delta x^{2}}
+                    \end{array} \text{ donc} &\\
+                 & = -\frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}}
+    \end{flalign*}
+    \item Donner la forme générale des solutions $\psi$(x) de l'équation de Schr$\ddot{o}$dinger sur ce domaine.\newline
+    D'après la question précédente, on a $E\psi(x) = -\frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}}$\newline
+    Or $E = E_{c}+E_{p} = \frac{1}{2}mv^2 + 0$ et p = mv
+    \begin{flalign*}
+        E & = \frac{p^{2}}{2m} \text{ or, par la propriété onde-corpuscule: } p = \frac{h}{\lambda} = \frac{h}{2\pi}\frac{2\pi}{\lambda} &\\
+          & = \frac{\hbar^{2}k^{2}}{2m}
+    \end{flalign*}
+    Avec les derniers résultats obtenus, on a:
+    \begin{flalign*}
+        \frac{\hbar^{2}k^{2}}{2m}\psi(x) = -\frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}} & \Longleftrightarrow \frac{\hbar^{2}}{2m}\frac{\delta^2 \psi(x)}{\delta x^{2}} + \frac{\hbar^{2}k^{2}}{2m}\psi(x) = 0 &\\
+                                                                                                      & \Longleftrightarrow \frac{d^{2}\psi(x)}{dx^{2}} + k^{2}\psi(x) = 0 &\\
+                                                                                                      & \Longleftrightarrow \psi(x)''+k^{2}\psi(x) = 0
+    \end{flalign*}
+    La forme générale des solutions $\psi(x)$ est donc : $\psi(x) = A\sin(kx)+B\cos(kx)$
+    \item Quelles sont les conditions aux limites $\psi$(0) et $\psi$(L)? Utiliser ces conditions pour déterminer certaines des constantes de la solution générale $\psi$(x).\newline
+    $\left\{
+        \begin{array}{l}
+            (1) \psi(x=0) = 0 \Longrightarrow B = 0 \\
+            (2) \psi(x=L) = 0 
+        \end{array}
+    $\newline
+    D'après (2), $\psi(x=L) = A\sin(kL) = 0 \Longrightarrow kL = n\pi \text{ car A différent de 0 mais sin peut être nul}\Longrightarrow k = \frac{n\pi}{L}$, sin est $\pi$-périodique et $\forall n\in\mathbb{N}^{*}$
+    \[ \psi(x) = A\sin\left(\frac{n\pi}{L}x\right) \]
+    \item Que vaut $\int_{0}^{L} |\psi(x)|^{2}dx$ ? Utiliser ce résultat pour déterminer complètement l'expression de $\psi$(x).\newline
+    Pour calculer A, on utilise la condition de normalisation (entre 0 et L): $\int_{0}^{L} |\psi(x)|^{2}dx = 1$ donc \newline
+    \begin{flalign*}
+        \int_{0}^{L} A^{2}\sin^{2}\left(\frac{n\pi}{L}x\right) dx = 1 & \Longleftrightarrow \int_{0}^{L} \frac{A^{2}}{2} \left(1-\cos\left(\frac{2n\pi x}{L}\right)\right)dx = 1 &\\
+                                                           & \Longleftrightarrow \frac{A^{2}}{2} \left[\int_{0}^{L}dx - \int_{0}^{L} \cos\left(\frac{2n\pi x}{L}\right)dx \right] = 1&\\
+                                                           & \Longleftrightarrow \frac{A^{2}}{2}L = 1 &\\
+                                                           & \Longleftrightarrow A = \sqrt{\frac{2}{L}}
+    \end{flalign*}
+    \item Reporter ce résultat dans l'équation de Schr$\ddot{o}$dinger pour déterminer les valeurs d'énergie accessibles à la particule. Comment interprétez-vous ce résultat ? Quel facteur de l'expression peut être qualifié de "nombre quantique" associé au niveau d'énergie ?\newline
+    On rappelle que $\left\{
+        \begin{array}{l}
+            -\frac{\hbar^{2}}{2m}\frac{d^{2}\psi(x)}{dx^{2}} = E\psi(x)\\
+            \psi(x) = \sqrt{\frac{2}{L}}\sin\left(\frac{n\pi}{L}x\right)
+        \end{array}$\newline
+        \begin{flalign*}
+            \frac{d^{2}\psi(x)}{dx^{2}} & = \frac{d}{dx}\left(\frac{d\psi(x)}{dx}\right) &\\
+                                        & = \frac{d}{dx} \left(\sqrt{\frac{2}{L}}\times\frac{n\pi}{L}\cos\left(\frac{n\pi}{L}\right)\right) &\\
+                                        & = \sqrt{\frac{2}{L}}\left(\frac{n\pi}{L}\right)\left(-\frac{n\pi}{L}\sin\left(\frac{n\pi}{L}x\right)\right) &\\
+                                        & = -\sqrt{\frac{2}{L}}\left(\frac{n^{2}\pi^{2}}{L^{2}}\right)\sin\left(\frac{n\pi}{L}x\right) &\\
+                                        & = -\frac{n^2\pi^{2}}{L^{2}} \times \psi(x)
+        \end{flalign*}
+        On revient à l'équation de Schrodinguer : \newline
+        $-\frac{\hbar^{2}}{2m}\left(-\frac{n^{2}\pi^{2}}{L^{2}}\right) \psi(x) = E\psi(x) \Longrightarrow E_{n} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}}\times n^{2}$. n peut être qualifié de nombre quantique associé au niveau d'énergie.
+    \item Schématiser le diagramme d'énergie en traçant sur chaque niveau l'allure de la fonction de probabilité de présence $|\psi(x)|^{2}$ pour x $\in$ [0;L].\newline
+    $\left\{
+        \begin{array}{l}
+            \psi(x) = \sqrt{\frac{2}{L}}\sin\left(\frac{n\pi x}{L}\right)\\
+            E_{n} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}}\times n^{2}\\
+            |\psi(x)|^{2} = \frac{2}{L}\sin^{2}\left(\frac{n\pi x}{L}\right)
+        \end{array}
+        \Longrightarrow \left\{
+        \begin{array}{l}
+            n = 1 : E_{1} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} = E_{f}\\
+            n = 2 : E_{2} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} \times 2^{2} = 4E_{f}\\
+            \forall n\in\mathbb{N}^{*} : E_{n} = \frac{\hbar^{2}\pi^{2}}{2mL^{2}} \times n^{2} = n^{2}E_{f}
+
+        \end{array}
+    $
+\end{enumerate}
+
+\noindent\textbf{Ex3: Boîte quantique}\newline
+On s'intéresse maintenant au puits quantique 3D : la boîte quantique. La fonction d'onde $\psi$(x, y, z) associée à une particule de masse m présente dans la boîte est alors fonction des trois variables de l'espace. Le potentiel V(x, y, z) est nul dans la boîte, infini en-dehors :
+\[ V(x,y,z)= \left\{
+    \begin{array}{c}
+        0 \text{ si } (x,y,z) \in [0;a] \times [0;b] \times [0;c] \\
+        +\infty \text{ sinon}
+    \end{array}
+\]
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{figure2.png}
+    \caption{Boîte quantique de dimensions a$\times$b$\times$c}
+\end{figure}
+
+\begin{enumerate}
+    \item Rappeler l'équation de Schr$\ddot{o}$dinger appliquée à $\psi$ en fonction de $\hbar$, m, de l'énergie E de la particule et des dérivées partielles secondes spatiales de $\psi$.\newline
+    \begin{flalign*}
+        \mathcal{H}\psi = E\psi & \Longleftrightarrow \left(-\frac{\hbar^{2}}{2m}\Delta + V\right)\psi = E\psi &\\
+        & \Longleftrightarrow -\frac{\hbar^{2}}{2m}\Delta \psi(x,y,z) = E\psi(x,y,z) &\\
+    \end{flalign*}
+    \newline\newline De manière analogue au cas 1D, on montre que:
+
+    \item Identifier les facteurs pouvant être qualifiés de nombres quantiques associés à chaque niveau d'énergie.\newline
+    Les facteurs pouvant être qualifiés de nombres quantiques associés à chaque niveau d'énergie sont n, p et q.
+
+    \newpage
+    \item Utiliser l'équation de Schr$\ddot{o}$dinger pour déterminer les niveaux d'énergie accessibles en fonction notamment des nombres quantiques. (On développera pour la dérivé partielle par rapport à x)
+    D'après l'ex 2, on a :
+    \begin{flalign*}
+        \psi(x,y,z) & = \sqrt{\frac{2}{L_{x}}}\sin(\frac{n\pi}{L_{x}}x)\times\sqrt{\frac{2}{L_{y}}}\sin(\frac{p\pi}{L_{y}}y)\times\sqrt{\frac{2}{L_{z}}}\sin(\frac{q\pi}{L_{z}}z) &\\
+                    & = \sqrt{\frac{2\times2\times2}{L_{x}+L_{y}+L_{z}}}\sin(\frac{n\pi}{L_{x}}x)\sin(\frac{p\pi}{L_{y}}y)\sin(\frac{q\pi}{L_{z}}z) &\\
+                    & = \sqrt{\frac{8}{L_{x}+L_{y}+L_{z}}}\sin(\frac{n\pi}{L_{x}}x)\sin(\frac{p\pi}{L_{y}}y)\sin(\frac{q\pi}{L_{z}}z)
+    \end{flalign*}
+    \begin{flalign*}
+        \frac{\delta\psi(x,y,z)}{\delta x^{2}} & = \left(\sqrt{\frac{8}{abc}}\sin(\frac{n\pi}{a}x)\sin(\frac{p\pi}{b}y)\sin(\frac{q\pi}{c}z)\right)'' &\\
+                                               & = \left(\sqrt{\frac{8}{abc}}\frac{n\pi}{a}\cos(\frac{n\pi}{a}x)\sin(\frac{p\pi}{b}y)\sin(\frac{q\pi}{c}z)\right)' &\\
+                                               & = \sqrt{\frac{8}{abc}}\left(-\left(\frac{n\pi}{a}\right)^{2}\right)\sin(\frac{n\pi}{a}x)\sin(\frac{p\pi}{b}y)\sin(\frac{q\pi}{c}z) &\\
+                                               & = -\left(\frac{n\pi}{a}\right)^{2}\psi(x,y,z) &\\
+        \frac{\delta\psi(x,y,z)}{\delta y^{2}} & = \sqrt{\frac{8}{abc}}\sin(\frac{n\pi}{a}x)\left(-\left(\frac{p\pi}{b}\right)^{2}\right)\sin(\frac{p\pi}{b}y)\sin(\frac{q\pi}{c}z) &\\
+                                               & = -\left(\frac{p\pi}{b}\right)^{2}\psi(x,y,z) &\\
+        \frac{\delta\psi(x,y,z)}{\delta z^{2}} & = \sqrt{\frac{8}{abc}}\sin(\frac{n\pi}{a}x)\sin(\frac{p\pi}{b}y)\left(-\left(\frac{q\pi}{c}\right)^{2}\right)\sin(\frac{q\pi}{c}z) &\\
+                                               & =  -\left(\frac{q\pi}{c}\right)^{2}\psi(x,y,z)                     
+    \end{flalign*}
+    or $-\frac{\hbar^{2}}{2m}\Delta\psi(x,y,z) = E\psi(x,y,z)$ donc
+    \begin{flalign*}
+        \left(-\frac{\hbar^{2}}{2m}\right)\left(-\left(\frac{n^{2}\pi^{2}}{a^{2}}+\frac{p^{2}\pi^{2}}{b^{2}}+\frac{q^{2}\pi^{2}}{c^{2}}\right)\right)\psi(x,y,z) = E\psi(x,y,z) & &\\
+        \text{On identifie } E_{n,p,q} = \frac{\hbar^{2}\pi^{2}}{2m}\left(\frac{n^{2}}{a^{2}}+\frac{p^{2}}{b^{2}}+\frac{q^{2}}{c^{2}}\right) & &\\
+    \end{flalign*}
+
+    \newpage
+    \item Pour le cas particulier a = b = c, donner l'expression du plus petit niveau d'énergie $E_{f}$ en fonction de $\hbar$, m et a. Pour quelles valeurs des nombres quantiques ce niveau est-il atteint ?\newline
+    a = b = c donc $E_{n,p,q} = \frac{\hbar^{2}\pi^{2}}{2ma} (n^{2}+p^{2}+q^{2})$.\newline
+    $E_{f}$ est l'énergie de l'état fondamentale (énergie minimale) correspondant à $\Sigma n_{i}^{2}$ minimale, càd n=p=q=1:
+    \begin{flalign*}
+        E_{f} & = \frac{\hbar^{2}\pi^{2}}{2ma^{2}} (1^{2} + 1^{2} + 1^{2}) = \frac{3}{2}\times\frac{\hbar^{2}\pi^{2}}{ma^{2}}
+    \end{flalign*}
+
+    \item Lorsque N jeux de nombres quantiques permettent d'atteindre un même niveau d'énergie, l'on dit ce niveau d'énergie est de degré de dégénérescence N. Compléter le tableau suivant pour les trois premiers niveaux d'énergie. Donner leur énergie en fonction de $E_{f}$.\newline
+    $E_{n} = \frac{3}{2}\frac{\hbar^{2}\pi^{2}}{ma^{2}}\times\Sigma n_{i}^{2}$. Ex:\newline
+    Pour n=2 : ((1,1,2),(1,2,1),(2,1,1))
+    \begin{flalign*}
+        E_{2} & = \frac{3}{2}\frac{\hbar^{2}\pi^{2}}{ma^{2}}\times\Sigma n_{i}^{2} = \frac{3}{2}\frac{\hbar^{2}\pi^{2}}{ma^{2}}\times(1+1+4) &\\
+              & = \frac{3}{2}\frac{\hbar^{2}\pi^{2}}{ma^{2}}\times 6 = 2 \left(\frac{3}{2}\frac{\hbar^{2}\pi^{2}}{ma^{2}}\right) &\\
+              & = 2E_{f}
+    \end{flalign*}
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            Niveau & Nombres quantiques & Énergie & Degré de dégénérescence N \\
+            \hline
+            1 & \{(1,1,1)\} & $E_{f} = \frac{3}{2}\frac{\hbar^{2}\pi^{2}}{ma^{2}}$ & N=1 \\
+            \hline
+            2 & \{(1,1,2),(1,2,1),(2,1,1)\} & $E_{2}$ = 2$E_{f}$ & N=3 \\
+            \hline
+            3 & \{(1,2,2),(2,1,2),(2,2,1)\} & $E_{3} = 3E_{f}$ & N=3 \\
+            \hline
+            4 & \{(1,1,3),(1,3,1),(3,1,1)\}& $E_{4} = \frac{11}{3}E_{f}$& N=3\\
+            \hline
+            5 & \{(2,2,2)\} & $E_{5} = 4E_{f}$ & N=1 \\
+            \hline
+        \end{tabular}
+    \end{table}\newline
+    \textit{Rappel : opérateur laplacien scalaire en coordonnées cartésiennes :}
+    \[ 1D : \Delta = \frac{d^{2}}{dx^{2}}; 3D : \Delta = \frac{\delta^{2}}{\delta x^{2}} + \frac{\delta^{2}}{\delta y^{2}} + \frac{\delta^{2}}{\delta z^{2}} \]
+\end{enumerate}
+
+\newpage
+\noindent\textbf{Notes de cours}\newline
+\begin{flalign*}
+    \left(A\sin\left(\frac{n\pi}{L}x\right)\right)^{2} & = A^{2}\sin^{2}\left(\frac{n\pi}{L}x\right) \text{ or on sait que } \sin^{2}(x) = \frac{1-cos(2x)}{2} &\\
+                                                           & = A^{2} \frac{1-\cos\left(2\times\frac{n\pi}{L}x\right)}{2} &\\
+                                                           & = \frac{A^{2}}{2} \left(1-\cos\left(\frac{2n\pi}{L}x\right)\right) &\\                                       
+\end{flalign*}
+
+
+Développement complet de cette intégrale: on sait que $\int \cos(ax)dx = \frac{1}{a}\sin(ax)+C$ (on prendra C=0)
+\begin{flalign*}
+    \int_{0}^{L} \cos\left(\frac{2n\pi x}{L}\right)dx & = \left[\frac{1}{\frac{2n\pi}{L}x}\sin\left(\frac{2n\pi}{L}x\right)\right]_{0}^{L} &\\
+                                                      & = \frac{1}{\frac{2n\pi}{L}}\left(\sin\left(\frac{2n\pi L}{L}\right) - \sin\left(\frac{2n\pi 0}{L}\right)\right) &\\
+                                                      & = \frac{1}{\frac{2n\pi}{L}} (\sin(2n\pi)-\sin(0)) \text{ or sin est pi-périodique donc } &\\
+                                                      & = \frac{1}{\frac{2n\pi}{L}} (0-0) &\\
+                                                      & = 0
+\end{flalign*}
+cos(2a) = 2sin(a)cos(a) et sin(2a) = 1-sin2(a) et sin2(a) = (1-cos(2a))/2
+\end{document}

@@ -1,26 +1,156 @@
 \documentclass{article}
-\usepackage[a4paper, total={6in, 8in}]{geometry}  
-%\usepackage{graphicx} % pour insérer des images
+%% for multiple lines comment in LaTeX
+%% won't compile if the next line is deleted
+\usepackage{verbatim}
+%% usage :
+\begin{comment}
+	Your multiple lines comment
+\end{comment}
 
-% pour utiliser des notations scientifiques
-%\usepackage{amssymb}
-%\usepackage{amsmath}
-%\usepackage{amsfonts}
 
-%\usepackage{extarrows} % pour afficher les flèches de logiques (implique, équivalent à ,etc...)
-%\usepackage{soul} % utilité à troiver
-%\let\oldemptyset\emptyset
-%\usepackage[T1]{fontenc}
+%% README
+\begin{comment}
+	IF YOU DISPLAY CODE OR MATH PLOTS, USE THE '-shell-escape' COMPILATION OPTION
+	This file is a template for LaTeX document. To create a pdf file, you need to compile the tex file but use :
+		pdflatex yourTexFile.tex
+		
+	All the lines beginning by %% are commented lines to explain the code to the user (file wont' compile if you delete both %)
+	All the lines beginning by % are lines containing a package : some things in LaTeX need macros to be made and macros are imported by the :
+		\usepackage{macro name}
+	So, to use a package, just delete the % at the beginning of the line
+	For each package, a comment section will describe what is the goal of the current package and how to use it. A single %% line will be display above it to make a sum up.
+	If you need more information about a specific package, you can go on https://ctan.org/pkg/ and search for the package you need, they give the documentation
 
-\author{}
-\date{}
-\title{Title}
+	Some lines can't be deleted, otherwise the file won't compile. It's always mentionned when it's the case.
+\end{comment}
+
+%% Commands section :
+%% User can create their own commands
+%% to be able to use the author and the title in the document (optionnal)		
+\newcommand{\myauthor}{Author}
+\newcommand{\mytitle}{Document's title}
+
+
+%% Macros import sections
+%% size and format of the page (european format)
+\usepackage[a4paper]{geometry}
+
+%% to include images
+\usepackage{graphicx}
+\begin{comment}
+	Usage :
+	\begin{figure}
+		\centering (not necessary but it's prettier)
+		\includegraphics[scale=(1 by default)]{path to the image/imageName.extension}
+		\if you want to put another image side to side, just add a line like the previous
+		\caption{picture(s) in a nutshell} (not necessary but it's useful) (won't compile if missing)
+	\end{figure}
+\end{comment}
+
+%% pour insérer des liens
+\usepackage{hyperref}
+\begin{comment}
+	Usage :
+	\href{the complete link}{the display text}
+	or if you want to show the complete link, just use 
+	\url{the complete link}
+\end{comment}
+
+%% Color package
+\usepackage{xcolor}
+\begin{comment}
+Package to use colors in the document.
+	Usage :
+	- \textcolor{COLOR}{TEXT}
+	- {\color{COLOR} TEXT}
+\end{comment}
+
+
+%% for page header and footer customization (just need to be called here)
+\usepackage{fancyhdr}
+%% let the user the \pageref{LastPage] command
+\usepackage{lastpage}
+
+%% customization of header and footer
+%% don't delete the next line if you use them
+%\pagestyle{fancy}
+%% left, center and right header customization
+%\lhead{\mytitle}
+%\chead{}
+%\rhead{\myauthor}
+%% left, center and right footer customization
+%\lfoot{}
+%\cfoot{Page \thepage \text{ }of \pageref{LastPage}}
+%\rfoot{} 
+
+%% to display code
+\usepackage{minted}
+\begin{comment}
+	Usage :
+		\begin{minted}{language}
+			your code
+		\end{minter}
+\end{comment}
+
+%% to make "box color"
+\usepackage{tcolorbox}
+\begin{comment}
+	Note : need to be used with the xcolor package (on line 58)
+	Usage :
+	\begin{tcolorbox}[colback=COLOR,colframe=COLOR,title=TITLE]
+		TEXT
+	\end{tcolorbox}
+	
+	--> colback : the background color of TEXT
+	--> colframe : the background color of TITLE
+	
+	syntax of color : color1!Percentage of color1!...!color n-1!Percentage of color	n-1!color n
+\end{comment}
+
+
+%% to use maths and other sciences symbols (cf https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf) (
+\usepackage{amssymb,amsmath,amsfonts,extarrows}
+
+%% Math plot package
+\usepackage{pgfplots}
+\begin{comment}
+	Let the user make math plot inside the pdf file
+	Usage :
+	\begin{tikzpicture}
+		\begin[OPTIONS]{axis}
+			\addplot[OPTIONS]{function}
+			or
+			\addplot3[OPTIONS]{function]
+		\end{axis}
+	\end{tikzpicture}
+	
+	addplot3 make 3D plot (tip : use the "surf" option)
+	
+	To customize your plot, you can use options. They have to be put in the [OPTIONS] and have to be separated by a comma.
+	They could be separated by a comma and a newline.
+	
+	Note : to make the compilation faster, you can use the -shell-escape option of pdflatex when compiling the document.
+	In addition, you'll have each plot in a separated pdf file. To do this, uncomment the two lines next the end of the comment section
+\end{comment}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+%% Have to find the goal of it
+\usepackage{soul}
+\let\oldemptyset\emptyset
+\usepackage[T1]{fontenc}
+
+%% won't compile if at least one of these three next line is deleted
+%% but you can add nothing between the brackets to leave it blank
+\author{\myauthor}	% cf new commands section
+\date{\today}		% could be change
+\title{\mytitle}	% cf new command section
 
 \begin{document}
 \maketitle
 \newpage
+%% create a table of content (optionnal) (compile twice the first time if used)
 \tableofcontents
 \newpage
-
 
 \end{document}
